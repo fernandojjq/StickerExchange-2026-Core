@@ -176,15 +176,23 @@ export const Album = () => {
         const allIsos = ALBUM_MANIFEST.filter(g => groupFilter === 'ALL' || g.title === groupFilter)
                                       .flatMap(g => g.sections.map(s => s.country))
                                       .filter((v, i, s) => v && s.indexOf(v) === i && v !== 'INT');
+        
+        const teams = allIsos.filter(iso => !['FWC', 'EXT', 'CC'].includes(iso));
+        const specials = allIsos.filter(iso => ['FWC', 'EXT', 'CC'].includes(iso));
+        
+        // Si estamos en "TODOS", ponemos FWC al principio de los equipos para el acceso rápido
+        const sortedTeams = groupFilter === 'ALL' && specials.includes('FWC') 
+            ? ['FWC', 'SEPARATOR', ...teams] 
+            : teams;
+
         return {
-            teams: allIsos.filter(iso => !['FWC', 'EXT', 'CC'].includes(iso)),
-            specials: allIsos.filter(iso => ['FWC', 'EXT', 'CC'].includes(iso))
+            teams: sortedTeams,
+            specials: specials.filter(s => s !== 'FWC')
         };
     }, [groupFilter]);
 
     const handleIncrement = useCallback((id) => {
         setInventory(prev => {
-            const next = { ...prev, [id]: (prev[id] || 0) + 1 };
             const current = prev[id] || 0;
             const next = { ...prev, [id]: current + 1 };
             storage.saveInventory(next);
@@ -338,13 +346,30 @@ export const Album = () => {
                         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 pt-1 pl-1">
                             <div className="flex gap-3">
                                 {navGroups.teams.map(iso => {
-                                    const cp = countryProgress[iso] || { percentage: 0 };
-                                    const isActive = activeCountry === iso;
+                                    if (iso === 'SEPARATOR') {
+                                        return <div key="sep" className="w-px h-6 bg-slate-300 mx-1 self-center" />;
+                                    }
                                     return (
-                                        <button key={iso} onClick={() => { if(groupFilter === 'ALL' || navGroups.teams.includes(iso)) document.getElementById(`section-${iso}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className={`flex-shrink-0 relative w-10 h-10 flex items-center justify-center transition-all ${isActive ? 'scale-110' : 'grayscale opacity-60'}`}>
-                                            <ProgressRing progress={cp.percentage} size={40} stroke={3} />
-                                            <div className="relative z-10"><Flag iso={iso} size="sm" /></div>
-                                            {cp.percentage === 100 && <div className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full flex items-center justify-center z-20"><Icons.Check className="w-2 h-2 text-white" /></div>}
+                                        <button 
+                                            key={iso} 
+                                            onClick={() => {
+                                                const el = document.getElementById(`section-${iso}`);
+                                                if (el) {
+                                                    const headerOffset = 210;
+                                                    const elementPosition = el.getBoundingClientRect().top;
+                                                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                                                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                                                }
+                                            }}
+                                            className={`flex flex-col items-center gap-1 shrink-0 p-1.5 rounded-xl transition-all ${activeCountry === iso ? 'bg-indigo-600 shadow-md' : 'bg-white border border-slate-100'}`}
+                                        >
+                                            <Flag iso={iso} size="sm" />
+                                            <div className="flex flex-col items-center">
+                                                <span className={`text-[8px] font-black ${activeCountry === iso ? 'text-white' : 'text-slate-900'}`}>{iso}</span>
+                                                <span className={`text-[7px] font-bold ${activeCountry === iso ? 'text-indigo-200' : 'text-indigo-600'}`}>
+                                                    {countryProgress[iso]?.percentage || 0}%
+                                                </span>
+                                            </div>
                                         </button>
                                     );
                                 })}
