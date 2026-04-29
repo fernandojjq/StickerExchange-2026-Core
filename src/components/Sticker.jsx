@@ -148,7 +148,7 @@ export const Sticker = React.memo(({
             {quantity > 0 && (
                 <button
                     onClick={handleDecrementClick}
-                    className="absolute -top-2 -left-2 z-20 w-6 h-6 bg-rose-500 text-white rounded-full 
+                    className="absolute -top-2 -left-2 z-50 w-6 h-6 bg-rose-500 text-white rounded-full 
                                flex items-center justify-center shadow-md hover:bg-rose-600 active:bg-rose-700
                                transition-transform hover:scale-110 active:scale-90"
                     title="Remove duplicate"
@@ -161,7 +161,7 @@ export const Sticker = React.memo(({
             {quantity > 0 && (
                 <button
                     onClick={handleMainClick}
-                    className="absolute -bottom-2 -right-2 z-20 w-6 h-6 bg-indigo-500 text-white rounded-full 
+                    className="absolute -bottom-2 -right-2 z-50 w-6 h-6 bg-indigo-500 text-white rounded-full 
                                flex items-center justify-center shadow-md hover:bg-indigo-600 active:bg-indigo-700
                                transition-transform hover:scale-110 active:scale-90"
                     title="Add duplicate"
@@ -172,7 +172,7 @@ export const Sticker = React.memo(({
 
             {/* BADGE: Repeated Count */}
             {quantity > 1 && (
-                <div className="absolute top-1/2 -translate-y-1/2 -right-2 z-20">
+                <div className="absolute top-1/2 -translate-y-1/2 -right-2 z-50">
                     <div className="bg-white text-indigo-600 font-black text-[10px] 
                                     px-1.5 py-0.5 rounded-md border-2 border-indigo-600 shadow-sm">
                         x{quantity}
