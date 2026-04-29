@@ -34,7 +34,7 @@ export const WelcomeGuide = ({ isOpen, onClose }) => {
                         </div>
                         <div>
                             <h4 className="font-bold text-slate-800 text-sm uppercase tracking-tight">Intercambio Offline</h4>
-                            <p className="text-slate-500 text-xs mt-1">Genera tu QR y deja que otros lo escaneen para saber qué podéis cambiar.</p>
+                            <p className="text-slate-500 text-xs mt-1">Genera tu QR y deja que otros lo escaneen para saber qué pueden intercambiar.</p>
                         </div>
                     </div>
 
