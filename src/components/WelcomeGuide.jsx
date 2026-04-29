@@ -50,10 +50,11 @@ export const WelcomeGuide = ({ isOpen, onClose }) => {
 
                     <button
                         onClick={onClose}
-                        className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-slate-200 uppercase tracking-widest text-sm"
+                        className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-slate-200 uppercase tracking-widest text-sm mb-2"
                     >
                         ¡Entendido!
                     </button>
+                    <div className="h-[env(safe-area-inset-bottom,0px)]" />
                 </div>
             </div>
         </div>
