@@ -79,7 +79,7 @@ export const Album = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     
     // DEFAULT TO GROUP A for instant mount performance
-    const [groupFilter, setGroupFilter] = useState('GROUP A');
+    const [groupFilter, setGroupFilter] = useState('ALL');
     const [typeFilter, setTypeFilter] = useState('ALL'); 
     const [showGuide, setShowGuide] = useState(false);
     

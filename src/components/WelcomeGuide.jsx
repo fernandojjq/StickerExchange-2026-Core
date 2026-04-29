@@ -24,7 +24,7 @@ export const WelcomeGuide = ({ isOpen, onClose }) => {
                         </div>
                         <div>
                             <h4 className="font-bold text-slate-800 text-sm uppercase tracking-tight">Gestiona tu álbum</h4>
-                            <p className="text-slate-500 text-xs mt-1">Marca tus cromos, filtra por repetidos y mira tu progreso por país.</p>
+                            <p className="text-slate-500 text-xs mt-1">Toca un cromo para marcarlo. Toca el botón <b>+</b> para añadir repetidas rápidamente.</p>
                         </div>
                     </div>
 

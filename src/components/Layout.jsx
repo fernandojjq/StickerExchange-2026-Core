@@ -27,8 +27,8 @@ export const Layout = () => {
             </main>
 
             {/* Bottom Navigation */}
-            <nav className="fixed bottom-0 left-0 right-0 z-40">
-                <div className="max-w-lg mx-auto bg-white/80 backdrop-blur-xl border-t border-slate-200/50 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] pb-safe rounded-t-3xl mx-2 mb-2">
+            <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-t border-slate-200/50 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)]">
+                <div className="max-w-lg mx-auto pb-[env(safe-area-inset-bottom,12px)]">
                     <div className="flex justify-around items-center py-3 px-2">
                         {navItems.map((item) => {
                             const isActive = location.pathname === item.path;
