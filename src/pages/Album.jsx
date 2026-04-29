@@ -310,7 +310,7 @@ export const Album = () => {
                                 <Icons.Info className="w-6 h-6" />
                             </button>
                             <div className="text-right">
-                                <div className="text-sm font-black text-slate-900 leading-none">{totalStickers} / 1014</div>
+                                <div className="text-sm font-black text-slate-900 leading-none">{stats.unique} / 1014</div>
                                 <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">Stickers</div>
                             </div>
                         </div>
