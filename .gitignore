@@ -1,0 +1,41 @@
+# --- BASURA DE DESARROLLO ---
+node_modules/
+dist/
+dist-ssr/
+*.local
+*.log
+*.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- ARCHIVOS TEMPORALES Y DE IA ---
+full_project_code.md
+modificaciones_version11.3.md
+links_ligas.txt
+pasted-texts/
+1/
+.gemini/
+antigravity/
+scratch/
+
+# --- EDITORES ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# --- SISTEMA ---
+.env
+.env.production
+.env.local
+.env.*.local
+
+# --- OTROS ---
+package-lock.json
+# (Es opcional, pero algunos prefieren no subirlo si usan diferentes gestores de paquetes)

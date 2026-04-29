@@ -1,0 +1,298 @@
+/* ============================================================================
+   ARCHIVO: src/index.css
+   VERSIÓN: 11.1 - Fix CSS Broken (Restored v4 config + New UI)
+   ============================================================================ */
+
+/* TAILWIND v4 SETUP */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --header-offset: 260px;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900;
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: none;
+}
+
+* {
+  -webkit-touch-callout: none;
+}
+
+input, textarea {
+  -webkit-touch-callout: default;
+}
+
+/* ============================================================================
+   SAFE AREA UTILITIES
+   ============================================================================ */
+
+.pt-safe-top {
+  padding-top: env(safe-area-inset-top, 20px);
+}
+
+.pb-safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+}
+
+.pb-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 1rem);
+}
+
+.sticky-safe-top {
+  top: 0;
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* ============================================================================
+   QR SCANNER - CRITICAL FIX v10.2
+   ============================================================================ */
+
+/* ============================================================================
+   QR SCANNER - CRITICAL FIX v11.1
+   ============================================================================ */
+
+/* Cambiamos #reader por #qr-reader para que coincida con Swap.jsx */
+#qr-reader {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  overflow: hidden;
+  background: black;
+}
+
+/* Forzar que el video ocupe todo el contenedor sin dejar espacios negros */
+#qr-reader video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  /* Esto evita las franjas negras */
+}
+
+/* Ocultar elementos innecesarios que genera la librería */
+#qr-reader img[alt="Camera menu icon"] {
+  display: none !important;
+}
+
+#qr-reader__dashboard {
+  display: none !important;
+}
+
+#qr-reader__scan_region {
+  height: 100% !important;
+}
+
+/* ============================================================================
+   QR CODE RENDERING - CRISP EDGES (Samsung Fix)
+   ============================================================================ */
+
+.qr-code-container svg,
+.qr-container svg {
+  shape-rendering: crispEdges;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.qr-code-container canvas,
+.qr-container canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* ============================================================================
+   SCANNER FULLSCREEN OVERLAY & V11.0 FIXES
+   ============================================================================ */
+
+.scanner-fullscreen,
+.fullscreen-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9999 !important;
+  background-color: #000;
+}
+
+.fullscreen-overlay.bg-slate-900\/95 {
+  background-color: rgba(15, 23, 42, 0.95);
+}
+
+/* Force video to fill container */
+/* Force video to fill container */
+.scanner-fullscreen video,
+#qr-reader video {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+}
+
+#qr-reader {
+  border: none !important;
+  background: #000;
+}
+
+/* Hide library specific elements */
+#qr-reader__scan_region img,
+img[alt="Info icon"],
+img[alt="Camera based scan"] {
+  display: none !important;
+}
+
+/* ============================================================================
+   ANIMATIONS & EFFECTS
+   ============================================================================ */
+
+/* HOLOGRAPHIC EFFECTS */
+@keyframes holoshimmer {
+  0% {
+    background-position: 200% center;
+  }
+
+  100% {
+    background-position: -200% center;
+  }
+}
+
+.holo-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .holo-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(120deg, transparent 25%, rgba(255, 255, 255, 0.4) 35%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.4) 65%, transparent 75%);
+    background-size: 300% auto;
+    animation: holoshimmer 4s infinite linear;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+  }
+
+  .holo-gold::after {
+    background: linear-gradient(120deg, transparent 25%, rgba(251, 191, 36, 0.3) 35%, rgba(245, 158, 11, 0.6) 50%, rgba(251, 191, 36, 0.3) 65%, transparent 75%);
+    background-size: 300% auto;
+    animation: holoshimmer 3s infinite linear;
+  }
+}
+
+/* PROGRESS RING */
+.progress-ring {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.35s;
+  transform-origin: 50% 50%;
+}
+
+/* UTILITIES */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* CHECKBOX (Legacy support + new styles) */
+.swap-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.swap-checkbox:checked {
+  background-color: currentColor;
+}
+
+.swap-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* MODAL ANIMATIONS */
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-animate {
+  animation: modal-enter 0.2s ease-out;
+}
+
+/* PULSE ANIMATION */
+@keyframes soft-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse-soft {
+  animation: soft-pulse 2s ease-in-out infinite;
+}
+
+/* HARDWARE ACCELERATION */
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.transform-gpu {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* LAZY RENDERING OPTIMIZATION */
+.lazy-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 650px; /* Better estimate for team sections */
+}
+
+.disable-lazy .lazy-section {
+  content-visibility: visible !important;
+}
+
+/* Fix for scroll jumping on some browsers */
+.scroll-mt-fix {
+  scroll-margin-top: var(--header-offset);
+}
