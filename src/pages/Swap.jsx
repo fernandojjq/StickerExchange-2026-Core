@@ -13,6 +13,7 @@ import { Flag } from '../components/Flag';
 import { Icons } from '../components/Icons';
 import { HistoryPanel } from '../components/HistoryPanel';
 import { useLiveSession, SESSION_STATE } from '../hooks/useLiveSession';
+import { useLanguage } from '../hooks/useLanguage';
 import { WelcomeGuide } from '../components/WelcomeGuide';
 
 // ============================================================================
@@ -677,7 +678,7 @@ const LiveSessionView = ({ session, onLeave }) => {
     return (
         <div className="text-center py-12">
             <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-slate-500">Conectando...</p>
+            <p className="text-slate-500">{t.swap.connecting}</p>
         </div>
     );
 };
@@ -686,6 +687,7 @@ const LiveSessionView = ({ session, onLeave }) => {
 // COMPONENTE PRINCIPAL: Swap
 // ============================================================================
 export const Swap = () => {
+    const { t, language } = useLanguage();
     // Tab activo
     const [activeTab, setActiveTab] = useState(SWAP_TAB.OFFLINE);
     const [showGuide, setShowGuide] = useState(false);
@@ -819,7 +821,7 @@ export const Swap = () => {
             handleScanSuccess(result);
         } catch (err) {
             console.error('Image scan failed:', err);
-            setScanError('No se pudo leer el código QR de la imagen. Asegúrate de que sea una imagen clara del código.');
+            setScanError(t.swap.qr_error);
         }
 
         if (imageInputRef.current) {
@@ -907,7 +909,7 @@ export const Swap = () => {
                     </div>
                     <div className="leading-tight">
                         <h1 className="text-xl font-black italic tracking-tighter text-slate-900 leading-none uppercase">SWAP-26</h1>
-                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Centro de Intercambio</p>
+                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t.swap.subtitle}</p>
                     </div>
                 </div>
                 <button 
@@ -932,7 +934,7 @@ export const Swap = () => {
                             onClick={() => setScanError(null)}
                             className="w-full py-3 bg-slate-900 text-white font-bold rounded-xl"
                         >
-                            Entendido
+                            {t.common.understand}
                         </button>
                     </div>
                 </div>
@@ -950,7 +952,7 @@ export const Swap = () => {
                                 : 'text-slate-500'
                                 }`}
                         >
-                            <span>📷</span> Offline
+                            <span>📷</span> {t.swap.offline_btn}
                         </button>
                         <button
                             onClick={() => setActiveTab(SWAP_TAB.LIVE)}
@@ -959,7 +961,7 @@ export const Swap = () => {
                                 : 'text-slate-500'
                                 }`}
                         >
-                            <span className="text-rose-500">●</span> En Vivo
+                            <span className="text-rose-500">●</span> {t.swap.live_btn}
                         </button>
                     </div>
 

@@ -6,11 +6,13 @@
 import { useState, useEffect } from 'react';
 import { storage } from '../utils/storage';
 import { Icons } from './Icons';
+import { useLanguage } from '../hooks/useLanguage';
 
 // ============================================================================
 // Componente: HistoryEntry (Una entrada del historial)
 // ============================================================================
 const HistoryEntry = ({ entry }) => {
+    const { t } = useLanguage();
     const [isExpanded, setIsExpanded] = useState(false);
 
     const date = new Date(entry.timestamp);
@@ -22,7 +24,7 @@ const HistoryEntry = ({ entry }) => {
     });
 
     const isLive = entry.type === 'live';
-    const typeLabel = isLive ? 'En Vivo' : 'Offline';
+    const typeLabel = isLive ? t.swap.live_btn : t.swap.offline_btn;
     const typeBgClass = isLive ? 'bg-rose-100 text-rose-600' : 'bg-slate-100 text-slate-500';
 
     return (
@@ -53,15 +55,15 @@ const HistoryEntry = ({ entry }) => {
                         <div className="flex gap-3 text-xs font-bold text-slate-500">
                             <span className="flex items-center gap-1">
                                 <Icons.ArrowDown className="w-3 h-3 text-emerald-500" />
-                                Recibidos: {entry.receivedCount || entry.received?.length || 0}
+                                {t.history.received}: {entry.receivedCount || entry.received?.length || 0}
                             </span>
                             <span className="flex items-center gap-1">
                                 <Icons.ArrowUp className="w-3 h-3 text-indigo-500" />
-                                Entregados: {entry.givenCount || entry.given?.length || 0}
+                                {t.history.given}: {entry.givenCount || entry.given?.length || 0}
                             </span>
                         </div>
                         <span className="text-[10px] text-indigo-500 font-bold bg-indigo-50 px-2 py-1 rounded-full flex items-center gap-1 animate-pulse">
-                            Ver detalles <Icons.ArrowDown className="w-3 h-3" />
+                            {t.history.details} <Icons.ArrowDown className="w-3 h-3" />
                         </span>
                     </div>
                 )}
@@ -75,7 +77,7 @@ const HistoryEntry = ({ entry }) => {
                         <div className="bg-emerald-50/50 rounded-lg p-2">
                             <h4 className="text-[10px] font-black text-emerald-600 uppercase mb-2 flex items-center gap-1">
                                 <Icons.ArrowDown className="w-3 h-3" />
-                                Recibidos ({entry.received?.length || 0})
+                                {t.history.received} ({entry.received?.length || 0})
                             </h4>
                             <div className="flex flex-wrap gap-1">
                                 {(entry.received || []).map(id => (
@@ -84,7 +86,7 @@ const HistoryEntry = ({ entry }) => {
                                     </span>
                                 ))}
                                 {(!entry.received || entry.received.length === 0) && (
-                                    <span className="text-[9px] text-slate-400 italic">Ninguno</span>
+                                    <span className="text-[9px] text-slate-400 italic">{t.common.none}</span>
                                 )}
                             </div>
                         </div>
@@ -93,7 +95,7 @@ const HistoryEntry = ({ entry }) => {
                         <div className="bg-indigo-50/50 rounded-lg p-2">
                             <h4 className="text-[10px] font-black text-indigo-600 uppercase mb-2 flex items-center gap-1">
                                 <Icons.ArrowUp className="w-3 h-3" />
-                                Entregados ({entry.given?.length || 0})
+                                {t.history.given} ({entry.given?.length || 0})
                             </h4>
                             <div className="flex flex-wrap gap-1">
                                 {(entry.given || []).map(id => (
@@ -102,7 +104,7 @@ const HistoryEntry = ({ entry }) => {
                                     </span>
                                 ))}
                                 {(!entry.given || entry.given.length === 0) && (
-                                    <span className="text-[9px] text-slate-400 italic">Ninguno</span>
+                                    <span className="text-[9px] text-slate-400 italic">{t.common.none}</span>
                                 )}
                             </div>
                         </div>
@@ -125,6 +127,7 @@ const HistoryEntry = ({ entry }) => {
 // Componente Principal: HistoryPanel
 // ============================================================================
 export const HistoryPanel = ({ refreshTrigger = 0 }) => {
+    const { t } = useLanguage();
     const [history, setHistory] = useState(() => storage.getHistory());
     const [isExpanded, setIsExpanded] = useState(false);
 
@@ -136,7 +139,7 @@ export const HistoryPanel = ({ refreshTrigger = 0 }) => {
 
     // Limpiar historial
     const handleClearHistory = () => {
-        if (confirm('¿Borrar todo el historial de intercambios?')) {
+        if (confirm(t.history.clear_confirm)) {
             storage.clearHistory();
             setHistory([]);
         }
@@ -163,9 +166,9 @@ export const HistoryPanel = ({ refreshTrigger = 0 }) => {
                         <Icons.Exchange className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div className="text-left">
-                        <h3 className="font-bold text-slate-800">Historial</h3>
+                        <h3 className="font-bold text-slate-800">{t.history.title}</h3>
                         <p className="text-xs text-slate-400">
-                            {history.length} intercambio{history.length !== 1 ? 's' : ''}
+                            {history.length} {history.length !== 1 ? t.history.plural : t.history.singular}
                             {history.length > 0 && (
                                 <span className="ml-1">
                                     • +{stats.totalReceived} / -{stats.totalGiven}
@@ -209,9 +212,9 @@ export const HistoryPanel = ({ refreshTrigger = 0 }) => {
                             <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
                                 <Icons.Exchange className="w-8 h-8 text-slate-300" />
                             </div>
-                            <p className="text-sm font-bold text-slate-400">Sin intercambios aún</p>
+                            <p className="text-sm font-bold text-slate-400">{t.history.empty}</p>
                             <p className="text-xs text-slate-300 mt-1">
-                                Tus transacciones aparecerán aquí
+                                {t.history.desc}
                             </p>
                         </div>
                     ) : (
@@ -227,7 +230,7 @@ export const HistoryPanel = ({ refreshTrigger = 0 }) => {
                                 className="w-full text-center text-xs text-rose-500 font-bold py-3 hover:bg-rose-50 rounded-xl transition"
                             >
                                 <Icons.Trash className="w-3 h-3 inline mr-1" />
-                                Borrar todo el historial
+                                {t.history.clear_btn}
                             </button>
                         </>
                     )}

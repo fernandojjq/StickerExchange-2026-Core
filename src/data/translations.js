@@ -1,16 +1,16 @@
 // ============================================================================
 // ARCHIVO: src/data/translations.js
-// VERSIÓN: 2.0 - Sistema Multi-idioma Extendido (ES, EN, PT, FR, DE)
+// VERSIÓN: 8.1 - CORRECCIÓN DE SINTAXIS Y COBERTURA TOTAL
 // ============================================================================
 
 export const translations = {
     es: {
-        common: { loading: "Cargando...", understand: "¡Entendido!" },
+        common: { loading: "Cargando...", understand: "¡Entendido!", cancel: "Cancelar", confirm: "Confirmar", help: "Ayuda", none: "Ninguno", generating: "Generando...", no_results: "Sin resultados", clear_filters: "Limpiar filtros" },
         nav: { album: "Álbum", swap: "Intercambio", profile: "Mi ID" },
         album: {
             title: "SWAP-26",
             subtitle: "Inventario Digital",
-            search_placeholder: "Buscar...",
+            search_placeholder: "Buscar número o país...",
             filter_all: "TODO",
             filter_missing: "FALTANTES",
             filter_repeated: "REPETIDAS",
@@ -21,9 +21,65 @@ export const translations = {
             type_extras: "EXTRAS",
             type_players: "JUGADORES",
             stats_stickers: "Stickers",
+            stats_unique: "Únicos",
+            stats_repeated: "Repetidas",
             help_title: "Guía de Ayuda",
             tip_title: "¡Buen comienzo!",
-            tip_desc: "Toca el botón + para añadir repetidas y el - para quitarlas."
+            tip_desc: "Toca el botón + para añadir repetidas y el - para quitarlas.",
+            promo_desc: "Colección especial. Estos stickers no cuentan para el progreso del álbum base.",
+            extras_desc: "Colección Premium. No forman parte de los 980 stickers del álbum principal."
+        },
+        swap: {
+            title: "Centro de Intercambio",
+            subtitle: "Escaneo y Sincronización",
+            scan_btn: "Escanear QR",
+            camera_btn: "Cámara",
+            upload_btn: "Subir QR",
+            qr_desc: "Muestra este código para que otros vean tus repetidas.",
+            instructions: "Apunta al QR de un amigo para ver qué pueden cambiar.",
+            matching_title: "Cromos Encontrados",
+            no_match: "No hay coincidencias para cambiar.",
+            live_btn: "En Vivo",
+            offline_btn: "Offline",
+            connecting: "Conectando...",
+            qr_error: "No se pudo leer el código QR. Asegúrate de que sea una imagen clara."
+        },
+        history: {
+            title: "Historial",
+            empty: "Sin intercambios aún",
+            desc: "Tus transacciones aparecerán aquí",
+            received: "Recibidos",
+            given: "Entregados",
+            details: "Ver detalles",
+            clear_btn: "Borrar historial",
+            clear_confirm: "¿Borrar todo el historial de intercambios?",
+            plural: "intercambios",
+            singular: "intercambio"
+        },
+        profile: {
+            title: "MI ID",
+            subtitle: "Perfil del Coleccionista",
+            name_placeholder: "Tu Nombre",
+            share_card: "Compartir",
+            share_btn: "Descargar Tarjeta",
+            share_desc: "Descarga una imagen con tu resumen de colección lista para compartir.",
+            reset_data: "Borrar Datos",
+            reset_confirm: "¿Estás seguro de que quieres borrar TODOS tus datos? Esta acción no se puede deshacer.",
+            reset_btn: "Reiniciar Datos",
+            reset_warn: "Atención: Esta acción borrará todo tu progreso local.",
+            stats_completion: "Progreso Álbum Base",
+            stats_base: "Base",
+            stats_coke: "Especiales",
+            stats_extras: "Extras",
+            stats_by_category: "Estadísticas por Categoría",
+            stats_teams: "Equipos Completos",
+            backup_title: "Copia de Seguridad",
+            backup_export: "Exportar",
+            backup_import: "Importar",
+            backup_desc: "Guarda o restaura tu inventario en otro dispositivo.",
+            restore_title: "¿RESTAURAR DATOS?",
+            restore_desc: "Se sobrescribirá tu inventario actual. Esta acción no se puede deshacer.",
+            restore_confirm_btn: "Sí, Restaurar"
         },
         guide: {
             manual: "Manual de Usuario",
@@ -31,25 +87,35 @@ export const translations = {
                 title: "Guía del Álbum",
                 steps: [
                     { t: "Marcar Cromos", d: "Toca cualquier cromo para marcarlo como recolectado." },
-                    { t: "Gestión de Repetidas", d: "Usa el botón (+) para añadir repetidas y el (-) para quitarlas." },
+                    { t: "Gestión de Repetidas", d: "Usa (+) para añadir y (-) para quitar repetidas." },
                     { t: "Filtros Rápidos", d: "Filtra por 'Faltantes' para ver qué te falta." }
                 ]
+            },
+            swap: {
+                title: "Intercambio Pro",
+                steps: [
+                    { t: "Escáner QR", d: "Apunta al QR de un amigo para ver sus repetidas." },
+                    { t: "Sesión en Vivo", d: "Los cambios se sincronizan al instante." },
+                    { t: "Cero Errores", d: "La app te dice qué le falta a tu amigo." }
+                ]
+            },
+            profile: {
+                title: "Tu Identidad",
+                steps: [
+                    { t: "Compartir ID", d: "Genera una tarjeta visual para presumir en redes." },
+                    { t: "Estadísticas", d: "Mira tu progreso global y por grupos." },
+                    { t: "Seguridad", d: "Tus datos se guardan solo en este dispositivo." }
+                ]
             }
-        },
-        profile: {
-            title: "MI ID",
-            subtitle: "Perfil del Coleccionista",
-            share_card: "Generar Tarjeta",
-            reset_data: "Borrar Datos"
         }
     },
     en: {
-        common: { loading: "Loading...", understand: "Got it!" },
+        common: { loading: "Loading...", understand: "Got it!", cancel: "Cancel", confirm: "Confirm", help: "Help", none: "None", generating: "Generating...", no_results: "No results", clear_filters: "Clear filters" },
         nav: { album: "Album", swap: "Swap", profile: "My ID" },
         album: {
             title: "SWAP-26",
             subtitle: "Digital Inventory",
-            search_placeholder: "Search...",
+            search_placeholder: "Search number or country...",
             filter_all: "ALL",
             filter_missing: "MISSING",
             filter_repeated: "REPEATED",
@@ -60,9 +126,65 @@ export const translations = {
             type_extras: "EXTRAS",
             type_players: "PLAYERS",
             stats_stickers: "Stickers",
+            stats_unique: "Unique",
+            stats_repeated: "Duplicates",
             help_title: "Help Guide",
             tip_title: "Great start!",
-            tip_desc: "Tap the + button to add duplicates and the - to remove them."
+            tip_desc: "Tap + to add duplicates and - to remove them.",
+            promo_desc: "Special collection. These stickers do not count towards base album progress.",
+            extras_desc: "Premium collection. Not part of the 980 main album stickers."
+        },
+        swap: {
+            title: "Swap Center",
+            subtitle: "Scan & Sync",
+            scan_btn: "Scan QR",
+            camera_btn: "Camera",
+            upload_btn: "Upload QR",
+            qr_desc: "Show this code so others can see your duplicates.",
+            instructions: "Point at a friend's QR to see what you can trade.",
+            matching_title: "Matches Found",
+            no_match: "No matches found to trade.",
+            live_btn: "Live",
+            offline_btn: "Offline",
+            connecting: "Connecting...",
+            qr_error: "Could not read QR code. Make sure it's a clear image."
+        },
+        history: {
+            title: "History",
+            empty: "No trades yet",
+            desc: "Your transactions will appear here",
+            received: "Received",
+            given: "Given",
+            details: "View details",
+            clear_btn: "Clear history",
+            clear_confirm: "Clear all trade history?",
+            plural: "trades",
+            singular: "trade"
+        },
+        profile: {
+            title: "MY ID",
+            subtitle: "Collector Profile",
+            name_placeholder: "Your Name",
+            share_card: "Share",
+            share_btn: "Download Card",
+            share_desc: "Download an image of your collection summary ready to share.",
+            reset_data: "Clear Data",
+            reset_confirm: "Are you sure you want to clear ALL your data? This action cannot be undone.",
+            reset_btn: "Reset Data",
+            reset_warn: "Warning: This action will clear all your local progress.",
+            stats_completion: "Base Album Progress",
+            stats_base: "Base",
+            stats_coke: "Specials",
+            stats_extras: "Extras",
+            stats_by_category: "Stats by Category",
+            stats_teams: "Full Teams",
+            backup_title: "Backup",
+            backup_export: "Export",
+            backup_import: "Import",
+            backup_desc: "Save or restore your inventory on another device.",
+            restore_title: "RESTORE DATA?",
+            restore_desc: "Your current inventory will be overwritten. This action cannot be undone.",
+            restore_confirm_btn: "Yes, Restore"
         },
         guide: {
             manual: "User Manual",
@@ -70,25 +192,35 @@ export const translations = {
                 title: "Album Guide",
                 steps: [
                     { t: "Mark Stickers", d: "Tap any sticker to mark it as collected." },
-                    { t: "Duplicate Management", d: "Use the (+) button to add duplicates and (-) to remove them." },
-                    { t: "Quick Filters", d: "Filter by 'Missing' to see what you need." }
+                    { t: "Duplicates", d: "Use (+) to add and (-) to remove duplicates." },
+                    { t: "Filters", d: "Filter by 'Missing' to see what you need." }
+                ]
+            },
+            swap: {
+                title: "Pro Trading",
+                steps: [
+                    { t: "QR Scanner", d: "Point at a friend's QR to see their duplicates." },
+                    { t: "Live Sync", d: "Changes are synchronized instantly." },
+                    { t: "No Errors", d: "The app shows exactly what your friend needs." }
+                ]
+            },
+            profile: {
+                title: "Your Identity",
+                steps: [
+                    { t: "Share ID", d: "Generate a card to show off on social media." },
+                    { t: "Stats", d: "See your global and group progress." },
+                    { t: "Security", d: "Your data is saved only on this device." }
                 ]
             }
-        },
-        profile: {
-            title: "MY ID",
-            subtitle: "Collector Profile",
-            share_card: "Generate Card",
-            reset_data: "Clear Data"
         }
     },
     pt: {
-        common: { loading: "Carregando...", understand: "Entendi!" },
+        common: { loading: "Carregando...", understand: "Entendi!", cancel: "Cancelar", confirm: "Confirmar", help: "Ajuda", none: "Nenhum", generating: "Gerando...", no_results: "Sem resultados", clear_filters: "Limpar filtros" },
         nav: { album: "Álbum", swap: "Troca", profile: "Meu ID" },
         album: {
             title: "SWAP-26",
             subtitle: "Inventário Digital",
-            search_placeholder: "Buscar...",
+            search_placeholder: "Buscar número ou país...",
             filter_all: "TUDO",
             filter_missing: "FALTANDO",
             filter_repeated: "REPETIDAS",
@@ -99,35 +231,101 @@ export const translations = {
             type_extras: "EXTRAS",
             type_players: "JOGADORES",
             stats_stickers: "Figurinhas",
+            stats_unique: "Únicas",
+            stats_repeated: "Repetidas",
             help_title: "Guia de Ajuda",
             tip_title: "Bom começo!",
-            tip_desc: "Toque no botão + para adicionar repetidas e no - para remover."
+            tip_desc: "Toque em + para adicionar repetidas e em - para remover.",
+            promo_desc: "Coleção especial. Estas figurinhas não contam para o progresso do álbum base.",
+            extras_desc: "Coleção Premium. Não fazem parte das 980 figurinhas do álbum principal."
+        },
+        swap: {
+            title: "Centro de Trocas",
+            subtitle: "Escanear e Sincronizar",
+            scan_btn: "Escanear QR",
+            camera_btn: "Câmera",
+            upload_btn: "Enviar QR",
+            qr_desc: "Mostre este código para que outros vejam suas repetidas.",
+            instructions: "Aponte para o QR de um amigo para ver as trocas.",
+            matching_title: "Figurinhas Encontradas",
+            no_match: "Nenhuma combinação encontrada.",
+            live_btn: "Ao Vivo",
+            offline_btn: "Offline",
+            connecting: "Conectando...",
+            qr_error: "Não foi possível ler o código QR. Certifique-se de que a imagem esteja nítida."
+        },
+        history: {
+            title: "Histórico",
+            empty: "Nenhuma troca ainda",
+            desc: "Suas transações aparecerão aqui",
+            received: "Recebidas",
+            given: "Enviadas",
+            details: "Ver detalhes",
+            clear_btn: "Limpar histórico",
+            clear_confirm: "Limpar todo o histórico de trocas?",
+            plural: "trocas",
+            singular: "troca"
+        },
+        profile: {
+            title: "MEU ID",
+            subtitle: "Perfil do Colecionador",
+            name_placeholder: "Seu Nome",
+            share_card: "Compartilhar",
+            share_btn: "Baixar Cartão",
+            share_desc: "Baixe uma imagem com o resumo da sua coleção pronta para compartilhar.",
+            reset_data: "Limpar Dados",
+            reset_confirm: "Tem certeza de que deseja limpar TODOS os seus datos? Esta ação não pode ser desfeita.",
+            reset_btn: "Reiniciar Dados",
+            reset_warn: "Atenção: Esta ação limpará todo o seu progresso local.",
+            stats_completion: "Progresso do Álbum Base",
+            stats_base: "Base",
+            stats_coke: "Especiais",
+            stats_extras: "Extras",
+            stats_by_category: "Estatísticas por Categoria",
+            stats_teams: "Equipes Completas",
+            backup_title: "Backup",
+            backup_export: "Exportar",
+            backup_import: "Importar",
+            backup_desc: "Salve ou restaure seu inventário em outro dispositivo.",
+            restore_title: "RESTAURAR DADOS?",
+            restore_desc: "Seu inventário atual será sobrescrito. Esta ação não pode ser desfeita.",
+            restore_confirm_btn: "Sim, Restaurar"
         },
         guide: {
             manual: "Manual do Usuário",
             album: {
                 title: "Guia do Álbum",
                 steps: [
-                    { t: "Marcar Figurinhas", d: "Toque em qualquer figurinha para marcar como coletada." },
-                    { t: "Gestão de Repetidas", d: "Use o botão (+) para adicionar e (-) para remover." },
-                    { t: "Filtros Rápidos", d: "Filtre por 'Faltando' para ver o que precisa." }
+                    { t: "Marcar Figurinhas", d: "Toque em qualquer figurinha para coletar." },
+                    { t: "Repetidas", d: "Use (+) para adicionar e (-) para remover." },
+                    { t: "Filtros", d: "Filtre por 'Faltando' para ver necessidades." }
+                ]
+            },
+            swap: {
+                title: "Troca Pro",
+                steps: [
+                    { t: "Scanner QR", d: "Aponte para o QR do amigo para ver repetidas." },
+                    { t: "Sincronização", d: "As mudanças são sincronizadas na hora." },
+                    { t: "Sem Erros", d: "O app mostra o que seu amigo precisa." }
+                ]
+            },
+            profile: {
+                title: "Sua Identidade",
+                steps: [
+                    { t: "Compartilhar", d: "Gere um cartão visual para as redes sociais." },
+                    { t: "Estatísticas", d: "Veja seu progresso global e por grupos." },
+                    { t: "Segurança", d: "Seus dados ficam apenas neste dispositivo." }
                 ]
             }
-        },
-        profile: {
-            title: "MEU ID",
-            subtitle: "Perfil do Colecionador",
-            share_card: "Gerar Cartão",
-            reset_data: "Limpar Dados"
         }
     },
     fr: {
-        common: { loading: "Chargement...", understand: "Compris !" },
+        common: { loading: "Chargement...", understand: "Compris !", cancel: "Annuler", confirm: "Confirmer", help: "Aide", none: "Aucun", generating: "Génération...", no_results: "Aucun résultat", clear_filters: "Effacer les filtres" },
         nav: { album: "Album", swap: "Échange", profile: "Mon ID" },
         album: {
             title: "SWAP-26",
             subtitle: "Inventaire Numérique",
-            search_placeholder: "Chercher...",
+            search_placeholder: "Chercher numéro...",
             filter_all: "TOUT",
             filter_missing: "MANQUANTS",
             filter_repeated: "DOUBLES",
@@ -138,35 +336,101 @@ export const translations = {
             type_extras: "EXTRAS",
             type_players: "JOUEURS",
             stats_stickers: "Stickers",
-            help_title: "Guide d'aide",
+            stats_unique: "Uniques",
+            stats_repeated: "Doubles",
+            help_title: "Guide d'Aide",
             tip_title: "Bon début !",
-            tip_desc: "Appuyez sur + pour ajouter des doubles et sur - pour les retirer."
+            tip_desc: "Appuyez sur + pour les doubles et sur - pour retirer.",
+            promo_desc: "Collection spéciale. Ces stickers ne comptent pas pour la progression de l'album de base.",
+            extras_desc: "Collection Premium. Ne fait pas partie des 980 stickers de l'album principal."
         },
-        guide: {
-            manual: "Manuel de l'utilisateur",
-            album: {
-                title: "Guide de l'album",
-                steps: [
-                    { t: "Marquer les stickers", d: "Appuyez sur un sticker pour le marquer comme collecté." },
-                    { t: "Gestion des doubles", d: "Utilisez (+) pour ajouter et (-) pour retirer." },
-                    { t: "Filtres rapides", d: "Filtrez par 'Manquants' pour voir vos besoins." }
-                ]
-            }
+        swap: {
+            title: "Centre d'Échange",
+            subtitle: "Scan et Sync",
+            scan_btn: "Scanner QR",
+            camera_btn: "Caméra",
+            upload_btn: "Charger QR",
+            qr_desc: "Montrez ce code pour voir vos doubles.",
+            instructions: "Pointez le QR d'un ami pour voir les échanges.",
+            matching_title: "Stickers Trouvés",
+            no_match: "Aucune correspondance trouvée.",
+            live_btn: "En Direct",
+            offline_btn: "Hors-ligne",
+            connecting: "Connexion...",
+            qr_error: "Impossible de lire le code QR. Assurez-vous que l'image est claire."
+        },
+        history: {
+            title: "Historique",
+            empty: "Pas encore d'échanges",
+            desc: "Vos transactions apparaîtront ici",
+            received: "Reçus",
+            given: "Donnés",
+            details: "Voir détails",
+            clear_btn: "Effacer l'historique",
+            clear_confirm: "Effacer tout l'historique des échanges ?",
+            plural: "échanges",
+            singular: "échange"
         },
         profile: {
             title: "MON ID",
             subtitle: "Profil du Collectionneur",
-            share_card: "Générer Carte",
-            reset_data: "Effacer Données"
+            name_placeholder: "Votre Nom",
+            share_card: "Partager",
+            share_btn: "Télécharger Carte",
+            share_desc: "Téléchargez une image du résumé de votre collection prête à être partagée.",
+            reset_data: "Effacer Données",
+            reset_confirm: "Êtes-vous sûr de vouloir effacer TOUTES vos données ? Cette action est irréversible.",
+            reset_btn: "Réinitialiser Données",
+            reset_warn: "Attention : Cette action effacera toute votre progression locale.",
+            stats_completion: "Progression Album de Base",
+            stats_base: "Base",
+            stats_coke: "Spéciaux",
+            stats_extras: "Extras",
+            stats_by_category: "Stats par Catégorie",
+            stats_teams: "Équipes Complètes",
+            backup_title: "Sauvegarde",
+            backup_export: "Exporter",
+            backup_import: "Importer",
+            backup_desc: "Enregistrez ou restaurez votre inventaire sur un autre appareil.",
+            restore_title: "RESTAURER DONNÉES ?",
+            restore_desc: "Votre inventaire actuel sera écrasé. Cette action est irréversible.",
+            restore_confirm_btn: "Oui, Restaurer"
+        },
+        guide: {
+            manual: "Manuel d'Utilisation",
+            album: {
+                title: "Guide de l'Album",
+                steps: [
+                    { t: "Marquer Stickers", d: "Appuyez sur un sticker pour collecter." },
+                    { t: "Doubles", d: "Utilisez (+) pour ajouter et (-) pour retirer." },
+                    { t: "Filtres", d: "Filtrez par 'Manquants' pour voir vos besoins." }
+                ]
+            },
+            swap: {
+                title: "Échange Pro",
+                steps: [
+                    { t: "Scanner QR", d: "Pointez le QR d'un ami pour ses doubles." },
+                    { t: "Sync en Direct", d: "Les changements sont instantanés." },
+                    { t: "Sans Erreur", d: "L'app montre ce dont votre ami a besoin." }
+                ]
+            },
+            profile: {
+                title: "Votre Identité",
+                steps: [
+                    { t: "Partager ID", d: "Générez une carte pour les réseaux sociaux." },
+                    { t: "Stats", d: "Consultez vos progrès globaux et par groupes." },
+                    { t: "Sécurité", d: "Vos données restent sur cet appareil." }
+                ]
+            }
         }
     },
     de: {
-        common: { loading: "Laden...", understand: "Verstanden!" },
+        common: { loading: "Laden...", understand: "Verstanden!", cancel: "Abbrechen", confirm: "Bestätigen", help: "Hilfe", none: "Keine", generating: "Generiere...", no_results: "Keine Ergebnisse", clear_filters: "Filter löschen" },
         nav: { album: "Album", swap: "Tausch", profile: "Mein ID" },
         album: {
             title: "SWAP-26",
             subtitle: "Digitales Inventar",
-            search_placeholder: "Suchen...",
+            search_placeholder: "Nummer suchen...",
             filter_all: "ALLE",
             filter_missing: "FEHLEND",
             filter_repeated: "DOPPELTE",
@@ -177,26 +441,197 @@ export const translations = {
             type_extras: "EXTRAS",
             type_players: "SPIELER",
             stats_stickers: "Sticker",
+            stats_unique: "Einzigartig",
+            stats_repeated: "Doppelte",
             help_title: "Hilfe-Leitfaden",
             tip_title: "Guter Start!",
-            tip_desc: "Drücken Sie +, um Doppelte hinzuzufügen, und -, um sie zu entfernen."
+            tip_desc: "Drücken Sie + für Doppelte und - zum Entfernen.",
+            promo_desc: "Spezielle Sammlung. Diese Sticker zählen nicht zum Fortschritt des Basis-Albums.",
+            extras_desc: "Premium-Sammlung. Kein Teil der 980 Hauptalbum-Sticker."
+        },
+        swap: {
+            title: "Tausch-Zentrum",
+            subtitle: "Scan & Sync",
+            scan_btn: "QR Scannen",
+            camera_btn: "Kamera",
+            upload_btn: "QR Hochladen",
+            qr_desc: "Code zeigen, um Doppelte zu teilen.",
+            instructions: "QR eines Freundes scannen für Tausch-Optionen.",
+            matching_title: "Treffer Gefunden",
+            no_match: "Keine Tausch-Treffer gefunden.",
+            live_btn: "Live",
+            offline_btn: "Offline",
+            connecting: "Verbinden...",
+            qr_error: "QR-Code konnte nicht gelesen werden. Stellen Sie sicher, dass das Bild klar ist."
+        },
+        history: {
+            title: "Verlauf",
+            empty: "Noch keine Täusche",
+            desc: "Ihre Transaktionen werden hier angezeigt",
+            received: "Erhalten",
+            given: "Gegeben",
+            details: "Details anzeigen",
+            clear_btn: "Verlauf löschen",
+            clear_confirm: "Gesamten Tauschverlauf löschen?",
+            plural: "Täusche",
+            singular: "Tausch"
+        },
+        profile: {
+            title: "MEIN ID",
+            subtitle: "Sammlerprofil",
+            name_placeholder: "Dein Name",
+            share_card: "Teilen",
+            share_btn: "Karte herunterladen",
+            share_desc: "Laden Sie ein Bild Ihrer Sammlungszusammenfassung herunter, das Sie teilen können.",
+            reset_data: "Daten Löschen",
+            reset_confirm: "Sind Sie sicher, dass Sie ALLE Ihre Daten löschen möchten? Dies kann nicht rückgängig gemacht werden.",
+            reset_btn: "Daten zurücksetzen",
+            reset_warn: "Warnung: Diese Aktion löscht all Ihren lokalen Fortschritt.",
+            stats_completion: "Fortschritt Basis-Album",
+            stats_base: "Basis",
+            stats_coke: "Spezial",
+            stats_extras: "Extras",
+            stats_by_category: "Statistiken nach Kategorie",
+            stats_teams: "Vollständige Teams",
+            backup_title: "Sicherung",
+            backup_export: "Exportieren",
+            backup_import: "Importieren",
+            backup_desc: "Speichern oder wiederherstellen Sie Ihr Inventar auf einem anderen Gerät.",
+            restore_title: "DATEN WIEDERHERSTELLEN?",
+            restore_desc: "Ihr aktuelles Inventar wird überschrieben. Dies kann nicht rückgängig gemacht werden.",
+            restore_confirm_btn: "Ja, Wiederherstellen"
         },
         guide: {
             manual: "Benutzerhandbuch",
             album: {
                 title: "Album-Anleitung",
                 steps: [
-                    { t: "Sticker markieren", d: "Tippen Sie auf einen Sticker, um ihn als gesammelt zu markieren." },
-                    { t: "Doppelte verwalten", d: "Nutzen Sie (+) zum Hinzufügen und (-) zum Entfernen." },
-                    { t: "Schnellfilter", d: "Filtern Sie nach 'Fehlend', um zu sehen, was Sie brauchen." }
+                    { t: "Sticker Markieren", d: "Sticker tippen, um ihn zu sammeln." },
+                    { t: "Doppelte", d: "Nutzen Sie (+) und (-) für Doppelte." },
+                    { t: "Filter", d: "Filter nach 'Fehlend' nutzen." }
+                ]
+            },
+            swap: {
+                title: "Pro-Tausch",
+                steps: [
+                    { t: "QR-Scanner", d: "QR eines Freundes für Doppelte scannen." },
+                    { t: "Live-Sync", d: "Änderungen werden sofort geteilt." },
+                    { t: "Fehlerfrei", d: "App zeigt, was dein Freund braucht." }
+                ]
+            },
+            profile: {
+                title: "Deine Identität",
+                steps: [
+                    { t: "ID Teilen", d: "Karte für soziale Medien erstellen." },
+                    { t: "Statistiken", d: "Fortschritt global und pro Gruppe sehen." },
+                    { t: "Sicherheit", d: "Daten werden nur hier gespeichert." }
                 ]
             }
+        }
+    },
+    it: {
+        common: { loading: "Caricamento...", understand: "Ho capito!", cancel: "Annulla", confirm: "Conferma", help: "Aiuto", none: "Nessuno", generating: "Generazione...", no_results: "Nessun risultato", clear_filters: "Cancella filtri" },
+        nav: { album: "Album", swap: "Scambio", profile: "Il mio ID" },
+        album: {
+            title: "SWAP-26",
+            subtitle: "Inventario Digitale",
+            search_placeholder: "Cerca numero...",
+            filter_all: "TUTTO",
+            filter_missing: "MANCANTI",
+            filter_repeated: "DOPPIE",
+            group_all: "TUTTI I GRUPPI",
+            type_all: "TUTTO",
+            type_crests: "STEMMI",
+            type_promo: "PROMO",
+            type_extras: "EXTRA",
+            type_players: "GIOCATORI",
+            stats_stickers: "Sticker",
+            stats_unique: "Unici",
+            stats_repeated: "Doppie",
+            help_title: "Guida",
+            tip_title: "Buon inizio!",
+            tip_desc: "Tocca + per le doppie e - per rimuoverle.",
+            promo_desc: "Collezione speciale. Questi sticker non contano per il progresso dell'album base.",
+            extras_desc: "Collezione Premium. Non fanno parte dei 980 sticker dell'album principale."
+        },
+        swap: {
+            title: "Centro Scambi",
+            subtitle: "Scan & Sync",
+            scan_btn: "Scansiona QR",
+            camera_btn: "Camera",
+            upload_btn: "Carica QR",
+            qr_desc: "Mostra il codice per le tue doppie.",
+            instructions: "Inquadra il QR di un amico per vedere gli scambi.",
+            matching_title: "Sticker Trovati",
+            no_match: "Nessuna corrispondenza trovata.",
+            live_btn: "Dal Vivo",
+            offline_btn: "Offline",
+            connecting: "Connessione...",
+            qr_error: "Impossibile leggere il codice QR. Assicurati che l'immagine sia nitida."
+        },
+        history: {
+            title: "Cronologia",
+            empty: "Ancora nessun scambio",
+            desc: "Le tue transazioni appariranno qui",
+            received: "Ricevuti",
+            given: "Dati",
+            details: "Vedi dettagli",
+            clear_btn: "Cancella cronologia",
+            clear_confirm: "Cancellare tutta la cronologia degli scambi?",
+            plural: "scambi",
+            singular: "scambio"
         },
         profile: {
-            title: "MEIN ID",
-            subtitle: "Sammlerprofil",
-            share_card: "Karte erstellen",
-            reset_data: "Daten löschen"
+            title: "IL MIO ID",
+            subtitle: "Profilo Collezionista",
+            name_placeholder: "Tuo Nome",
+            share_card: "Condividi",
+            share_btn: "Scarica Carta",
+            share_desc: "Scarica un'immagine del riepilogo della tua collezione pronta per la condivisione.",
+            reset_data: "Elimina Dati",
+            reset_confirm: "Sei sicuro di voler eliminare TUTTI i tuoi dati? L'azione è irreversibile.",
+            reset_btn: "Ripristina Dati",
+            reset_warn: "Attenzione: Questa acción cancellerà tutti i tuoi progressi locali.",
+            stats_completion: "Progresso Album Base",
+            stats_base: "Base",
+            stats_coke: "Speciali",
+            stats_extras: "Extra",
+            stats_by_category: "Statistiche per Categoria",
+            stats_teams: "Squadre Complete",
+            backup_title: "Backup",
+            backup_export: "Esporta",
+            backup_import: "Importa",
+            backup_desc: "Salva o ripristina il tuo inventario su un altro dispositivo.",
+            restore_title: "RIPRISTINARE I DATI?",
+            restore_desc: "Il tuo inventario attuale verrà sovrascritto. Questa azione è irreversibile.",
+            restore_confirm_btn: "Sì, Ripristina"
+        },
+        guide: {
+            manual: "Manuale Utente",
+            album: {
+                title: "Guida Album",
+                steps: [
+                    { t: "Segna Sticker", d: "Tocca uno sticker per raccoglierlo." },
+                    { t: "Doppie", d: "Usa (+) e (-) per gestire le doppie." },
+                    { t: "Filtri", d: "Filtra per 'Mancanti' per i tuoi bisogni." }
+                ]
+            },
+            swap: {
+                title: "Scambio Pro",
+                steps: [
+                    { t: "Scanner QR", d: "Inquadra il QR di un amico per le doppie." },
+                    { t: "Sync Live", d: "I cambi sono sincronizzati all'istante." },
+                    { t: "Senza Errori", d: "L'app mostra cosa serve al tuo amico." }
+                ]
+            },
+            profile: {
+                title: "Tua Identità",
+                steps: [
+                    { t: "Condividi ID", d: "Genera una carta per i social network." },
+                    { t: "Statistiche", d: "Guarda il progresso globale e per gruppi." },
+                    { t: "Sicurezza", d: "I tuoi datos restano su questo dispositivo." }
+                ]
+            }
         }
     }
 };

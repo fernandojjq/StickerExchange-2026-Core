@@ -297,7 +297,7 @@ export const Album = () => {
                             <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white"><Icons.Logo className="w-6 h-6" /></div>
                             <div>
                                 <h1 className="text-xl font-black italic tracking-tighter text-slate-900 leading-none">SWAP-26</h1>
-                                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Inventario Digital</p>
+                                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t.album.subtitle}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
@@ -320,7 +320,7 @@ export const Album = () => {
                                 <div className="text-sm font-black text-slate-900 leading-none">
                                     {Number(stats.unique || 0).toLocaleString()} / 1,014
                                 </div>
-                                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t.album.stats_stickers}</div>
+                                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t.album.stats_unique}</div>
                             </div>
                         </div>
                     </div>
@@ -346,7 +346,7 @@ export const Album = () => {
                     <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 mb-1 items-center">
                         <select value={groupFilter} onChange={(e) => { setGroupFilter(e.target.value); setTypeFilter('ALL'); }} className="bg-white border rounded-lg px-2 py-1.5 text-[10px] font-bold text-slate-600 outline-none shrink-0">
                             <option value="ALL">{t.album.group_all}</option>
-                            <option value="INTL COMPETITION 2026">{language === 'es' ? 'ESPECIALES FWC' : 'FWC SPECIALS'}</option>
+                            <option value="INTL COMPETITION 2026">{t.album.type_promo}</option>
                             {ALBUM_MANIFEST.filter(g => g.id.startsWith('group_')).map(g => <option key={g.id} value={g.title}>{g.title}</option>)}
                         </select>
                         
@@ -407,8 +407,8 @@ export const Album = () => {
                 {filteredManifest.length === 0 ? (
                     <div className="min-h-[40vh] flex flex-col items-center justify-center text-center">
                         <Icons.Search className="w-12 h-12 text-slate-200 mb-2" />
-                        <p className="text-slate-400 font-bold">Sin resultados</p>
-                        <button onClick={() => { setGroupFilter('ALL'); setTypeFilter('ALL'); setFilterMode('all'); }} className="mt-2 text-indigo-500 text-xs font-bold underline">Limpiar filtros</button>
+                        <p className="text-slate-400 font-bold">{t.common.no_results}</p>
+                        <button onClick={() => { setGroupFilter('ALL'); setTypeFilter('ALL'); setFilterMode('all'); }} className="mt-2 text-indigo-500 text-xs font-bold underline">{t.common.clear_filters}</button>
                     </div>
                 ) : (
                     filteredManifest.map((group, gIdx) => (
@@ -420,15 +420,13 @@ export const Album = () => {
 
                             {group.id === 'promo' && (
                                 <p className="text-[10px] text-amber-500 font-bold -mt-6 mb-4 px-1 leading-relaxed">
-                                    Colección especial de socio.<br />
-                                    Estos stickers no cuentan para el progreso del álbum base.
+                                    {t.album.promo_desc}
                                 </p>
                             )}
 
                             {group.id === 'extras' && (
                                 <p className="text-[10px] text-amber-500 font-bold -mt-6 mb-4 px-1 leading-relaxed">
-                                    Colección de stickers Extras/ Premium.<br />
-                                    No forman parte de los 980 stickers del álbum principal.
+                                    {t.album.extras_desc}
                                 </p>
                             )}
                             

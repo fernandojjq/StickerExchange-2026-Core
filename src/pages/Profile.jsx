@@ -9,6 +9,7 @@ import { Protocol } from '../utils/protocol';
 import { Icons } from '../components/Icons';
 import { ALBUM_MANIFEST } from '../data/albumManifest';
 import { WelcomeGuide } from '../components/WelcomeGuide';
+import { useLanguage } from '../hooks/useLanguage';
 
 // ============================================================================
 // Configuración del Álbum
@@ -142,6 +143,7 @@ const generateStatusCard = async (userName, percentage, countryData, stats, cate
 };
 
 export const Profile = () => {
+    const { t } = useLanguage();
     const [user, setUser] = useState(() => storage.getUser());
     const [isGenerating, setIsGenerating] = useState(false);
     const [pendingBackup, setPendingBackup] = useState(null);
@@ -197,24 +199,17 @@ export const Profile = () => {
         storage.saveUser(newUser);
     };
 
-    const handleReset = () => {
-        if (confirm('¿ESTÁS SEGURO? Se borrarán todos tus datos permanentemente.')) {
+    const handleClearData = () => {
+        if (window.confirm(t.profile.reset_confirm || "¿Estás seguro?")) {
             storage.clear();
             window.location.reload();
         }
+    };
+
     const handleGenerate = async () => {
         setIsGenerating(true);
         await generateStatusCard(user.name, categoryStats.completion, countryData, stats, categoryStats);
         setIsGenerating(false);
-    };
-
-    const handleClearData = () => {
-        if (window.confirm('¿Estás seguro de que quieres borrar TODOS tus datos? Esta acción no se puede deshacer.')) {
-            if (window.confirm('¿REALMENTE SEGURO? Perderás todo tu progreso.')) {
-                storage.clear();
-                window.location.reload();
-            }
-        }
     };
 
     return (
@@ -228,22 +223,22 @@ export const Profile = () => {
                         <Icons.User className="w-7 h-7" />
                     </div>
                     <div>
-                        <h1 className="text-2xl font-black italic tracking-tighter text-slate-900 leading-none">MY ID</h1>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Perfil del Coleccionista</p>
+                        <h1 className="text-2xl font-black italic tracking-tighter text-slate-900 leading-none">{t.profile.title}</h1>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t.profile.subtitle}</p>
                     </div>
                 </div>
                 <div className="flex gap-2">
                     <button 
                         onClick={handleClearData}
                         className="w-10 h-10 flex items-center justify-center rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-100 transition-colors border border-rose-100"
-                        title="Borrar Datos"
+                        title={t.profile.reset_data}
                     >
                         <Icons.Trash className="w-5 h-5" />
                     </button>
                     <button 
                         onClick={() => setShowGuide(true)}
                         className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors border border-slate-200"
-                        title="Ayuda"
+                        title={t.album.help_title}
                     >
                         <Icons.Info className="w-5 h-5" />
                     </button>
@@ -259,12 +254,12 @@ export const Profile = () => {
                         <Icons.User className="w-7 h-7 text-white" />
                     </div>
                     <div className="flex-1">
-                        <label className="text-[10px] text-indigo-300 font-bold uppercase tracking-widest block mb-1">Tu Nombre</label>
+                        <label className="text-[10px] text-indigo-300 font-bold uppercase tracking-widest block mb-1">{t.profile.name_placeholder}</label>
                         <input
                             type="text"
                             value={user.name}
                             onChange={handleNameChange}
-                            placeholder="Escribe tu nombre..."
+                            placeholder={t.profile.name_placeholder}
                             className="bg-transparent text-xl font-black text-white border-b border-white/20 focus:border-white focus:outline-none w-full"
                         />
                     </div>
@@ -273,22 +268,22 @@ export const Profile = () => {
                 <div className="grid grid-cols-3 gap-3 mb-6 relative z-10 text-center">
                     <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
                         <div className="text-sm font-black whitespace-nowrap">{stats.unique}/1014</div>
-                        <div className="text-[8px] uppercase opacity-60">Únicos</div>
+                        <div className="text-[8px] uppercase opacity-60">{t.album.stats_unique}</div>
                     </div>
                     <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
                         <div className="text-sm font-black text-amber-300 whitespace-nowrap">{categoryStats.cokeCollected}/14</div>
-                        <div className="text-[8px] uppercase opacity-60">Promo</div>
+                        <div className="text-[8px] uppercase opacity-60">{t.album.type_promo}</div>
                     </div>
                     <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
                         <div className="text-sm font-black text-emerald-300 whitespace-nowrap">{categoryStats.extraCollected}/20</div>
-                        <div className="text-[8px] uppercase opacity-60">Extras</div>
+                        <div className="text-[8px] uppercase opacity-60">{t.album.type_extras}</div>
                     </div>
                 </div>
 
                 <div className="space-y-3 relative z-10">
                     <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                         <div className="flex justify-between text-[10px] font-bold mb-1">
-                            <span>PROGRESO ÁLBUM BASE</span>
+                            <span className="uppercase">{t.profile.stats_completion}</span>
                             <span>{categoryStats.completion}%</span>
                         </div>
                         <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
@@ -305,21 +300,21 @@ export const Profile = () => {
                         <Icons.Flag className="w-5 h-5" />
                     </div>
                     <div>
-                        <div className="text-xs font-bold text-slate-500 uppercase tracking-tighter">Equipos Completos</div>
+                        <div className="text-xs font-bold text-slate-500 uppercase tracking-tighter">{t.profile.stats_teams}</div>
                         <div className="text-lg font-black text-slate-900">
                             {countryData.filter(c => c.pct === 100).length} / 48
                         </div>
                     </div>
                 </div>
                 <div className="text-right">
-                    <div className="text-xs font-bold text-slate-500 uppercase tracking-tighter">Repetidas</div>
+                    <div className="text-xs font-bold text-slate-500 uppercase tracking-tighter">{t.album.stats_repeated}</div>
                     <div className="text-lg font-black text-rose-600">{stats.repeated}</div>
                 </div>
             </div>
 
             {/* Gestión de Datos */}
             <div className="mb-2">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 pl-1">Copia de Seguridad</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 pl-1">{t.profile.backup_title}</p>
                 <div className="grid grid-cols-2 gap-3 mb-2">
                     <button 
                         onClick={() => {
@@ -334,7 +329,7 @@ export const Profile = () => {
                         className="flex items-center justify-center gap-2 bg-emerald-500/10 text-emerald-600 font-bold py-4 px-4 rounded-2xl border border-emerald-500/20 active:scale-95 transition-all"
                     >
                         <Icons.Download className="w-5 h-5" />
-                        Exportar
+                        {t.profile.backup_export}
                     </button>
                     <button 
                         onClick={() => {
@@ -356,10 +351,10 @@ export const Profile = () => {
                         className="flex items-center justify-center gap-2 bg-amber-500/10 text-amber-600 font-bold py-4 px-4 rounded-2xl border border-amber-500/20 active:scale-95 transition-all"
                     >
                         <Icons.Upload className="w-5 h-5" />
-                        Importar
+                        {t.profile.backup_import}
                     </button>
                 </div>
-                <p className="text-[9px] text-slate-400 pl-1 mb-6">Usa estos botones para guardar o restaurar tu inventario en otro dispositivo.</p>
+                <p className="text-[9px] text-slate-400 pl-1 mb-6">{t.profile.backup_desc}</p>
             </div>
 
             {/* Acciones Finales */}
@@ -369,18 +364,18 @@ export const Profile = () => {
                     disabled={isGenerating}
                     className="w-full py-5 bg-slate-900 text-white rounded-[2rem] font-black uppercase tracking-widest text-xs shadow-xl active:scale-95 transition-all disabled:opacity-50"
                 >
-                    {isGenerating ? 'Generando...' : 'Descargar Tarjeta'}
+                    {isGenerating ? t.common.generating : t.profile.share_btn}
                 </button>
-                <p className="text-[9px] text-slate-400 text-center px-4">Descarga una imagen con tu resumen de colección lista para compartir en redes.</p>
+                <p className="text-[9px] text-slate-400 text-center px-4">{t.profile.share_desc}</p>
                 
                 <div className="pt-6 pb-12">
                     <button 
-                        onClick={handleReset}
+                        onClick={handleClearData}
                         className="w-full py-3 text-rose-500 font-bold text-[10px] uppercase tracking-widest hover:bg-rose-50 rounded-2xl transition-all"
                     >
-                        Reiniciar Datos
+                        {t.profile.reset_btn}
                     </button>
-                    <p className="text-[8px] text-rose-300 text-center uppercase tracking-tighter">Atención: Esta acción borrará todo tu progreso local.</p>
+                    <p className="text-[8px] text-rose-300 text-center uppercase tracking-tighter">{t.profile.reset_warn}</p>
                 </div>
             </div>
 
@@ -389,8 +384,8 @@ export const Profile = () => {
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
                     <div className="relative bg-white w-full max-w-xs rounded-3xl p-6 shadow-2xl">
-                        <h3 className="text-lg font-black text-slate-900 mb-2">¿RESTAURAR DATOS?</h3>
-                        <p className="text-sm text-slate-500 mb-6">Se sobrescribirá tu inventario actual con los datos del archivo. Esta acción no se puede deshacer.</p>
+                        <h3 className="text-lg font-black text-slate-900 mb-2 uppercase">{t.profile.restore_title}</h3>
+                        <p className="text-sm text-slate-500 mb-6">{t.profile.restore_desc}</p>
                         <div className="flex flex-col gap-2">
                             <button 
                                 onClick={() => {
@@ -399,7 +394,7 @@ export const Profile = () => {
                                 }}
                                 className="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl"
                             >
-                                Sí, Restaurar
+                                {t.profile.restore_confirm_btn}
                             </button>
                             <button 
                                 onClick={() => {
@@ -408,7 +403,7 @@ export const Profile = () => {
                                 }}
                                 className="w-full py-3 bg-slate-100 text-slate-500 font-bold rounded-xl"
                             >
-                                Cancelar
+                                {t.common.cancel}
                             </button>
                         </div>
                     </div>
