@@ -918,7 +918,7 @@ export const Swap = () => {
                 </button>
             </div>
 
-            <WelcomeGuide isOpen={showGuide} onClose={() => setShowGuide(false)} />
+            <WelcomeGuide isOpen={showGuide} onClose={() => setShowGuide(false)} type="swap" />
 
             {/* Error Modal */}
             {scanError && (

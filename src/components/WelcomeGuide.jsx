@@ -1,60 +1,77 @@
 import React from 'react';
 import { Icons } from './Icons';
 
-export const WelcomeGuide = ({ isOpen, onClose }) => {
+const GUIDE_CONTENT = {
+    album: {
+        title: "Guía del Álbum",
+        icon: <Icons.Album className="w-8 h-8 text-indigo-500" />,
+        steps: [
+            { t: "Marcar Cromos", d: "Toca cualquier cromo para marcarlo como recolectado." },
+            { t: "Gestión de Repetidas", d: "Usa el botón (+) para añadir repetidas y el (-) para quitarlas." },
+            { t: "Filtros Rápidos", d: "Filtra por 'Faltantes' para ver qué te falta o usa el buscador por número." }
+        ]
+    },
+    swap: {
+        title: "Centro de Intercambio",
+        icon: <Icons.Exchange className="w-8 h-8 text-emerald-500" />,
+        steps: [
+            { t: "Escáner QR", d: "Apunta a la pantalla de un amigo para importar sus repetidas al instante." },
+            { t: "Sesión en Vivo", d: "Inicia una sesión para intercambiar en tiempo real. ¡Tus cambios se guardan solos!" },
+            { t: "Historial", d: "Revisa tus intercambios pasados en el panel inferior." }
+        ]
+    },
+    profile: {
+        title: "Tu Perfil (ID)",
+        icon: <Icons.User className="w-8 h-8 text-amber-500" />,
+        steps: [
+            { t: "Compartir ID", d: "Genera una tarjeta visual de tu álbum para presumir en redes sociales." },
+            { t: "Estadísticas", d: "Mira cuánto te falta para completar el álbum global y por grupos." },
+            { t: "Seguridad", d: "Tus datos se guardan en este dispositivo. Puedes exportarlos si cambias de móvil." }
+        ]
+    }
+};
+
+export const WelcomeGuide = ({ isOpen, onClose, type = 'album' }) => {
     if (!isOpen) return null;
+    const content = GUIDE_CONTENT[type] || GUIDE_CONTENT.album;
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={onClose}></div>
+            <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-md" onClick={onClose}></div>
             
-            <div className="relative bg-white w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
-                <div className="bg-indigo-600 p-8 text-center relative">
-                    <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/30 backdrop-blur-md">
-                        <Icons.Logo className="w-10 h-10 text-white" />
+            <div className="relative bg-white w-full max-w-sm rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in duration-300">
+                {/* Header Guía */}
+                <div className="bg-slate-50 p-6 flex flex-col items-center text-center border-b border-slate-100">
+                    <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-slate-100">
+                        {content.icon}
                     </div>
-                    <h2 className="text-2xl font-black text-white uppercase tracking-tight">Bienvenido a Swap-26</h2>
-                    <p className="text-indigo-100 text-sm mt-2">La forma más rápida de completar tu álbum.</p>
+                    <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight italic">{content.title}</h2>
+                    <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Manual de Usuario</p>
                 </div>
 
-                <div className="p-8 space-y-6">
-                    <div className="flex gap-4">
-                        <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <Icons.Album className="w-5 h-5 text-indigo-600" />
+                {/* Pasos */}
+                <div className="p-6 space-y-5">
+                    {content.steps.map((step, idx) => (
+                        <div key={idx} className="flex gap-4">
+                            <div className="w-6 h-6 rounded-full bg-slate-900 text-white text-[10px] font-black flex items-center justify-center flex-shrink-0 mt-0.5">
+                                {idx + 1}
+                            </div>
+                            <div>
+                                <h4 className="text-sm font-black text-slate-900 leading-none mb-1">{step.t}</h4>
+                                <p className="text-xs text-slate-500 leading-relaxed font-medium">{step.d}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 className="font-bold text-slate-800 text-sm uppercase tracking-tight">Gestiona tu álbum</h4>
-                            <p className="text-slate-500 text-xs mt-1">Toca un cromo para marcarlo. Toca el botón <b>+</b> para añadir repetidas rápidamente.</p>
-                        </div>
-                    </div>
+                    ))}
+                </div>
 
-                    <div className="flex gap-4">
-                        <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <Icons.QRCode className="w-5 h-5 text-purple-600" />
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-slate-800 text-sm uppercase tracking-tight">Intercambio Offline</h4>
-                            <p className="text-slate-500 text-xs mt-1">Genera tu QR y deja que otros lo escaneen para saber qué pueden intercambiar.</p>
-                        </div>
-                    </div>
-
-                    <div className="flex gap-4">
-                        <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <Icons.Exchange className="w-5 h-5 text-amber-600" />
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-slate-800 text-sm uppercase tracking-tight">Sincronización en Vivo</h4>
-                            <p className="text-slate-500 text-xs mt-1">Conéctate con un amigo en tiempo real para negociar cromos a distancia.</p>
-                        </div>
-                    </div>
-
-                    <button
+                {/* Footer */}
+                <div className="p-6 pt-0">
+                    <button 
                         onClick={onClose}
-                        className="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-slate-200 uppercase tracking-widest text-sm mb-2"
+                        className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all active:scale-95 shadow-xl shadow-slate-200"
                     >
                         ¡Entendido!
                     </button>
-                    <div className="h-[env(safe-area-inset-bottom,0px)]" />
                 </div>
             </div>
         </div>

@@ -212,7 +212,7 @@ export const Profile = () => {
 
     return (
         <div className="pb-24 px-4 pt-6 max-w-lg mx-auto">
-            <WelcomeGuide isOpen={showGuide} onClose={() => setShowGuide(false)} />
+            <WelcomeGuide isOpen={showGuide} onClose={() => setShowGuide(false)} type="profile" />
 
             {/* HEADER SUPERIOR */}
             <div className="flex items-center justify-between mb-8 px-2">

@@ -262,7 +262,7 @@ export const Album = () => {
 
     return (
         <div className="bg-slate-50 min-h-screen">
-            <WelcomeGuide isOpen={showGuide} onClose={closeGuide} />
+            <WelcomeGuide isOpen={showGuide} onClose={closeGuide} type="album" />
 
             {/* Tip Contextual de Sticker */}
             {showStickerTip && (
