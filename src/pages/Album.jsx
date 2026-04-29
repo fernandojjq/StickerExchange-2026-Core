@@ -144,7 +144,17 @@ export const Album = () => {
                 return null;
             }).filter(Boolean);
             
-            if (filteredSections.length > 0) return { ...group, sections: filteredSections };
+            if (filteredSections.length > 0) {
+                // Si estamos en TODOS, mover la sección FWC al principio del grupo si existe
+                if (groupFilter === 'ALL') {
+                    filteredSections.sort((a, b) => {
+                        if (a.country === 'FWC') return -1;
+                        if (b.country === 'FWC') return 1;
+                        return 0;
+                    });
+                }
+                return { ...group, sections: filteredSections };
+            }
             return null;
         }).filter(Boolean);
     }, [deferredInventory, deferredSearchQuery, filterMode, groupFilter, typeFilter]);
