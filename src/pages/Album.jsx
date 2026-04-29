@@ -273,7 +273,7 @@ export const Album = () => {
             )}
             
             {/* HEADER */}
-            <div className={`sticky top-0 z-30 bg-slate-50/95 backdrop-blur-md border-b border-slate-200/60 transition-shadow ${isScrolled ? 'shadow-md' : ''}`}>
+            <div className={`sticky top-0 z-[60] bg-slate-50/95 backdrop-blur-md border-b border-slate-200/60 transition-shadow ${isScrolled ? 'shadow-md' : ''}`}>
                 <div className="max-w-4xl mx-auto px-4 pt-3 pb-2">
                     <div className="flex items-end justify-between mb-4">
                         <div className="flex items-center gap-3">
@@ -286,10 +286,10 @@ export const Album = () => {
                         <div className="flex items-center gap-2">
                             <button 
                                 onClick={() => setShowGuide(true)}
-                                className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors"
+                                className="w-10 h-10 flex items-center justify-center rounded-full bg-amber-400 text-slate-900 hover:bg-amber-500 transition-all shadow-lg animate-pulse"
                                 title="Ayuda"
                             >
-                                <Icons.Info className="w-5 h-5" />
+                                <Icons.Info className="w-6 h-6" />
                             </button>
                             <div className="text-right">
                                 <div className="text-sm font-black text-slate-900 leading-none">{totalStickers} / 1014</div>
