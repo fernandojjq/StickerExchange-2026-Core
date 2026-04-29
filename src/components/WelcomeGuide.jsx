@@ -1,39 +1,19 @@
 import React from 'react';
 import { Icons } from './Icons';
-
-const GUIDE_CONTENT = {
-    album: {
-        title: "Guía del Álbum",
-        icon: <Icons.Album className="w-8 h-8 text-indigo-500" />,
-        steps: [
-            { t: "Marcar Cromos", d: "Toca cualquier cromo para marcarlo como recolectado." },
-            { t: "Gestión de Repetidas", d: "Usa el botón (+) para añadir repetidas y el (-) para quitarlas." },
-            { t: "Filtros Rápidos", d: "Filtra por 'Faltantes' para ver qué te falta o usa el buscador por número." }
-        ]
-    },
-    swap: {
-        title: "Centro de Intercambio",
-        icon: <Icons.Exchange className="w-8 h-8 text-emerald-500" />,
-        steps: [
-            { t: "Escáner QR", d: "Apunta a la pantalla de un amigo para importar sus repetidas al instante." },
-            { t: "Sesión en Vivo", d: "Inicia una sesión para intercambiar en tiempo real. ¡Tus cambios se guardan solos!" },
-            { t: "Historial", d: "Revisa tus intercambios pasados en el panel inferior." }
-        ]
-    },
-    profile: {
-        title: "Tu Perfil (ID)",
-        icon: <Icons.User className="w-8 h-8 text-amber-500" />,
-        steps: [
-            { t: "Compartir ID", d: "Genera una tarjeta visual de tu álbum para presumir en redes sociales." },
-            { t: "Estadísticas", d: "Mira cuánto te falta para completar el álbum global y por grupos." },
-            { t: "Seguridad", d: "Tus datos se guardan en este dispositivo. Puedes exportarlos si cambias de móvil." }
-        ]
-    }
-};
+import { useLanguage } from '../hooks/useLanguage';
 
 export const WelcomeGuide = ({ isOpen, onClose, type = 'album' }) => {
+    const { t } = useLanguage();
     if (!isOpen) return null;
-    const content = GUIDE_CONTENT[type] || GUIDE_CONTENT.album;
+
+    const GUIDE_ICONS = {
+        album: <Icons.Album className="w-8 h-8 text-indigo-500" />,
+        swap: <Icons.Exchange className="w-8 h-8 text-emerald-500" />,
+        profile: <Icons.User className="w-8 h-8 text-amber-500" />
+    };
+
+    const content = t.guide[type] || t.guide.album;
+    const icon = GUIDE_ICONS[type] || GUIDE_ICONS.album;
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
@@ -43,10 +23,10 @@ export const WelcomeGuide = ({ isOpen, onClose, type = 'album' }) => {
                 {/* Header Guía */}
                 <div className="bg-slate-50 p-6 flex flex-col items-center text-center border-b border-slate-100">
                     <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-slate-100">
-                        {content.icon}
+                        {icon}
                     </div>
                     <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight italic">{content.title}</h2>
-                    <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Manual de Usuario</p>
+                    <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">{t.guide.manual}</p>
                 </div>
 
                 {/* Pasos */}
@@ -70,7 +50,7 @@ export const WelcomeGuide = ({ isOpen, onClose, type = 'album' }) => {
                         onClick={onClose}
                         className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all active:scale-95 shadow-xl shadow-slate-200"
                     >
-                        ¡Entendido!
+                        {t.common.understand}
                     </button>
                 </div>
             </div>

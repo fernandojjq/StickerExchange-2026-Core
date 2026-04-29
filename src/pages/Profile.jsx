@@ -202,12 +202,19 @@ export const Profile = () => {
             storage.clear();
             window.location.reload();
         }
-    };
-
     const handleGenerate = async () => {
         setIsGenerating(true);
         await generateStatusCard(user.name, categoryStats.completion, countryData, stats, categoryStats);
         setIsGenerating(false);
+    };
+
+    const handleClearData = () => {
+        if (window.confirm('¿Estás seguro de que quieres borrar TODOS tus datos? Esta acción no se puede deshacer.')) {
+            if (window.confirm('¿REALMENTE SEGURO? Perderás todo tu progreso.')) {
+                storage.clear();
+                window.location.reload();
+            }
+        }
     };
 
     return (
@@ -217,18 +224,30 @@ export const Profile = () => {
             {/* HEADER SUPERIOR */}
             <div className="flex items-center justify-between mb-8 px-2">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white"><Icons.Logo className="w-6 h-6" /></div>
+                    <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-white shadow-xl">
+                        <Icons.User className="w-7 h-7" />
+                    </div>
                     <div>
-                        <h1 className="text-xl font-black italic tracking-tighter text-slate-900 leading-none">MY ID</h1>
-                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Perfil de Usuario</p>
+                        <h1 className="text-2xl font-black italic tracking-tighter text-slate-900 leading-none">MY ID</h1>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Perfil del Coleccionista</p>
                     </div>
                 </div>
-                <button 
-                    onClick={() => setShowGuide(true)}
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors"
-                >
-                    <Icons.Info className="w-5 h-5" />
-                </button>
+                <div className="flex gap-2">
+                    <button 
+                        onClick={handleClearData}
+                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-100 transition-colors border border-rose-100"
+                        title="Borrar Datos"
+                    >
+                        <Icons.Trash className="w-5 h-5" />
+                    </button>
+                    <button 
+                        onClick={() => setShowGuide(true)}
+                        className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors border border-slate-200"
+                        title="Ayuda"
+                    >
+                        <Icons.Info className="w-5 h-5" />
+                    </button>
+                </div>
             </div>
             
             {/* Cabecera de Perfil */}

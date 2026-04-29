@@ -1,13 +1,15 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Icons } from './Icons';
+import { useLanguage } from '../hooks/useLanguage';
 
 export const Layout = () => {
     const location = useLocation();
+    const { t } = useLanguage();
 
     const navItems = [
-        { path: '/', label: 'Album', Icon: Icons.Album },
-        { path: '/swap', label: 'Swap', Icon: Icons.Exchange },
-        { path: '/profile', label: 'My ID', Icon: Icons.User },
+        { path: '/', label: t.nav.album, Icon: Icons.Album },
+        { path: '/swap', label: t.nav.swap, Icon: Icons.Exchange },
+        { path: '/profile', label: t.nav.profile, Icon: Icons.User },
     ];
 
     return (

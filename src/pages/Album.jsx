@@ -6,6 +6,7 @@ import { storage } from '../utils/storage';
 import { ALBUM_MANIFEST, ENTITY_TYPES } from '../data/albumManifest';
 import { COUNTRY_NAMES } from '../data/countries';
 import { WelcomeGuide } from '../components/WelcomeGuide';
+import { useLanguage } from '../hooks/useLanguage';
 
 // ============================================================================
 // 1. OPTIMIZED COMPONENTS
@@ -72,6 +73,7 @@ const StickerSection = React.memo(({ section, inventory, onIncrement, onDecremen
 // 2. MAIN COMPONENT
 // ============================================================================
 export const Album = () => {
+    const { t, language, toggleLanguage } = useLanguage();
     const [inventory, setInventory] = useState(() => storage.getInventory());
     const [searchQuery, setSearchQuery] = useState('');
     const [activeCountry, setActiveCountry] = useState(null);
@@ -160,15 +162,12 @@ export const Album = () => {
     }, [deferredInventory, deferredSearchQuery, filterMode, groupFilter, typeFilter]);
 
     const stats = useMemo(() => {
-        let unique = 0, repeated = 0;
-        Object.values(deferredInventory).forEach(qty => {
-            if (qty > 0) {
-                unique++;
-                if (qty > 1) repeated += (qty - 1);
-            }
-        });
-        return { unique, repeated };
-    }, [deferredInventory]);
+        const counts = Object.values(inventory);
+        return {
+            unique: counts.filter(qty => qty > 0).length,
+            repeated: counts.reduce((acc, qty) => qty > 1 ? acc + (qty - 1) : acc, 0)
+        };
+    }, [inventory]);
 
     const progressPercentage = Math.round((stats.unique / totalStickers) * 100);
 
@@ -273,8 +272,8 @@ export const Album = () => {
                                 <Icons.Plus className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                                <p className="text-sm font-bold">¡Buen comienzo!</p>
-                                <p className="text-xs text-slate-300 mt-0.5">Toca el botón <b>+</b> para añadir repetidas. Para quitar cromos, usa el botón <b>-</b> que aparecerá en cada sticker.</p>
+                                <p className="text-sm font-bold">{t.album.tip_title}</p>
+                                <p className="text-xs text-slate-300 mt-0.5">{t.album.tip_desc}</p>
                             </div>
                         </div>
                         <button 
@@ -284,7 +283,7 @@ export const Album = () => {
                             }}
                             className="w-full mt-3 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest transition-colors"
                         >
-                            Entendido
+                            {t.common.understand}
                         </button>
                     </div>
                 </div>
@@ -302,51 +301,65 @@ export const Album = () => {
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
+                            {/* Lang Toggle */}
+                            <button 
+                                onClick={toggleLanguage}
+                                className="px-2 py-1 bg-white border border-slate-200 rounded-lg text-[10px] font-black text-indigo-600 shadow-sm active:scale-90 transition-transform uppercase"
+                            >
+                                {language}
+                            </button>
+
                             <button 
                                 onClick={() => setShowGuide(true)}
-                                className="w-10 h-10 flex items-center justify-center rounded-full bg-amber-400 text-slate-900 hover:bg-amber-500 transition-all shadow-lg animate-pulse"
-                                title="Ayuda"
+                                className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-all border border-slate-200"
+                                title={t.album.help_title}
                             >
                                 <Icons.Info className="w-6 h-6" />
                             </button>
                             <div className="text-right">
-                                <div className="text-sm font-black text-slate-900 leading-none">{stats.unique} / 1014</div>
-                                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">Stickers</div>
+                                <div className="text-sm font-black text-slate-900 leading-none">
+                                    {Number(stats.unique || 0).toLocaleString()} / 1,014
+                                </div>
+                                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t.album.stats_stickers}</div>
                             </div>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-2 mb-2">
                         <div className="flex bg-slate-100 p-1 rounded-xl overflow-x-auto no-scrollbar shrink-0">
-                            {['all', 'missing', 'repeats'].map(m => (
-                                <button key={m} onClick={() => setFilterMode(m)} className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase transition-all whitespace-nowrap ${filterMode === m ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-400'}`}>
-                                    {m === 'all' ? 'Todo' : m === 'missing' ? 'Faltantes' : 'Repetidas'}
+                            {[
+                                { id: 'all', label: t.album.filter_all },
+                                { id: 'missing', label: t.album.filter_missing },
+                                { id: 'repeats', label: t.album.filter_repeated }
+                            ].map(m => (
+                                <button key={m.id} onClick={() => setFilterMode(m.id)} className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase transition-all whitespace-nowrap ${filterMode === m.id ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-400'}`}>
+                                    {m.label}
                                 </button>
                             ))}
                         </div>
                         <div className="flex-1 relative">
-                            <input type="text" placeholder="Buscar..." className="w-full pl-9 pr-3 py-2 bg-slate-100 border rounded-xl text-sm focus:outline-none" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+                            <input type="text" placeholder={t.album.search_placeholder} className="w-full pl-9 pr-3 py-2 bg-slate-100 border rounded-xl text-sm focus:outline-none placeholder:text-slate-400" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                             <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"><Icons.Search className="w-4 h-4" /></div>
                         </div>
                     </div>
 
                     <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1 mb-1 items-center">
                         <select value={groupFilter} onChange={(e) => { setGroupFilter(e.target.value); setTypeFilter('ALL'); }} className="bg-white border rounded-lg px-2 py-1.5 text-[10px] font-bold text-slate-600 outline-none shrink-0">
-                            <option value="ALL">TODOS LOS GRUPOS</option>
-                            <option value="INTL COMPETITION 2026">ESPECIALES FWC</option>
+                            <option value="ALL">{t.album.group_all}</option>
+                            <option value="INTL COMPETITION 2026">{language === 'es' ? 'ESPECIALES FWC' : 'FWC SPECIALS'}</option>
                             {ALBUM_MANIFEST.filter(g => g.id.startsWith('group_')).map(g => <option key={g.id} value={g.title}>{g.title}</option>)}
                         </select>
                         
                         <div className="flex gap-1 overflow-x-auto no-scrollbar">
                             {[
-                                { id: 'ALL', label: 'Todos' },
-                                { id: 'CREST', label: 'Escudos' },
-                                { id: 'COKE', label: 'Promo' },
-                                { id: 'EXTRAS', label: 'Extras' },
-                                { id: 'PLAYER', label: 'Jugadores' }
-                            ].map(t => (
-                                <button key={t.id} onClick={() => { setTypeFilter(t.id); if(t.id === 'COKE' || t.id === 'EXTRAS') setGroupFilter('ALL'); }} className={`px-2 py-1.5 rounded-lg text-[9px] font-black uppercase border whitespace-nowrap transition-all ${typeFilter === t.id ? 'bg-indigo-600 text-white border-indigo-700 shadow-md' : 'bg-white text-slate-400 border-slate-200'}`}>
-                                    {t.label}
+                                { id: 'ALL', label: t.album.type_all },
+                                { id: 'CREST', label: t.album.type_crests },
+                                { id: 'COKE', label: t.album.type_promo },
+                                { id: 'EXTRAS', label: t.album.type_extras },
+                                { id: 'PLAYER', label: t.album.type_players }
+                            ].map(t_item => (
+                                <button key={t_item.id} onClick={() => { setTypeFilter(t_item.id); if(t_item.id === 'COKE' || t_item.id === 'EXTRAS') setGroupFilter('ALL'); }} className={`px-2 py-1.5 rounded-lg text-[9px] font-black uppercase border whitespace-nowrap transition-all ${typeFilter === t_item.id ? 'bg-indigo-600 text-white border-indigo-700 shadow-md' : 'bg-white text-slate-400 border-slate-200'}`}>
+                                    {t_item.label}
                                 </button>
                             ))}
                         </div>
