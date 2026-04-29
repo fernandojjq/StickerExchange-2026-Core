@@ -13,6 +13,7 @@ import { Flag } from '../components/Flag';
 import { Icons } from '../components/Icons';
 import { HistoryPanel } from '../components/HistoryPanel';
 import { useLiveSession, SESSION_STATE } from '../hooks/useLiveSession';
+import { WelcomeGuide } from '../components/WelcomeGuide';
 
 // ============================================================================
 // CONSTANTES
@@ -687,6 +688,7 @@ const LiveSessionView = ({ session, onLeave }) => {
 export const Swap = () => {
     // Tab activo
     const [activeTab, setActiveTab] = useState(SWAP_TAB.OFFLINE);
+    const [showGuide, setShowGuide] = useState(false);
 
     // Estado general
     const [inventory, setInventory] = useState(() => storage.getInventory());
@@ -898,17 +900,25 @@ export const Swap = () => {
             />
 
             {/* Header */}
-            <div className="flex justify-center items-center mb-6">
+            <div className="flex justify-between items-center mb-6 px-2">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
                         <Icons.Logo className="w-6 h-6" />
                     </div>
                     <div className="leading-tight">
-                        <h1 className="text-xl font-black text-slate-900 tracking-tighter uppercase">Swap-26</h1>
-                        <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase">Centro de Intercambio</p>
+                        <h1 className="text-xl font-black italic tracking-tighter text-slate-900 leading-none uppercase">SWAP-26</h1>
+                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Centro de Intercambio</p>
                     </div>
                 </div>
+                <button 
+                    onClick={() => setShowGuide(true)}
+                    className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors"
+                >
+                    <Icons.Info className="w-5 h-5" />
+                </button>
             </div>
+
+            <WelcomeGuide isOpen={showGuide} onClose={() => setShowGuide(false)} />
 
             {/* Error Modal */}
             {scanError && (

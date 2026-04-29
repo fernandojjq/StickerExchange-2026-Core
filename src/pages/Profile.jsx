@@ -1,13 +1,14 @@
 // ============================================================================
 // ARCHIVO: src/pages/Profile.jsx
-// VERSIÓN: 15.0 - Estadísticas con Formato Recolectado/Total
+// VERSIÓN: 18.0 - Guía Contextual y Botón de Ayuda
 // ============================================================================
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { storage } from '../utils/storage';
 import { Protocol } from '../utils/protocol';
 import { Icons } from '../components/Icons';
 import { ALBUM_MANIFEST } from '../data/albumManifest';
+import { WelcomeGuide } from '../components/WelcomeGuide';
 
 // ============================================================================
 // Configuración del Álbum
@@ -21,85 +22,73 @@ const ALBUM_CONFIG = {
 };
 
 // ============================================================================
-// Generador de Tarjeta de Estado (Estilo Original - 1350px con Grid)
+// Generación de Tarjeta de Estatus (Canvas)
 // ============================================================================
-const generateStatusCard = async (userName, completion, countryData, stats, categoryStats) => {
+const generateStatusCard = async (userName, percentage, countryData, stats, categoryStats) => {
     const canvas = document.createElement('canvas');
-    canvas.width = 1080;
-    canvas.height = 1350; 
     const ctx = canvas.getContext('2d');
+    
+    // Tamaño 4:5 (Ideal para Instagram/Social)
+    canvas.width = 1080;
+    canvas.height = 1350;
 
-    const safeCompletion = isNaN(completion) ? 0 : completion;
-
-    // Fondo degradado
-    const gradient = ctx.createLinearGradient(0, 0, 1080, 1350);
+    // Fondo degradado Premium
+    const gradient = ctx.createLinearGradient(0, 0, 0, 1350);
     gradient.addColorStop(0, '#0f172a');
-    gradient.addColorStop(0.3, '#1e1b4b');
-    gradient.addColorStop(0.6, '#312e81');
-    gradient.addColorStop(1, '#0f172a');
+    gradient.addColorStop(1, '#1e1b4b');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 1080, 1350);
 
-    // Decoración
+    // Decoración de fondo (Círculos)
+    ctx.fillStyle = 'rgba(79, 70, 229, 0.1)';
     ctx.beginPath();
-    ctx.arc(950, 80, 200, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(99, 102, 241, 0.08)';
+    ctx.arc(1080, 0, 400, 0, Math.PI * 2);
     ctx.fill();
 
-    // Cabecera
+    // Encabezado
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 48px system-ui, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('SWAP-26', 540, 70);
-
-    ctx.fillStyle = 'rgba(255,255,255,0.5)';
-    ctx.font = '22px system-ui, sans-serif';
-    ctx.fillText('Estado de Colección', 540, 110);
-
-    // Nombre
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 72px system-ui, sans-serif';
-    ctx.fillText(userName || 'Coleccionista', 540, 220);
-
-    // Círculo de progreso
-    const cx = 540, cy = 420, radius = 130;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-    ctx.lineWidth = 25;
-    ctx.stroke();
-
-    const endAngle = -Math.PI / 2 + (safeCompletion / 100) * Math.PI * 2;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius, -Math.PI / 2, endAngle);
-    const progressGrad = ctx.createLinearGradient(cx - radius, cy, cx + radius, cy);
-    progressGrad.addColorStop(0, '#6366f1');
-    progressGrad.addColorStop(1, '#10b981');
-    ctx.strokeStyle = progressGrad;
-    ctx.lineWidth = 25;
-    ctx.lineCap = 'round';
-    ctx.stroke();
-
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 84px system-ui, sans-serif';
-    ctx.fillText(`${safeCompletion}%`, cx, cy + 30);
-
-    ctx.fillStyle = 'rgba(255,255,255,0.6)';
-    ctx.font = '24px system-ui, sans-serif';
-    ctx.fillText(`${stats.unique}/${ALBUM_CONFIG.FULL_TOTAL} únicos • ${stats.repeated} repetidos`, cx, cy + radius + 60);
-
-    // Estadísticas detalladas
-    const statsY = 680;
-    
-    // Álbum Base
+    ctx.font = 'black 80px system-ui, sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillStyle = '#a5b4fc';
+    ctx.fillText('SWAP-26', 80, 150);
+
+    ctx.fillStyle = '#818cf8';
+    ctx.font = 'bold 30px system-ui, sans-serif';
+    ctx.fillText('MI ESTADO DE COLECCIÓN', 80, 200);
+
+    // Tarjeta Principal de Usuario
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+    ctx.roundRect(80, 260, 920, 200, 40);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '900 60px system-ui, sans-serif';
+    ctx.fillText(userName.toUpperCase() || 'COLECCIONISTA', 140, 360);
+
+    ctx.fillStyle = '#6366f1';
+    ctx.font = 'bold 80px system-ui, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(`${percentage}%`, 940, 380);
+    ctx.textAlign = 'left';
+
+    // Estadísticas
+    const statsY = 560;
+    
+    // Únicos
+    ctx.fillStyle = '#6366f1';
     ctx.font = 'bold 24px system-ui, sans-serif';
-    ctx.fillText('ÁLBUM BASE', 120, statsY);
+    ctx.fillText('CROMOS ÚNICOS', 120, statsY);
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 36px system-ui, sans-serif';
-    ctx.fillText(`${categoryStats.baseCollected}/980`, 120, statsY + 45);
-    
+    ctx.fillText(`${stats.unique}/1014`, 120, statsY + 45);
+
+    // Repetidos
+    ctx.fillStyle = '#f43f5e';
+    ctx.font = 'bold 24px system-ui, sans-serif';
+    ctx.fillText('REPETIDOS', 360, statsY);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 36px system-ui, sans-serif';
+    ctx.fillText(`${stats.repeated}`, 360, statsY + 45);
+
     // Coca-Cola
     ctx.fillStyle = '#fbbf24';
     ctx.fillText('PROMOCIONALES', 600, statsY);
@@ -108,21 +97,21 @@ const generateStatusCard = async (userName, completion, countryData, stats, cate
 
     // Grid de países (Estilo visual original)
     const gridStartX = 140;
-    const gridStartY = 850;
-    const cellSize = 65;
-    const cols = 10;
+    const gridStartY = 720;
+    const cellSize = 75;
     const gap = 15;
 
-    countryData.slice(0, 30).forEach((country, i) => {
-        const col = i % cols;
-        const row = Math.floor(i / cols);
+    countryData.forEach((country, index) => {
+        const row = Math.floor(index / 8);
+        const col = index % 8;
         const x = gridStartX + col * (cellSize + gap);
         const y = gridStartY + row * (cellSize + gap);
 
-        let color = 'rgba(100, 116, 139, 0.2)';
-        if (country.pct > 0) color = 'rgba(99, 102, 241, 0.4)';
-        if (country.pct > 50) color = 'rgba(99, 102, 241, 0.7)';
-        if (country.pct === 100) color = 'rgba(16, 185, 129, 0.9)';
+        // Color según progreso
+        let color = 'rgba(255,255,255,0.05)';
+        if (country.pct === 100) color = '#10b981';
+        else if (country.pct > 50) color = '#6366f1';
+        else if (country.pct > 0) color = '#4338ca';
 
         ctx.beginPath();
         ctx.arc(x + cellSize / 2, y + cellSize / 2, cellSize / 2 - 4, 0, Math.PI * 2);
@@ -145,27 +134,19 @@ const generateStatusCard = async (userName, completion, countryData, stats, cate
     ctx.font = '10px monospace';
     ctx.fillText(`ID: ${structureHash}`, 540, 1320);
 
-    return new Promise((resolve) => {
-        canvas.toBlob((blob) => {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `swap26_card_${userName}.png`;
-            a.click();
-            URL.revokeObjectURL(url);
-            resolve();
-        }, 'image/png');
-    });
+    // Descargar
+    const link = document.createElement('a');
+    link.download = `swap26_id_${userName.toLowerCase().replace(/\s+/g, '_')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
 };
 
-// ============================================================================
-// Componente Profile
-// ============================================================================
 export const Profile = () => {
-    const [user, setUser] = useState(() => storage.getUser() || { name: 'Coleccionista' });
+    const [user, setUser] = useState(() => storage.getUser());
     const [isGenerating, setIsGenerating] = useState(false);
-    const [showRestoreConfirm, setShowRestoreConfirm] = useState(false);
     const [pendingBackup, setPendingBackup] = useState(null);
+    const [showRestoreConfirm, setShowRestoreConfirm] = useState(false);
+    const [showGuide, setShowGuide] = useState(false);
 
     const { stats, categoryStats, countryData } = useMemo(() => {
         const inventory = storage.getInventory();
@@ -231,6 +212,24 @@ export const Profile = () => {
 
     return (
         <div className="pb-24 px-4 pt-6 max-w-lg mx-auto">
+            <WelcomeGuide isOpen={showGuide} onClose={() => setShowGuide(false)} />
+
+            {/* HEADER SUPERIOR */}
+            <div className="flex items-center justify-between mb-8 px-2">
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white"><Icons.Logo className="w-6 h-6" /></div>
+                    <div>
+                        <h1 className="text-xl font-black italic tracking-tighter text-slate-900 leading-none">MY ID</h1>
+                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Perfil de Usuario</p>
+                    </div>
+                </div>
+                <button 
+                    onClick={() => setShowGuide(true)}
+                    className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors"
+                >
+                    <Icons.Info className="w-5 h-5" />
+                </button>
+            </div>
             
             {/* Cabecera de Perfil */}
             <div className="bg-gradient-to-br from-slate-900 via-indigo-900 to-purple-900 text-white p-6 rounded-3xl shadow-xl mb-6 relative overflow-hidden">
@@ -246,20 +245,16 @@ export const Profile = () => {
                             type="text"
                             value={user.name}
                             onChange={handleNameChange}
+                            placeholder="Escribe tu nombre..."
                             className="bg-transparent text-xl font-black text-white border-b border-white/20 focus:border-white focus:outline-none w-full"
                         />
                     </div>
                 </div>
 
-                {/* Grid de Stats (4 Columnas) - FORMATO RECOLECTADO/TOTAL */}
-                <div className="grid grid-cols-4 gap-2 text-center mb-6 relative z-10">
+                <div className="grid grid-cols-3 gap-3 mb-6 relative z-10 text-center">
                     <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
-                        <div className="text-sm font-black whitespace-nowrap">{stats.unique}/{ALBUM_CONFIG.FULL_TOTAL}</div>
+                        <div className="text-sm font-black whitespace-nowrap">{stats.unique}/1014</div>
                         <div className="text-[8px] uppercase opacity-60">Únicos</div>
-                    </div>
-                    <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
-                        <div className="text-sm font-black whitespace-nowrap">{Math.min(categoryStats.baseCollected, 980)}/980</div>
-                        <div className="text-[8px] uppercase opacity-60">Base</div>
                     </div>
                     <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm">
                         <div className="text-sm font-black text-amber-300 whitespace-nowrap">{categoryStats.cokeCollected}/14</div>
@@ -271,11 +266,10 @@ export const Profile = () => {
                     </div>
                 </div>
 
-                {/* Barra de Progreso */}
                 <div className="space-y-3 relative z-10">
                     <div className="bg-white/5 rounded-xl p-3 border border-white/10">
                         <div className="flex justify-between text-[10px] font-bold mb-1">
-                            <span>PROGRESO ÁLBUM</span>
+                            <span>PROGRESO ÁLBUM BASE</span>
                             <span>{categoryStats.completion}%</span>
                         </div>
                         <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
@@ -292,7 +286,7 @@ export const Profile = () => {
                         <Icons.Flag className="w-5 h-5" />
                     </div>
                     <div>
-                        <div className="text-xs font-bold text-slate-500 uppercase tracking-tighter">Equipos</div>
+                        <div className="text-xs font-bold text-slate-500 uppercase tracking-tighter">Equipos Completos</div>
                         <div className="text-lg font-black text-slate-900">
                             {countryData.filter(c => c.pct === 100).length} / 48
                         </div>
@@ -360,7 +354,7 @@ export const Profile = () => {
                 </button>
                 <p className="text-[9px] text-slate-400 text-center px-4">Descarga una imagen con tu resumen de colección lista para compartir en redes.</p>
                 
-                <div className="pt-6">
+                <div className="pt-6 pb-12">
                     <button 
                         onClick={handleReset}
                         className="w-full py-3 text-rose-500 font-bold text-[10px] uppercase tracking-widest hover:bg-rose-50 rounded-2xl transition-all"
@@ -373,20 +367,29 @@ export const Profile = () => {
 
             {/* Modal de Restauración */}
             {showRestoreConfirm && (
-                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6">
-                    <div className="bg-white rounded-3xl p-8 w-full max-w-sm shadow-2xl">
-                        <h3 className="text-xl font-black text-slate-900 text-center mb-4">Confirmar Restauración</h3>
-                        <p className="text-sm text-slate-500 text-center mb-8">Esto reemplazará todos tus datos actuales. ¿Deseas continuar?</p>
-                        <div className="flex gap-3">
-                            <button onClick={() => setShowRestoreConfirm(false)} className="flex-1 py-4 bg-slate-100 text-slate-600 font-bold rounded-2xl">Cancelar</button>
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+                    <div className="relative bg-white w-full max-w-xs rounded-3xl p-6 shadow-2xl">
+                        <h3 className="text-lg font-black text-slate-900 mb-2">¿RESTAURAR DATOS?</h3>
+                        <p className="text-sm text-slate-500 mb-6">Se sobrescribirá tu inventario actual con los datos del archivo. Esta acción no se puede deshacer.</p>
+                        <div className="flex flex-col gap-2">
                             <button 
                                 onClick={() => {
-                                    storage.restoreBackup(pendingBackup);
+                                    storage.restoreFromBackup(pendingBackup);
                                     window.location.reload();
-                                }} 
-                                className="flex-1 py-4 bg-amber-500 text-white font-bold rounded-2xl"
+                                }}
+                                className="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl"
                             >
-                                Restaurar
+                                Sí, Restaurar
+                            </button>
+                            <button 
+                                onClick={() => {
+                                    setShowRestoreConfirm(false);
+                                    setPendingBackup(null);
+                                }}
+                                className="w-full py-3 bg-slate-100 text-slate-500 font-bold rounded-xl"
+                            >
+                                Cancelar
                             </button>
                         </div>
                     </div>

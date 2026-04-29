@@ -78,10 +78,10 @@ export const Album = () => {
     const [filterMode, setFilterMode] = useState('all');
     const [isScrolled, setIsScrolled] = useState(false);
     
-    // DEFAULT TO GROUP A for instant mount performance
     const [groupFilter, setGroupFilter] = useState('ALL');
     const [typeFilter, setTypeFilter] = useState('ALL'); 
     const [showGuide, setShowGuide] = useState(false);
+    const [showStickerTip, setShowStickerTip] = useState(false);
     
     const navObserverRef = useRef(null);
     const deferredInventory = useDeferredValue(inventory);
@@ -185,7 +185,16 @@ export const Album = () => {
     const handleIncrement = useCallback((id) => {
         setInventory(prev => {
             const next = { ...prev, [id]: (prev[id] || 0) + 1 };
+            const current = prev[id] || 0;
+            const next = { ...prev, [id]: current + 1 };
             storage.saveInventory(next);
+            
+            // Show tip if first sticker ever
+            const hasSeenTip = localStorage.getItem('swap26_sticker_tip_seen');
+            if (Object.keys(prev).length === 0 && !hasSeenTip) {
+                setShowStickerTip(true);
+            }
+            
             return next;
         });
         if (window.navigator.vibrate) window.navigator.vibrate(10);
@@ -236,6 +245,32 @@ export const Album = () => {
     return (
         <div className="bg-slate-50 min-h-screen">
             <WelcomeGuide isOpen={showGuide} onClose={closeGuide} />
+
+            {/* Tip Contextual de Sticker */}
+            {showStickerTip && (
+                <div className="fixed inset-x-4 top-24 z-50 animate-in slide-in-from-top duration-500">
+                    <div className="bg-slate-900 text-white p-4 rounded-2xl shadow-2xl border border-white/10">
+                        <div className="flex gap-3">
+                            <div className="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <Icons.Plus className="w-5 h-5 text-white" />
+                            </div>
+                            <div>
+                                <p className="text-sm font-bold">¡Buen comienzo!</p>
+                                <p className="text-xs text-slate-300 mt-0.5">Toca el botón <b>+</b> para añadir repetidas. Para quitar cromos, usa el botón <b>-</b> que aparecerá en cada sticker.</p>
+                            </div>
+                        </div>
+                        <button 
+                            onClick={() => {
+                                setShowStickerTip(false);
+                                localStorage.setItem('swap26_sticker_tip_seen', 'true');
+                            }}
+                            className="w-full mt-3 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest transition-colors"
+                        >
+                            Entendido
+                        </button>
+                    </div>
+                </div>
+            )}
             
             {/* HEADER */}
             <div className={`sticky top-0 z-30 bg-slate-50/95 backdrop-blur-md border-b border-slate-200/60 transition-shadow ${isScrolled ? 'shadow-md' : ''}`}>
@@ -244,13 +279,22 @@ export const Album = () => {
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white"><Icons.Logo className="w-6 h-6" /></div>
                             <div>
-                                <h1 className="text-xl font-black text-slate-800 tracking-tight uppercase leading-none">Swap-26</h1>
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">Álbum</p>
+                                <h1 className="text-xl font-black italic tracking-tighter text-slate-900 leading-none">SWAP-26</h1>
+                                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">Inventario Digital</p>
                             </div>
                         </div>
-                        <div className="text-right">
-                            <div className="text-3xl font-black text-indigo-600 leading-none tracking-tighter">{progressPercentage}%</div>
-                            <p className="text-[10px] font-mono text-slate-400 font-bold mt-1">{stats.unique}/{totalStickers}</p>
+                        <div className="flex items-center gap-2">
+                            <button 
+                                onClick={() => setShowGuide(true)}
+                                className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors"
+                                title="Ayuda"
+                            >
+                                <Icons.Info className="w-5 h-5" />
+                            </button>
+                            <div className="text-right">
+                                <div className="text-sm font-black text-slate-900 leading-none">{totalStickers} / 1014</div>
+                                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">Stickers</div>
+                            </div>
                         </div>
                     </div>
 
