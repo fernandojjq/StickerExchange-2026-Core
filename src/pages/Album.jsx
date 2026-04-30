@@ -46,7 +46,7 @@ const StickerSection = React.memo(({ section, inventory, onIncrement, onDecremen
     return (
         <div ref={sectionRef} id={section.country ? `section-${section.country}` : null} className="scroll-mt-fix min-h-[140px]">
             <div className="mb-4 flex items-center gap-2 pl-2 mt-4">
-                {section.country && <Flag iso={section.country} size="xs" />}
+                {section.country && <Flag iso={section.country} size="xs" hideText={true} />}
                 <div className="text-sm font-black text-slate-400 uppercase tracking-widest">{section.country || section.title}</div>
                 <div className="h-px bg-slate-100 flex-1" />
             </div>
@@ -150,8 +150,8 @@ export const Album = () => {
                 // Si estamos en TODOS, mover la sección FWC al principio del grupo si existe
                 if (groupFilter === 'ALL') {
                     filteredSections.sort((a, b) => {
-                        if (a.country === 'FWC') return -1;
-                        if (b.country === 'FWC') return 1;
+                        if (a.country === 'FWC' && b.country !== 'FWC') return -1;
+                        if (a.country !== 'FWC' && b.country === 'FWC') return 1;
                         return 0;
                     });
                 }
@@ -265,26 +265,27 @@ export const Album = () => {
 
             {/* Tip Contextual de Sticker */}
             {showStickerTip && (
-                <div className="fixed inset-x-4 top-24 z-50 animate-in slide-in-from-top duration-500">
-                    <div className="bg-slate-900 text-white p-4 rounded-2xl shadow-2xl border border-white/10">
-                        <div className="flex gap-3">
-                            <div className="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center flex-shrink-0">
-                                <Icons.Plus className="w-5 h-5 text-white" />
+                <div className="fixed inset-x-4 top-24 z-[70] animate-in slide-in-from-top duration-500 pointer-events-none">
+                    <div className="max-w-sm mx-auto bg-slate-900/95 backdrop-blur-md text-white p-5 rounded-2xl shadow-2xl border border-white/10 pointer-events-auto">
+                        <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start text-center sm:text-left">
+                            <div className="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-indigo-500/20">
+                                <Icons.Plus className="w-6 h-6 text-white" />
                             </div>
-                            <div>
-                                <p className="text-sm font-bold">{t.album.tip_title}</p>
-                                <p className="text-xs text-slate-300 mt-0.5">{t.album.tip_desc}</p>
+                            <div className="flex-1 w-full">
+                                <p className="text-sm font-black leading-tight">{t.album.tip_title}</p>
+                                <p className="text-[12px] text-slate-300 mt-2 leading-relaxed">{t.album.tip_desc}</p>
+                                
+                                <button 
+                                    onClick={() => {
+                                        setShowStickerTip(false);
+                                        localStorage.setItem('swap26_sticker_tip_seen', 'true');
+                                    }}
+                                    className="w-full mt-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all active:scale-95 shadow-md shadow-indigo-500/25"
+                                >
+                                    {t.common.understand}
+                                </button>
                             </div>
                         </div>
-                        <button 
-                            onClick={() => {
-                                setShowStickerTip(false);
-                                localStorage.setItem('swap26_sticker_tip_seen', 'true');
-                            }}
-                            className="w-full mt-3 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-[10px] font-black uppercase tracking-widest transition-colors"
-                        >
-                            {t.common.understand}
-                        </button>
                     </div>
                 </div>
             )}
@@ -386,13 +387,11 @@ export const Album = () => {
                                             }}
                                             className={`flex flex-col items-center gap-1 shrink-0 p-1.5 rounded-xl transition-all ${activeCountry === iso ? 'bg-indigo-600 shadow-md' : 'bg-white border border-slate-100'}`}
                                         >
-                                            <Flag iso={iso} size="sm" />
-                                            <div className="flex flex-col items-center">
-                                                <span className={`text-[8px] font-black ${activeCountry === iso ? 'text-white' : 'text-slate-900'}`}>{iso}</span>
-                                                <span className={`text-[7px] font-bold ${activeCountry === iso ? 'text-indigo-200' : 'text-indigo-600'}`}>
-                                                    {countryProgress[iso]?.percentage || 0}%
-                                                </span>
-                                            </div>
+                                            <span className={`text-[8px] font-black uppercase ${activeCountry === iso ? 'text-white' : 'text-slate-900'}`}>{iso}</span>
+                                            <Flag iso={iso} size="sm" hideText={true} />
+                                            <span className={`text-[7px] font-bold ${activeCountry === iso ? 'text-indigo-200' : 'text-indigo-600'}`}>
+                                                {countryProgress[iso]?.percentage || 0}%
+                                            </span>
                                         </button>
                                     );
                                 })}
