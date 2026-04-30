@@ -200,6 +200,7 @@ const QRCodeDisplay = ({ value, size = 280 }) => {
 // COMPONENTE: SelectableItemGrid
 // ============================================================================
 const SelectableItemGrid = ({ items, selectedItems, onToggleItem, type, urgentItems = [], readOnly = false }) => {
+    const { t } = useLanguage();
     const isReceive = type === 'receive';
 
     if (items.length === 0) {
@@ -245,7 +246,7 @@ const SelectableItemGrid = ({ items, selectedItems, onToggleItem, type, urgentIt
                         </div>
                         <Flag iso={iso} size="sm" className="mx-auto" />
                         <div className="font-black text-slate-800 text-xs mt-1">{num}</div>
-                        {isUrgent && <div className="text-[7px] font-bold text-amber-600 uppercase">Último</div>}
+                        {isUrgent && <div className="text-[7px] font-bold text-amber-600 uppercase">{t.swap.last_one || 'Último'}</div>}
                     </button>
                 );
             })}
@@ -270,6 +271,7 @@ const OfflineMatchModal = ({
     onClose,
     tradeProcessed
 }) => {
+    const { t } = useLanguage();
     if (!scanResult) return null;
 
     return createPortal(
@@ -382,6 +384,7 @@ const OfflineMatchModal = ({
 // COMPONENTE: CameraScannerModal
 // ============================================================================
 const CameraScannerModal = React.memo(({ isOpen, onClose, isLoading, error, onRetry }) => {
+    const { t } = useLanguage();
     if (!isOpen) return null;
 
     return createPortal(

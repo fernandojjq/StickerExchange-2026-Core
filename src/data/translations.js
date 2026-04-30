@@ -5,6 +5,11 @@
 
 export const translations = {
     es: {
+        error_boundary: {
+            title: "Vaya, algo salió mal",
+            desc: "Ha ocurrido un error inesperado en la interfaz. No te preocupes, tus datos están seguros en tu dispositivo.",
+            retry_btn: "RECARGAR APLICACIÓN"
+        },
         common: { loading: "Cargando...", understand: "¡Entendido!", cancel: "Cancelar", confirm: "Confirmar", help: "Ayuda", none: "Ninguno", generating: "Generando...", no_results: "Sin resultados", clear_filters: "Limpiar filtros" },
         nav: { album: "Álbum", swap: "Intercambio", profile: "Mi ID" },
         album: {
@@ -173,6 +178,11 @@ export const translations = {
         }
     },
     en: {
+        error_boundary: {
+            title: "Oops, something went wrong",
+            desc: "An unexpected error occurred in the interface. Don't worry, your data is safe on your device.",
+            retry_btn: "RELOAD APPLICATION"
+        },
         common: { loading: "Loading...", understand: "Got it!", cancel: "Cancel", confirm: "Confirm", help: "Help", none: "None", generating: "Generating...", no_results: "No results", clear_filters: "Clear filters" },
         nav: { album: "Album", swap: "Swap", profile: "My ID" },
         album: {
@@ -341,6 +351,11 @@ export const translations = {
         }
     },
     pt: {
+        error_boundary: {
+            title: "Ops, algo deu errado",
+            desc: "Ocorreu um erro inesperado na interface. Não se preocupe, seus dados estão seguros no seu dispositivo.",
+            retry_btn: "RECARREGAR APLICATIVO"
+        },
         common: { loading: "Carregando...", understand: "Entendi!", cancel: "Cancelar", confirm: "Confirmar", help: "Ajuda", none: "Nenhum", generating: "Gerando...", no_results: "Sem resultados", clear_filters: "Limpar filtros" },
         nav: { album: "Álbum", swap: "Troca", profile: "Meu ID" },
         album: {
@@ -509,6 +524,11 @@ export const translations = {
         }
     },
     fr: {
+        error_boundary: {
+            title: "Oups, un problema est survenu",
+            desc: "Une erreur inattendue s'est produite dans l'interface. Ne vous inquiétez pas, vos données sont en sécurité sur votre appareil.",
+            retry_btn: "RECHARGER L'APPLICATION"
+        },
         common: { loading: "Chargement...", understand: "Compris !", cancel: "Annuler", confirm: "Confirmer", help: "Aide", none: "Aucun", generating: "Génération...", no_results: "Aucun résultat", clear_filters: "Effacer les filtres" },
         nav: { album: "Album", swap: "Échange", profile: "Mon ID" },
         album: {
@@ -677,6 +697,11 @@ export const translations = {
         }
     },
     de: {
+        error_boundary: {
+            title: "Hoppla, etwas ist schiefgelaufen",
+            desc: "In der Benutzeroberfläche ist ein unerwarteter Fehler aufgetreten. Keine Sorge, deine Daten sind auf deinem Gerät sicher.",
+            retry_btn: "ANWENDUNG NEU LADEN"
+        },
         common: { loading: "Laden...", understand: "Verstanden!", cancel: "Abbrechen", confirm: "Bestätigen", help: "Hilfe", none: "Keine", generating: "Generiere...", no_results: "Keine Ergebnisse", clear_filters: "Filter löschen" },
         nav: { album: "Album", swap: "Tausch", profile: "Mein ID" },
         album: {
@@ -845,6 +870,11 @@ export const translations = {
         }
     },
     it: {
+        error_boundary: {
+            title: "Ops, qualcosa è andato storto",
+            desc: "Si è verificato un errore imprevisto nell'interfaccia. Non preoccuparti, i tuoi dati sono al sicuro sul tuo dispositivo.",
+            retry_btn: "RICARICA APPLICAZIONE"
+        },
         common: { loading: "Caricamento...", understand: "Ho capito!", cancel: "Annulla", confirm: "Conferma", help: "Aiuto", none: "Nessuno", generating: "Generazione...", no_results: "Nessun risultato", clear_filters: "Cancella filtri" },
         nav: { album: "Album", swap: "Scambio", profile: "Il mio ID" },
         album: {
