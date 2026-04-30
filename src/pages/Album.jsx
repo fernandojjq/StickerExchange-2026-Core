@@ -86,6 +86,11 @@ export const Album = () => {
     const [showCounterInfo, setShowCounterInfo] = useState(false);
     const [showStickerTip, setShowStickerTip] = useState(false);
     
+    // SEO: Update page title
+    useEffect(() => {
+        document.title = `${t.album.title} | Swap-26`;
+    }, [t.album.title]);
+    
     const navObserverRef = useRef(null);
     const deferredInventory = useDeferredValue(inventory);
     const deferredSearchQuery = useDeferredValue(searchQuery);

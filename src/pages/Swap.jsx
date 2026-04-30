@@ -694,6 +694,11 @@ export const Swap = () => {
     const [activeTab, setActiveTab] = useState(SWAP_TAB.OFFLINE);
     const [showGuide, setShowGuide] = useState(false);
 
+    // SEO: Update page title
+    useEffect(() => {
+        document.title = `${t.swap.title} | Swap-26`;
+    }, [t.swap.title]);
+
     // Estado general
     const [inventory, setInventory] = useState(() => storage.getInventory());
     const [qrData, setQrData] = useState('');
