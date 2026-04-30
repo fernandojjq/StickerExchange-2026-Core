@@ -57,7 +57,7 @@ export const Layout = () => {
                                         <div className="absolute inset-0 bg-indigo-50/50 rounded-xl scale-90 -z-10"></div>
                                     )}
 
-                                    <div className={`mb-0.5 transition-transform duration-300 ${isActive ? '-translate-y-0.5 scale-110' : 'group-hover:-translate-y-0.5'}`}>
+                                    <div className={`mb-0.5 transition-transform duration-300 will-change-transform ${isActive ? '-translate-y-0.5 scale-110' : 'group-hover:-translate-y-0.5'}`}>
                                         <IconComponent className="w-6 h-6" />
                                     </div>
 

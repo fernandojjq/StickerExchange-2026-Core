@@ -987,7 +987,7 @@ export const Swap = () => {
                                     <h2 className="text-lg font-black italic tracking-tighter">{t.swap.scanner_title}</h2>
                                     <p className="text-indigo-200 text-xs font-bold uppercase">{t.swap.camera_subtitle}</p>
                                 </div>
-                                <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
+                                <div className={`w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition will-change-transform`}>
                                     <Icons.Camera className="w-6 h-6" />
                                 </div>
                             </button>
@@ -1092,8 +1092,8 @@ export const Swap = () => {
             ) : (
                 /* Sesión Live Activa (Modal Full Screen) */
                 createPortal(
-                    <div className="fixed inset-0 z-[999] bg-slate-50 overflow-y-auto">
-                        <div className="max-w-lg mx-auto p-4 min-h-[100dvh] flex flex-col pb-32">
+                    <div className="fixed inset-0 z-[999] bg-slate-50 overflow-y-auto overscroll-none">
+                        <div className="max-w-lg mx-auto p-4 min-h-screen flex flex-col pb-40">
                             <LiveSessionView session={liveSession} onLeave={liveSession.leaveSession} />
                         </div>
                     </div>,
