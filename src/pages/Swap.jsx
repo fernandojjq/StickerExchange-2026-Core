@@ -499,7 +499,7 @@ const LiveSessionView = ({ session, onLeave }) => {
 
                 <button
                     onClick={onLeave}
-                    className="text-rose-500 font-bold text-sm hover:underline"
+                    className="w-full max-w-xs py-4 text-rose-500 font-black text-sm border-2 border-rose-100 hover:bg-rose-50 rounded-2xl transition active:scale-95 mx-auto"
                 >
                     {t.swap.live.cancel_room}
                 </button>
@@ -664,8 +664,9 @@ const LiveSessionView = ({ session, onLeave }) => {
                             )}
                             <button
                                 onClick={onLeave}
-                                className="w-full py-3 text-rose-500 font-bold text-sm hover:bg-rose-50 rounded-xl transition"
+                                className="w-full py-4 text-rose-500 font-black text-sm border-2 border-rose-100 hover:bg-rose-50 rounded-2xl transition active:scale-95 flex items-center justify-center gap-2"
                             >
+                                <Icons.Warning className="w-4 h-4" />
                                 {t.swap.live.leave_room}
                             </button>
                         </div>
@@ -1090,11 +1091,14 @@ export const Swap = () => {
                 </>
             ) : (
                 /* Sesión Live Activa (Modal Full Screen) */
-                <div className="fixed inset-0 z-[100] bg-slate-50 overflow-y-auto">
-                    <div className="max-w-lg mx-auto p-4 min-h-[100dvh] flex flex-col pb-10">
-                        <LiveSessionView session={liveSession} onLeave={liveSession.leaveSession} />
-                    </div>
-                </div>
+                createPortal(
+                    <div className="fixed inset-0 z-[999] bg-slate-50 overflow-y-auto">
+                        <div className="max-w-lg mx-auto p-4 min-h-[100dvh] flex flex-col pb-32">
+                            <LiveSessionView session={liveSession} onLeave={liveSession.leaveSession} />
+                        </div>
+                    </div>,
+                    document.body
+                )
             )}
 
             {/* Modal: Scanner de Cámara */}
