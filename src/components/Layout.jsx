@@ -9,7 +9,11 @@ export const Layout = () => {
 
     // Scroll to top on route change
     useEffect(() => {
-        window.scrollTo(0, 0);
+        // Un pequeño timeout asegura que React haya terminado de pintar la nueva pantalla antes de hacer scroll
+        const timeout = setTimeout(() => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        }, 10);
+        return () => clearTimeout(timeout);
     }, [location.pathname]);
 
     const navItems = [

@@ -25,7 +25,7 @@ const ALBUM_CONFIG = {
 // ============================================================================
 // Generación de Tarjeta de Estatus (Canvas)
 // ============================================================================
-const generateStatusCard = async (userName, percentage, countryData, stats, categoryStats) => {
+const generateStatusCard = async (userName, percentage, countryData, stats, categoryStats, t) => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     
@@ -48,13 +48,13 @@ const generateStatusCard = async (userName, percentage, countryData, stats, cate
 
     // Encabezado
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'black 80px system-ui, sans-serif';
+    ctx.font = '900 80px system-ui, sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText('SWAP-26', 80, 150);
 
     ctx.fillStyle = '#818cf8';
     ctx.font = 'bold 30px system-ui, sans-serif';
-    ctx.fillText('MI ESTADO DE COLECCIÓN', 80, 200);
+    ctx.fillText(t.profile.subtitle.toUpperCase(), 80, 200);
 
     // Tarjeta Principal de Usuario
     ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
@@ -63,7 +63,7 @@ const generateStatusCard = async (userName, percentage, countryData, stats, cate
 
     ctx.fillStyle = '#ffffff';
     ctx.font = '900 60px system-ui, sans-serif';
-    ctx.fillText(userName.toUpperCase() || 'COLECCIONISTA', 140, 360);
+    ctx.fillText(userName.toUpperCase() || 'SWAPPER', 140, 360);
 
     ctx.fillStyle = '#6366f1';
     ctx.font = 'bold 80px system-ui, sans-serif';
@@ -76,25 +76,35 @@ const generateStatusCard = async (userName, percentage, countryData, stats, cate
     
     // Únicos
     ctx.fillStyle = '#6366f1';
-    ctx.font = 'bold 24px system-ui, sans-serif';
-    ctx.fillText('CROMOS ÚNICOS', 120, statsY);
+    ctx.font = 'bold 22px system-ui, sans-serif';
+    ctx.fillText(t.album.stats_unique.toUpperCase(), 100, statsY);
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 36px system-ui, sans-serif';
-    ctx.fillText(`${stats.unique}/1014`, 120, statsY + 45);
+    ctx.fillText(`${stats.unique}/1014`, 100, statsY + 45);
 
     // Repetidos
     ctx.fillStyle = '#f43f5e';
-    ctx.font = 'bold 24px system-ui, sans-serif';
-    ctx.fillText('REPETIDOS', 360, statsY);
+    ctx.font = 'bold 22px system-ui, sans-serif';
+    ctx.fillText(t.album.stats_repeated.toUpperCase(), 340, statsY);
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 36px system-ui, sans-serif';
-    ctx.fillText(`${stats.repeated}`, 360, statsY + 45);
+    ctx.fillText(`${stats.repeated}`, 340, statsY + 45);
 
     // Coca-Cola
     ctx.fillStyle = '#fbbf24';
-    ctx.fillText('PROMOCIONALES', 600, statsY);
+    ctx.font = 'bold 22px system-ui, sans-serif';
+    ctx.fillText(t.profile.stats_coke.toUpperCase(), 580, statsY);
     ctx.fillStyle = '#ffffff';
-    ctx.fillText(`${categoryStats.cokeCollected}/14`, 600, statsY + 45);
+    ctx.font = 'bold 36px system-ui, sans-serif';
+    ctx.fillText(`${categoryStats.cokeCollected}/14`, 580, statsY + 45);
+
+    // Extras
+    ctx.fillStyle = '#a855f7';
+    ctx.font = 'bold 22px system-ui, sans-serif';
+    ctx.fillText(t.profile.stats_extras.toUpperCase(), 820, statsY);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 36px system-ui, sans-serif';
+    ctx.fillText(`${categoryStats.extraCollected}/20`, 820, statsY + 45);
 
     // Grid de países (Estilo visual original)
     const gridStartX = 140;
@@ -171,7 +181,7 @@ export const Profile = () => {
 
         const countries = [];
         ALBUM_MANIFEST.flatMap(g => g.sections)
-            .filter(s => s.country && s.country !== 'INT' && !['FWC', 'EXT', 'CC'].includes(s.country))
+            .filter(s => s.country && s.country !== 'INT' && !['EXT', 'CC'].includes(s.country))
             .filter((v, i, a) => a.findIndex(t => t.country === v.country) === i)
             .forEach(section => {
                 const code = section.country;
@@ -208,7 +218,7 @@ export const Profile = () => {
 
     const handleGenerate = async () => {
         setIsGenerating(true);
-        await generateStatusCard(user.name, categoryStats.completion, countryData, stats, categoryStats);
+        await generateStatusCard(user.name, categoryStats.completion, countryData, stats, categoryStats, t);
         setIsGenerating(false);
     };
 

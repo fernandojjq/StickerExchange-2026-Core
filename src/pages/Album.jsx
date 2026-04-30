@@ -83,6 +83,7 @@ export const Album = () => {
     const [groupFilter, setGroupFilter] = useState('ALL');
     const [typeFilter, setTypeFilter] = useState('ALL'); 
     const [showGuide, setShowGuide] = useState(false);
+    const [showCounterInfo, setShowCounterInfo] = useState(false);
     const [showStickerTip, setShowStickerTip] = useState(false);
     
     const navObserverRef = useRef(null);
@@ -162,11 +163,23 @@ export const Album = () => {
     }, [deferredInventory, deferredSearchQuery, filterMode, groupFilter, typeFilter]);
 
     const stats = useMemo(() => {
-        const counts = Object.values(inventory);
-        return {
-            unique: counts.filter(qty => qty > 0).length,
-            repeated: counts.reduce((acc, qty) => qty > 1 ? acc + (qty - 1) : acc, 0)
-        };
+        let unique = 0;
+        let repeated = 0;
+        let baseUnique = 0;
+        
+        Object.entries(inventory).forEach(([id, qty]) => {
+            if (qty > 0) {
+                unique++;
+                if (!id.startsWith('CC-') && !id.startsWith('EXT-')) {
+                    baseUnique++;
+                }
+            }
+            if (qty > 1) {
+                repeated += (qty - 1);
+            }
+        });
+
+        return { unique, repeated, baseUnique };
     }, [inventory]);
 
     const progressPercentage = Math.round((stats.unique / totalStickers) * 100);
@@ -263,6 +276,41 @@ export const Album = () => {
         <div className="bg-slate-50 min-h-screen">
             <WelcomeGuide isOpen={showGuide} onClose={closeGuide} type="album" />
 
+            {/* Modal Info Contadores */}
+            {showCounterInfo && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setShowCounterInfo(false)}></div>
+                    <div className="relative bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl animate-in zoom-in-95 duration-200">
+                        <h3 className="text-xl font-black text-slate-900 mb-4 uppercase">{t.album.counters_title}</h3>
+                        
+                        <div className="mb-6 space-y-4">
+                            <div className="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+                                <div className="text-indigo-900 font-black mb-1">{t.album.base_album} (980)</div>
+                                <div className="text-sm text-indigo-700">
+                                    {t.album.base_album_desc}
+                                </div>
+                            </div>
+                            
+                            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                <div className="text-slate-900 font-black mb-1">{t.album.full_album} (1014)</div>
+                                <div className="text-sm text-slate-600">
+                                    {t.album.full_album_desc} 
+                                    <br/><br/>
+                                    <span className="font-bold text-amber-600">{t.album.region_note}</span> {t.album.region_desc}
+                                </div>
+                            </div>
+                        </div>
+
+                        <button 
+                            onClick={() => setShowCounterInfo(false)}
+                            className="w-full py-4 bg-indigo-600 text-white font-black rounded-2xl shadow-xl active:scale-95 transition"
+                        >
+                            {t.common.understand}
+                        </button>
+                    </div>
+                </div>
+            )}
+
             {/* Tip Contextual de Sticker */}
             {showStickerTip && (
                 <div className="fixed inset-x-4 top-24 z-[70] animate-in slide-in-from-top duration-500 pointer-events-none">
@@ -317,12 +365,29 @@ export const Album = () => {
                             >
                                 <Icons.Info className="w-6 h-6" />
                             </button>
-                            <div className="text-right">
-                                <div className="text-sm font-black text-slate-900 leading-none">
-                                    {Number(stats.unique || 0).toLocaleString()} / 1,014
+                            <button 
+                                className="flex items-center gap-3 ml-1 bg-white border border-slate-200 shadow-sm px-3 py-1.5 rounded-xl cursor-pointer hover:bg-slate-50 hover:shadow active:scale-95 transition-all"
+                                onClick={() => setShowCounterInfo(true)}
+                                aria-label="Ver detalles de los contadores"
+                            >
+                                <div className="text-right">
+                                    <div className="text-sm font-black text-indigo-900 leading-none">
+                                        {Number(stats.baseUnique || 0).toLocaleString()} / 980
+                                    </div>
+                                    <div className="text-[8px] font-bold text-indigo-500 uppercase tracking-widest mt-1">
+                                        {t.profile.stats_base}
+                                    </div>
                                 </div>
-                                <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t.album.stats_unique}</div>
-                            </div>
+                                <div className="w-px h-6 bg-slate-200"></div>
+                                <div className="text-right">
+                                    <div className="text-sm font-black text-slate-900 leading-none">
+                                        {Number(stats.unique || 0).toLocaleString()} / 1,014
+                                    </div>
+                                    <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                                        {t.album.filter_all}
+                                    </div>
+                                </div>
+                            </button>
                         </div>
                     </div>
 

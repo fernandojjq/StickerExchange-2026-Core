@@ -26,8 +26,15 @@ export const translations = {
             help_title: "Guía de Ayuda",
             tip_title: "¡Buen comienzo!",
             tip_desc: "Toca el botón + para añadir repetidas y el - para quitarlas.",
-            promo_desc: "Colección especial. Estos stickers no cuentan para el progreso del álbum base.",
-            extras_desc: "Colección Premium. No forman parte de los 980 stickers del álbum principal."
+            promo_desc: "Colección especial. Estos stickers no cuentan para el progreso del álbum base. Pueden ser 12 dependiendo de la región.",
+            extras_desc: "Colección Premium. No forman parte de los 980 stickers del álbum principal.",
+            counters_title: "Estadísticas",
+            base_album: "Álbum Base",
+            base_album_desc: "Incluye únicamente la sección FWC (Oficial) y todas las selecciones nacionales. Estos son los cromos estándar necesarios para completar tu libro.",
+            full_album: "Álbum Completo",
+            full_album_desc: "Suma el álbum base más los cromos promocionales y Extras.",
+            region_note: "Nota importante:",
+            region_desc: "Dependiendo de la región de tu álbum o tu país, el total oficial impreso podría ser de 1012 o 1014 cromos, ya que las hojas promocionales y extras varían."
         },
         swap: {
             title: "Centro de Intercambio",
@@ -131,8 +138,15 @@ export const translations = {
             help_title: "Help Guide",
             tip_title: "Great start!",
             tip_desc: "Tap + to add duplicates and - to remove them.",
-            promo_desc: "Special collection. These stickers do not count towards base album progress.",
-            extras_desc: "Premium collection. Not part of the 980 main album stickers."
+            promo_desc: "Special collection. These stickers do not count towards base album progress. There may be 12 depending on the region.",
+            extras_desc: "Premium collection. Not part of the 980 main album stickers.",
+            counters_title: "Counters",
+            base_album: "Base Album",
+            base_album_desc: "Includes only the FWC (Official) section and all national teams. These are the standard stickers needed to complete your book.",
+            full_album: "Full Album",
+            full_album_desc: "Adds the base album plus promotional stickers and Extras.",
+            region_note: "Important note:",
+            region_desc: "Depending on your album region or country, the official printed total could be 1012 or 1014 stickers, as promo and extra sheets vary."
         },
         swap: {
             title: "Swap Center",
@@ -236,8 +250,15 @@ export const translations = {
             help_title: "Guia de Ajuda",
             tip_title: "Bom começo!",
             tip_desc: "Toque em + para adicionar repetidas e em - para remover.",
-            promo_desc: "Coleção especial. Estas figurinhas não contam para o progresso do álbum base.",
-            extras_desc: "Coleção Premium. Não fazem parte das 980 figurinhas do álbum principal."
+            promo_desc: "Coleção especial. Estas figurinhas não contam para o progresso do álbum base. Podem ser 12 dependendo da região.",
+            extras_desc: "Coleção Premium. Não fazem parte das 980 figurinhas do álbum principal.",
+            counters_title: "Contadores",
+            base_album: "Álbum Base",
+            base_album_desc: "Inclui apenas a seção FWC (Oficial) e todas as seleções nacionais. Estas são as figurinhas padrão necessárias para completar seu livro.",
+            full_album: "Álbum Completo",
+            full_album_desc: "Soma o álbum base mais as figurinhas promocionais e Extras.",
+            region_note: "Nota importante:",
+            region_desc: "Dependendo da região do seu álbum ou país, o total impresso oficial pode ser 1012 ou 1014 figurinhas, já que as folhas promocionais e extras variam."
         },
         swap: {
             title: "Centro de Trocas",
@@ -341,8 +362,15 @@ export const translations = {
             help_title: "Guide d'Aide",
             tip_title: "Bon début !",
             tip_desc: "Appuyez sur + pour les doubles et sur - pour retirer.",
-            promo_desc: "Collection spéciale. Ces stickers ne comptent pas pour la progression de l'album de base.",
-            extras_desc: "Collection Premium. Ne fait pas partie des 980 stickers de l'album principal."
+            promo_desc: "Collection spéciale. Ces stickers ne comptent pas pour la progression de l'album de base. Il peut y en avoir 12 selon la région.",
+            extras_desc: "Collection Premium. Ne fait pas partie des 980 stickers de l'album principal.",
+            counters_title: "Compteurs",
+            base_album: "Album de Base",
+            base_album_desc: "Comprend uniquement la section FWC (Officiel) et toutes les équipes nationales. Ce sont les stickers standard nécessaires pour compléter votre livre.",
+            full_album: "Album Complet",
+            full_album_desc: "Ajoute l'album de base plus les stickers promotionnels et Extras.",
+            region_note: "Note importante :",
+            region_desc: "Selon la région ou le pays de votre album, le total officiel imprimé pourrait être de 1012 ou 1014 stickers, car les feuilles promotionnelles et extras varient."
         },
         swap: {
             title: "Centre d'Échange",
@@ -446,8 +474,15 @@ export const translations = {
             help_title: "Hilfe-Leitfaden",
             tip_title: "Guter Start!",
             tip_desc: "Drücken Sie + für Doppelte und - zum Entfernen.",
-            promo_desc: "Spezielle Sammlung. Diese Sticker zählen nicht zum Fortschritt des Basis-Albums.",
-            extras_desc: "Premium-Sammlung. Kein Teil der 980 Hauptalbum-Sticker."
+            promo_desc: "Spezielle Sammlung. Diese Sticker zählen nicht zum Fortschritt des Basis-Albums. Je nach Region können es 12 sein.",
+            extras_desc: "Premium-Sammlung. Kein Teil der 980 Hauptalbum-Sticker.",
+            counters_title: "Zähler",
+            base_album: "Basis-Album",
+            base_album_desc: "Enthält nur den FWC-Abschnitt (Offiziell) und alle Nationalmannschaften. Dies sind die Standard-Sticker, die benötigt werden, um Ihr Buch zu vervollständigen.",
+            full_album: "Vollständiges Album",
+            full_album_desc: "Fügt das Basis-Album plus Werbe-Sticker und Extras hinzu.",
+            region_note: "Wichtiger Hinweis:",
+            region_desc: "Je nach Region oder Land Ihres Albums könnte die offiziell gedruckte Gesamtzahl 1012 oder 1014 Sticker betragen, da Werbe- und Extrabögen variieren."
         },
         swap: {
             title: "Tausch-Zentrum",
@@ -551,8 +586,15 @@ export const translations = {
             help_title: "Guida",
             tip_title: "Buon inizio!",
             tip_desc: "Tocca + per le doppie e - per rimuoverle.",
-            promo_desc: "Collezione speciale. Questi sticker non contano per il progresso dell'album base.",
-            extras_desc: "Collezione Premium. Non fanno parte dei 980 sticker dell'album principale."
+            promo_desc: "Collezione speciale. Questi sticker non contano per il progresso dell'album base. Potrebbero essere 12 a seconda della regione.",
+            extras_desc: "Collezione Premium. Non fanno parte dei 980 sticker dell'album principale.",
+            counters_title: "Contatori",
+            base_album: "Album Base",
+            base_album_desc: "Include solo la sezione FWC (Ufficiale) e tutte le squadre nazionali. Questi sono gli sticker standard necessari per completare il tuo libro.",
+            full_album: "Album Completo",
+            full_album_desc: "Aggiunge l'album base più gli sticker promozionali e gli Extra.",
+            region_note: "Nota importante:",
+            region_desc: "A seconda della regione o del paese del tuo album, il totale ufficiale stampato potrebbe essere di 1012 o 1014 sticker, poiché i fogli promozionali ed extra variano."
         },
         swap: {
             title: "Centro Scambi",
