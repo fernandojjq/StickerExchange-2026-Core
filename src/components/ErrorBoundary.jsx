@@ -16,9 +16,13 @@ export class ErrorBoundary extends React.Component {
     }
 
     getTranslation() {
-        const lang = localStorage.getItem('swap26_lang') || 'es';
-        const t = translations[lang] || translations['es'];
-        return t.error_boundary;
+        try {
+            const lang = localStorage.getItem('swap26_lang') || 'es';
+            const t = translations[lang] || translations['es'];
+            return t.error_boundary;
+        } catch (e) {
+            return translations['es'].error_boundary;
+        }
     }
 
     render() {

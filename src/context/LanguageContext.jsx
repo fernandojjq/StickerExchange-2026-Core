@@ -5,19 +5,27 @@ const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
     const [language, setLanguage] = useState(() => {
-        const stored = localStorage.getItem('swap26_lang');
-        if (stored) return stored;
-        const browserLang = navigator.language || navigator.userLanguage;
-        if (browserLang.startsWith('en')) return 'en';
-        if (browserLang.startsWith('pt')) return 'pt';
-        if (browserLang.startsWith('fr')) return 'fr';
-        if (browserLang.startsWith('de')) return 'de';
-        if (browserLang.startsWith('it')) return 'it';
+        try {
+            const stored = localStorage.getItem('swap26_lang');
+            if (stored) return stored;
+            const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            if (browserLang.startsWith('en')) return 'en';
+            if (browserLang.startsWith('pt')) return 'pt';
+            if (browserLang.startsWith('fr')) return 'fr';
+            if (browserLang.startsWith('de')) return 'de';
+            if (browserLang.startsWith('it')) return 'it';
+        } catch (e) {
+            console.warn('Language detection failed:', e);
+        }
         return 'es';
     });
 
     useEffect(() => {
-        localStorage.setItem('swap26_lang', language);
+        try {
+            localStorage.setItem('swap26_lang', language);
+        } catch (e) {
+            console.warn('Failed to save language:', e);
+        }
         document.documentElement.lang = language;
     }, [language]);
 
