@@ -9,9 +9,16 @@ export const useVersionCheck = () => {
 
     const checkVersion = async () => {
       try {
-        // Evitamos la caché añadiendo el timestamp a la URL
-        const response = await fetch('/version.json?t=' + Date.now());
-        if (response.ok) {
+        // 1. Evitamos bucles: No recargar si ya lo hicimos hace menos de 10 segundos
+        const lastReload = localStorage.getItem('swap26_last_reload');
+        const now = Date.now();
+        if (lastReload && (now - parseInt(lastReload)) < 10000) return;
+
+        const response = await fetch('/version.json?t=' + now);
+        const contentType = response.headers.get("content-type");
+        
+        // 2. Solo procesamos si la respuesta es OK y es un JSON real (evita errores con 404 redireccionados)
+        if (response.ok && contentType && contentType.includes("application/json")) {
           const data = await response.json();
           const savedVersion = localStorage.getItem('swap26_version');
           
@@ -19,11 +26,12 @@ export const useVersionCheck = () => {
             // Es el primer chequeo de esta sesión en memoria
             currentVersion = data.version;
             
+            // Si la versión guardada en el navegador es distinta a la del servidor, actualizamos
             if (savedVersion && savedVersion !== data.version) {
-                // Si la versión en disco duro es más vieja que la del servidor, recargamos
+                console.log("Nueva versión detectada al inicio. Actualizando...");
                 localStorage.setItem('swap26_version', data.version);
-                console.log("Versión desactualizada en inicio. Recargando...");
-                window.location.reload(true);
+                localStorage.setItem('swap26_last_reload', Date.now().toString());
+                window.location.reload();
                 return;
             }
             
@@ -31,14 +39,15 @@ export const useVersionCheck = () => {
             localStorage.setItem('swap26_version', data.version);
             
           } else if (currentVersion !== data.version) {
-            // ¡El desarrollador subió una nueva versión mientras el usuario usaba la app!
+            // Cambio detectado en "vivo" (app abierta)
+            console.log("Nueva versión detectada en vivo. Actualizando...");
             localStorage.setItem('swap26_version', data.version);
-            console.log("Nueva versión detectada en vivo. Recargando...");
-            window.location.reload(true);
+            localStorage.setItem('swap26_last_reload', Date.now().toString());
+            window.location.reload();
           }
         }
       } catch (err) {
-        // Si hay error (ej. sin internet), simplemente ignoramos
+        // Ignoramos errores de red o parsing
       }
     };
 
