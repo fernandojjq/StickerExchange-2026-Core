@@ -6,8 +6,11 @@ import { Album } from './pages/Album';
 import { Swap } from './pages/Swap';
 import { Profile } from './pages/Profile';
 import { NotFound } from './pages/NotFound';
+import { useVersionCheck } from './hooks/useVersionCheck';
 
 function App() {
+  useVersionCheck(); // Activamos el vigilante de versiones
+
   useEffect(() => {
     if (window.removeInitialLoader) {
       window.removeInitialLoader();

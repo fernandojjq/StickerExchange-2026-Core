@@ -2,6 +2,20 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+// Plugin simple para generar un archivo con el timestamp del build
+const versionPlugin = () => {
+  return {
+    name: 'version-plugin',
+    generateBundle() {
+      this.emitFile({
+        type: 'asset',
+        fileName: 'version.json',
+        source: JSON.stringify({ version: Date.now() })
+      });
+    }
+  };
+};
+
 export default defineConfig({
   server: {
     host: true,
@@ -14,6 +28,7 @@ export default defineConfig({
   },
 
   plugins: [
+    versionPlugin(),
     react(),
     VitePWA({
       registerType: 'autoUpdate',

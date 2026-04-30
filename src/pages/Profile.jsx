@@ -389,7 +389,7 @@ export const Profile = () => {
                         <div className="flex flex-col gap-2">
                             <button 
                                 onClick={() => {
-                                    storage.restoreFromBackup(pendingBackup);
+                                    storage.restoreBackup(pendingBackup);
                                     window.location.reload();
                                 }}
                                 className="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl"

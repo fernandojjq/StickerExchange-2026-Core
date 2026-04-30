@@ -800,6 +800,14 @@ export const Swap = () => {
         }
     }, [showScanner, startScanner, stopScanner]);
 
+    // Handle Camera Permissions/Errors Automatically
+    useEffect(() => {
+        if (cameraError) {
+            setShowScanner(false);
+            setScanError(cameraError);
+        }
+    }, [cameraError]);
+
     // Handler: Escanear desde imagen
     const handleImageSelect = useCallback(async (event) => {
         const file = event.target.files?.[0];
@@ -1043,12 +1051,12 @@ export const Swap = () => {
                                         onChange={(e) => setJoinCode(e.target.value.toUpperCase().slice(0, 6))}
                                         placeholder="CÓDIGO"
                                         maxLength={6}
-                                        className="flex-1 px-4 py-3 bg-slate-100 rounded-xl font-mono text-lg uppercase tracking-widest text-center font-bold placeholder:text-slate-300"
+                                        className="flex-1 min-w-0 px-3 py-3 bg-slate-100 rounded-xl font-mono text-lg uppercase tracking-widest text-center font-bold placeholder:text-slate-300"
                                     />
                                     <button
                                         onClick={() => liveSession.joinRoom(joinCode)}
                                         disabled={joinCode.length < 4}
-                                        className="px-5 py-3 bg-slate-900 text-white font-bold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 transition"
+                                        className="flex-shrink-0 px-4 py-3 bg-slate-900 text-white font-bold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 transition"
                                     >
                                         Unirse
                                     </button>
@@ -1080,8 +1088,12 @@ export const Swap = () => {
                     <HistoryPanel refreshTrigger={historyRefresh} />
                 </>
             ) : (
-                /* Sesión Live Activa */
-                <LiveSessionView session={liveSession} onLeave={liveSession.leaveSession} />
+                /* Sesión Live Activa (Modal Full Screen) */
+                <div className="fixed inset-0 z-[100] bg-slate-50 overflow-y-auto">
+                    <div className="max-w-lg mx-auto p-4 min-h-[100dvh] flex flex-col pb-10">
+                        <LiveSessionView session={liveSession} onLeave={liveSession.leaveSession} />
+                    </div>
+                </div>
             )}
 
             {/* Modal: Scanner de Cámara */}

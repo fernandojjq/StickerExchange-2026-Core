@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Icons } from './Icons';
 import { useLanguage } from '../hooks/useLanguage';
@@ -5,6 +6,11 @@ import { useLanguage } from '../hooks/useLanguage';
 export const Layout = () => {
     const location = useLocation();
     const { t } = useLanguage();
+
+    // Scroll to top on route change
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
 
     const navItems = [
         { path: '/', label: t.nav.album, Icon: Icons.Album },
