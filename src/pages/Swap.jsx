@@ -452,6 +452,7 @@ const CameraScannerModal = React.memo(({ isOpen, onClose, isLoading, error, onRe
 // COMPONENTE: LiveSessionView
 // ============================================================================
 const LiveSessionView = ({ session, onLeave }) => {
+    const { t } = useLanguage();
     const {
         sessionState, roomCode, isHost, error,
         matchData, mySelection, myReceive,
@@ -465,7 +466,7 @@ const LiveSessionView = ({ session, onLeave }) => {
         return (
             <div className="text-center py-12">
                 <div className="w-12 h-12 border-4 border-rose-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                <p className="text-slate-600 font-bold">Creando sala...</p>
+                <p className="text-slate-600 font-bold">{t.swap.live.creating}</p>
             </div>
         );
     }
@@ -477,7 +478,7 @@ const LiveSessionView = ({ session, onLeave }) => {
                 <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 text-white p-6 rounded-3xl mb-6 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500 rounded-full blur-3xl opacity-20" />
 
-                    <p className="text-sm text-slate-400 mb-3">Código de sala:</p>
+                    <p className="text-sm text-slate-400 mb-3">{t.swap.live.room_code}</p>
                     <div className="text-5xl font-black tracking-[0.3em] mb-6 font-mono">{roomCode}</div>
 
                     <div className="flex justify-center mb-4">
@@ -487,20 +488,20 @@ const LiveSessionView = ({ session, onLeave }) => {
                     </div>
 
                     <p className="text-xs text-slate-400">
-                        Tu amigo puede escanear este QR o escribir el código
+                        {t.swap.live.qr_hint}
                     </p>
                 </div>
 
                 <div className="flex items-center justify-center gap-2 text-slate-500 mb-6">
                     <div className="w-2 h-2 bg-amber-500 rounded-full pulse-soft" />
-                    <p className="text-sm font-medium">Esperando a que se una...</p>
+                    <p className="text-sm font-medium">{t.swap.live.waiting_peer}</p>
                 </div>
 
                 <button
                     onClick={onLeave}
                     className="text-rose-500 font-bold text-sm hover:underline"
                 >
-                    Cancelar sala
+                    {t.swap.live.cancel_room}
                 </button>
             </div>
         );
@@ -511,7 +512,7 @@ const LiveSessionView = ({ session, onLeave }) => {
         return (
             <div className="text-center py-12">
                 <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                <p className="text-slate-600 font-bold">Uniéndose a la sala...</p>
+                <p className="text-slate-600 font-bold">{t.swap.live.joining}</p>
             </div>
         );
     }
@@ -523,13 +524,13 @@ const LiveSessionView = ({ session, onLeave }) => {
                 <div className="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Icons.Warning className="w-8 h-8 text-rose-500" />
                 </div>
-                <p className="text-slate-800 font-bold mb-2">Error de Conexión</p>
+                <p className="text-slate-800 font-bold mb-2">{t.swap.live.conn_error}</p>
                 <p className="text-slate-500 text-sm mb-6">{error}</p>
                 <button
                     onClick={onLeave}
                     className="px-6 py-3 bg-slate-900 text-white font-bold rounded-xl"
                 >
-                    Volver
+                    {t.swap.live.back}
                 </button>
             </div>
         );
@@ -542,15 +543,15 @@ const LiveSessionView = ({ session, onLeave }) => {
                 <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <Icons.Check className="w-10 h-10 text-emerald-500" />
                 </div>
-                <h2 className="text-2xl font-black text-slate-800 mb-2">¡Intercambio Exitoso!</h2>
+                <h2 className="text-2xl font-black text-slate-800 mb-2">{t.swap.live.success_title}</h2>
                 <p className="text-slate-500 mb-6 px-6">
-                    Los cromos han sido añadidos a tu colección y descontados de tus repetidos.
+                    {t.swap.live.success_desc}
                 </p>
                 <button
                     onClick={onLeave}
                     className="w-full max-w-xs px-8 py-4 bg-slate-900 text-white font-black rounded-2xl shadow-xl active:scale-95 transition"
                 >
-                    Entendido
+                    {t.swap.live.understood}
                 </button>
             </div>
         );
@@ -565,11 +566,11 @@ const LiveSessionView = ({ session, onLeave }) => {
                     <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-emerald-500 rounded-full pulse-soft" />
                         <span className="text-sm font-bold text-emerald-700">
-                            {isHost ? 'Tu amigo se unió' : 'Conectado'}
+                            {isHost ? t.swap.live.peer_joined : t.swap.live.connected}
                         </span>
                     </div>
                     <span className="text-xs font-mono text-emerald-600 bg-emerald-100 px-2 py-1 rounded">
-                        Sala: {roomCode}
+                        {t.swap.live.room}: {roomCode}
                     </span>
                 </div>
 
@@ -581,10 +582,10 @@ const LiveSessionView = ({ session, onLeave }) => {
                                 <div>
                                     <h3 className="font-black text-emerald-800 text-sm uppercase flex items-center gap-2">
                                         <Icons.ArrowDown className="w-4 h-4" />
-                                        Recibiendo ({myReceive.length})
+                                        {t.swap.live.receiving} ({myReceive.length})
                                     </h3>
                                     <p className="text-[10px] text-emerald-600 mt-0.5">
-                                        Basado en lo que tu amigo ofrece
+                                        {t.swap.live.receive_desc}
                                     </p>
                                 </div>
                             </div>
@@ -603,12 +604,12 @@ const LiveSessionView = ({ session, onLeave }) => {
                             <div className="flex justify-between items-center mb-3">
                                 <h3 className="font-black text-indigo-800 text-sm uppercase flex items-center gap-2">
                                     <Icons.ArrowUp className="w-4 h-4" />
-                                    Entregando ({mySelection.give.length}/{matchData.canGive.length})
+                                    {t.swap.live.giving} ({mySelection.give.length}/{matchData.canGive.length})
                                 </h3>
                                 <div className="flex gap-2 text-[10px]">
-                                    <button onClick={() => selectAll()} className="font-bold text-indigo-600">Todo</button>
+                                    <button onClick={() => selectAll()} className="font-bold text-indigo-600">{t.swap.live.all}</button>
                                     <span className="text-indigo-300">|</span>
-                                    <button onClick={() => selectNone()} className="font-bold text-indigo-600">Nada</button>
+                                    <button onClick={() => selectNone()} className="font-bold text-indigo-600">{t.swap.live.none}</button>
                                 </div>
                             </div>
                             <SelectableItemGrid
@@ -621,20 +622,20 @@ const LiveSessionView = ({ session, onLeave }) => {
 
                         {/* Estado de confirmación */}
                         <div className="bg-slate-100 rounded-xl p-4">
-                            <p className="text-xs text-slate-500 text-center mb-3 font-bold uppercase">Estado de confirmación</p>
+                            <p className="text-xs text-slate-500 text-center mb-3 font-bold uppercase">{t.swap.live.conf_status}</p>
                             <div className="flex justify-around items-center">
                                 <div className="text-center">
                                     <div className={`w-10 h-10 rounded-full mx-auto mb-1 flex items-center justify-center ${myConfirmed ? 'bg-emerald-500' : 'bg-slate-300'}`}>
                                         {myConfirmed && <Icons.Check className="w-5 h-5 text-white" />}
                                     </div>
-                                    <span className="text-xs font-bold text-slate-600">Tú</span>
+                                    <span className="text-xs font-bold text-slate-600">{t.swap.live.you}</span>
                                 </div>
                                 <div className="text-2xl text-slate-300">⟷</div>
                                 <div className="text-center">
                                     <div className={`w-10 h-10 rounded-full mx-auto mb-1 flex items-center justify-center ${peerConfirmed ? 'bg-emerald-500' : 'bg-slate-300'}`}>
                                         {peerConfirmed && <Icons.Check className="w-5 h-5 text-white" />}
                                     </div>
-                                    <span className="text-xs font-bold text-slate-600">Amigo</span>
+                                    <span className="text-xs font-bold text-slate-600">{t.swap.live.friend}</span>
                                 </div>
                             </div>
                         </div>
@@ -647,7 +648,7 @@ const LiveSessionView = ({ session, onLeave }) => {
                                     className="w-full py-4 bg-amber-100 text-amber-700 font-bold rounded-2xl flex items-center justify-center gap-2"
                                 >
                                     <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
-                                    Esperando a tu amigo... (Cancelar)
+                                    {t.swap.live.waiting_friend} ({t.swap.live.cancel})
                                 </button>
                             ) : (
                                 <button
@@ -658,14 +659,14 @@ const LiveSessionView = ({ session, onLeave }) => {
                                                flex items-center justify-center gap-2"
                                 >
                                     <Icons.Check className="w-5 h-5" />
-                                    Confirmar Mi Parte
+                                    {t.swap.live.confirm_part}
                                 </button>
                             )}
                             <button
                                 onClick={onLeave}
                                 className="w-full py-3 text-rose-500 font-bold text-sm hover:bg-rose-50 rounded-xl transition"
                             >
-                                Abandonar Sala
+                                {t.swap.live.leave_room}
                             </button>
                         </div>
                     </>
