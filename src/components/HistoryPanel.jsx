@@ -12,11 +12,11 @@ import { useLanguage } from '../hooks/useLanguage';
 // Componente: HistoryEntry (Una entrada del historial)
 // ============================================================================
 const HistoryEntry = ({ entry }) => {
-    const { t } = useLanguage();
+    const { language, t } = useLanguage();
     const [isExpanded, setIsExpanded] = useState(false);
 
     const date = new Date(entry.timestamp);
-    const formattedDate = date.toLocaleDateString('es-ES', {
+    const formattedDate = date.toLocaleDateString(language, {
         day: 'numeric',
         month: 'short',
         hour: '2-digit',
@@ -113,7 +113,7 @@ const HistoryEntry = ({ entry }) => {
                     {isLive && entry.roomCode && (
                         <div className="mt-2 text-right">
                             <span className="text-[9px] text-slate-300 font-mono">
-                                Sala: {entry.roomCode}
+                                {t.swap.live.room}: {entry.roomCode}
                             </span>
                         </div>
                     )}

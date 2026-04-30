@@ -299,15 +299,15 @@ const OfflineMatchModal = ({
                         <div className="flex justify-between items-center mb-3">
                             <h3 className="font-black text-emerald-800 text-sm uppercase flex items-center gap-2">
                                 <Icons.ArrowDown className="w-4 h-4" />
-                                Recibiendo
+                                {t.swap.receiving_title}
                                 <span className="bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded text-xs">
                                     {selectedReceive.length}/{scanResult.get.length}
                                 </span>
                             </h3>
                             <div className="flex gap-2 text-[10px]">
-                                <button onClick={onSelectAllReceive} className="font-bold text-emerald-600 hover:underline">Marcar Todo</button>
+                                <button onClick={onSelectAllReceive} className="font-bold text-emerald-600 hover:underline">{t.swap.mark_all}</button>
                                 <span className="text-emerald-300">|</span>
-                                <button onClick={onSelectNoneReceive} className="font-bold text-emerald-600 hover:underline">Limpiar</button>
+                                <button onClick={onSelectNoneReceive} className="font-bold text-emerald-600 hover:underline">{t.swap.clear}</button>
                             </div>
                         </div>
                         <SelectableItemGrid
@@ -324,15 +324,15 @@ const OfflineMatchModal = ({
                         <div className="flex justify-between items-center mb-3">
                             <h3 className="font-black text-indigo-800 text-sm uppercase flex items-center gap-2">
                                 <Icons.ArrowUp className="w-4 h-4" />
-                                Entregando
+                                {t.swap.giving_title}
                                 <span className="bg-indigo-200 text-indigo-900 px-2 py-0.5 rounded text-xs">
                                     {selectedGive.length}/{scanResult.give.length}
                                 </span>
                             </h3>
                             <div className="flex gap-2 text-[10px]">
-                                <button onClick={onSelectAllGive} className="font-bold text-indigo-600 hover:underline">Marcar Todo</button>
+                                <button onClick={onSelectAllGive} className="font-bold text-indigo-600 hover:underline">{t.swap.mark_all}</button>
                                 <span className="text-indigo-300">|</span>
-                                <button onClick={onSelectNoneGive} className="font-bold text-indigo-600 hover:underline">Limpiar</button>
+                                <button onClick={onSelectNoneGive} className="font-bold text-indigo-600 hover:underline">{t.swap.clear}</button>
                             </div>
                         </div>
                         <SelectableItemGrid
@@ -345,7 +345,7 @@ const OfflineMatchModal = ({
 
                     <div className="bg-amber-50 rounded-xl p-3 border border-amber-100">
                         <p className="text-amber-700 text-xs font-medium text-center">
-                            ⚠️ Recuerda: tu amigo debe hacer lo mismo en su teléfono
+                            {t.swap.reminder_tip}
                         </p>
                     </div>
                 </div>
@@ -355,7 +355,7 @@ const OfflineMatchModal = ({
                     {tradeProcessed ? (
                         <div className="w-full py-4 bg-emerald-500 text-white rounded-2xl flex flex-col items-center">
                             <Icons.Check className="w-8 h-8 mb-1" />
-                            <span className="font-black uppercase tracking-widest text-sm">¡Guardado!</span>
+                            <span className="font-black uppercase tracking-widest text-sm">{t.swap.saved_status}</span>
                         </div>
                     ) : (
                         <button
@@ -368,7 +368,7 @@ const OfflineMatchModal = ({
                                        disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:scale-100"
                         >
                             <Icons.Check className="w-5 h-5" />
-                            Confirmar Intercambio
+                            {t.swap.confirm_btn}
                         </button>
                     )}
                 </div>
@@ -395,9 +395,9 @@ const CameraScannerModal = React.memo(({ isOpen, onClose, isLoading, error, onRe
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    Cerrar
+                    {t.swap.close_btn}
                 </button>
-                <span className="text-white font-black tracking-widest text-xs uppercase">Escáner</span>
+                <span className="text-white font-black tracking-widest text-xs uppercase">{t.swap.scanner_label}</span>
             </div>
 
             {/* Camera viewport */}
@@ -407,7 +407,7 @@ const CameraScannerModal = React.memo(({ isOpen, onClose, isLoading, error, onRe
                         {isLoading ? (
                             <>
                                 <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-4" />
-                                <p className="text-xs font-bold tracking-widest animate-pulse">INICIANDO CÁMARA...</p>
+                                <p className="text-xs font-bold tracking-widest animate-pulse">{t.swap.starting_camera}</p>
                             </>
                         ) : (
                             <div className="text-center px-6">
@@ -416,7 +416,7 @@ const CameraScannerModal = React.memo(({ isOpen, onClose, isLoading, error, onRe
                                 </div>
                                 <p className="font-bold mb-4 text-sm">{error}</p>
                                 <button onClick={onRetry} className="px-6 py-3 bg-indigo-600 rounded-xl font-bold text-sm">
-                                    REINTENTAR
+                                    {t.swap.retry_btn}
                                 </button>
                             </div>
                         )}
@@ -437,7 +437,7 @@ const CameraScannerModal = React.memo(({ isOpen, onClose, isLoading, error, onRe
                         </div>
                         <div className="absolute bottom-8 inset-x-0 flex justify-center z-10">
                             <p className="text-white/80 text-sm font-medium bg-black/50 px-4 py-2 rounded-full backdrop-blur">
-                                Apunta al código QR
+                                {t.swap.aim_hint}
                             </p>
                         </div>
                     </>
@@ -984,8 +984,8 @@ export const Swap = () => {
                                 className="w-full bg-slate-900 text-white rounded-2xl p-5 shadow-xl active:scale-[0.98] transition-all text-left flex items-center justify-between group"
                             >
                                 <div>
-                                    <h2 className="text-lg font-black italic tracking-tighter">ESCÁNER</h2>
-                                    <p className="text-indigo-200 text-xs font-bold uppercase">Usar cámara</p>
+                                    <h2 className="text-lg font-black italic tracking-tighter">{t.swap.scanner_title}</h2>
+                                    <p className="text-indigo-200 text-xs font-bold uppercase">{t.swap.camera_subtitle}</p>
                                 </div>
                                 <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
                                     <Icons.Camera className="w-6 h-6" />
@@ -998,8 +998,8 @@ export const Swap = () => {
                                 className="w-full bg-white text-slate-800 border-2 border-slate-100 rounded-2xl p-5 shadow-lg active:scale-[0.98] transition-all text-left flex items-center justify-between"
                             >
                                 <div>
-                                    <h2 className="text-lg font-black italic tracking-tighter">DESDE IMAGEN</h2>
-                                    <p className="text-slate-400 text-xs font-bold uppercase">Subir foto del QR</p>
+                                    <h2 className="text-lg font-black italic tracking-tighter">{t.swap.image_title}</h2>
+                                    <p className="text-slate-400 text-xs font-bold uppercase">{t.swap.image_subtitle}</p>
                                 </div>
                                 <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
                                     <Icons.Upload className="w-6 h-6 text-slate-600" />
@@ -1012,8 +1012,8 @@ export const Swap = () => {
                                 className="w-full bg-white text-slate-800 border-2 border-slate-100 rounded-2xl p-5 shadow-lg active:scale-[0.98] transition-all text-left flex items-center justify-between"
                             >
                                 <div>
-                                    <h2 className="text-lg font-black italic tracking-tighter">MI CÓDIGO</h2>
-                                    <p className="text-slate-400 text-xs font-bold uppercase">Mostrar QR</p>
+                                    <h2 className="text-lg font-black italic tracking-tighter">{t.swap.my_qr_title}</h2>
+                                    <p className="text-slate-400 text-xs font-bold uppercase">{t.swap.my_qr_subtitle}</p>
                                 </div>
                                 <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center">
                                     <Icons.QRCode className="w-6 h-6 text-slate-600" />
@@ -1032,8 +1032,8 @@ export const Swap = () => {
                             >
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full blur-3xl opacity-10" />
                                 <div className="relative z-10">
-                                    <h2 className="text-lg font-black italic tracking-tighter">CREAR SALA</h2>
-                                    <p className="text-rose-100 text-xs font-bold uppercase">Invita a tu amigo</p>
+                                    <h2 className="text-lg font-black italic tracking-tighter">{t.swap.create_room_title}</h2>
+                                    <p className="text-rose-100 text-xs font-bold uppercase">{t.swap.create_room_subtitle}</p>
                                 </div>
                                 <div className="relative z-10 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition">
                                     <Icons.Plus className="w-6 h-6" />
@@ -1044,14 +1044,14 @@ export const Swap = () => {
                             <div className="bg-white rounded-2xl p-5 border-2 border-slate-100 shadow-lg">
                                 <h3 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
                                     <Icons.User className="w-4 h-4 text-slate-400" />
-                                    Unirse a Sala
+                                    {t.swap.join_room_title}
                                 </h3>
                                 <div className="flex gap-2">
                                     <input
                                         type="text"
                                         value={joinCode}
                                         onChange={(e) => setJoinCode(e.target.value.toUpperCase().slice(0, 6))}
-                                        placeholder="CÓDIGO"
+                                        placeholder={t.swap.code_placeholder}
                                         maxLength={6}
                                         className="flex-1 min-w-0 px-3 py-3 bg-slate-100 rounded-xl font-mono text-lg uppercase tracking-widest text-center font-bold placeholder:text-slate-300"
                                     />
@@ -1060,7 +1060,7 @@ export const Swap = () => {
                                         disabled={joinCode.length < 4}
                                         className="flex-shrink-0 px-4 py-3 bg-slate-900 text-white font-bold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 transition"
                                     >
-                                        Unirse
+                                        {t.swap.join_btn}
                                     </button>
                                 </div>
                                 <div className="mt-3 text-center">
@@ -1071,16 +1071,16 @@ export const Swap = () => {
                                         <div className="w-8 h-8 bg-slate-100 rounded-lg flex items-center justify-center">
                                             <Icons.QRCode className="w-5 h-5 text-slate-500" />
                                         </div>
-                                        Escanear QR de Sala
+                                        {t.swap.scan_room_btn}
                                     </button>
                                 </div>
                             </div>
 
                             {/* Info */}
                             <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 border border-amber-100">
-                                <p className="text-amber-800 text-xs font-medium text-center flex items-center justify-center gap-2">
+                                <p className="text-[10px] text-amber-700 leading-relaxed">
                                     <span className="text-base">⚡</span>
-                                    El modo En Vivo sincroniza en tiempo real y requiere que ambos confirmen el intercambio.
+                                    {t.swap.live_mode_desc}
                                 </p>
                             </div>
                         </div>
@@ -1129,14 +1129,14 @@ export const Swap = () => {
                             </div>
                         </div>
 
-                        <h3 className="text-2xl font-black text-slate-800 mb-2 tracking-tighter uppercase">Tu Pasaporte</h3>
+                        <h3 className="text-2xl font-black text-slate-800 mb-2 tracking-tighter uppercase">{t.swap.qr_modal_title}</h3>
                         <p className="text-slate-500 text-sm mb-4">
-                            Muestra este código para comparar colecciones
+                            {t.swap.qr_modal_desc}
                         </p>
 
                         <div className="bg-amber-50 rounded-xl p-3 mb-4 border border-amber-100">
                             <p className="text-amber-700 text-xs font-medium">
-                                💡 Aumenta el brillo para mejor lectura
+                                {t.swap.qr_brightness_tip}
                             </p>
                         </div>
 
