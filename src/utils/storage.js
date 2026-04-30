@@ -240,10 +240,10 @@ export const storage = {
             }
 
             if (data.user) {
-                storage.saveUser(data.user);
+                localStorage.setItem(KEY_USER, JSON.stringify(data.user));
             }
 
-            storage.saveInventory(data.inventory);
+            localStorage.setItem(KEY_INVENTORY, JSON.stringify(data.inventory));
 
             if (data.history && Array.isArray(data.history)) {
                 localStorage.setItem(KEY_HISTORY, JSON.stringify(data.history));
