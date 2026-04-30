@@ -13,13 +13,27 @@ export const useVersionCheck = () => {
         const response = await fetch('/version.json?t=' + Date.now());
         if (response.ok) {
           const data = await response.json();
+          const savedVersion = localStorage.getItem('swap26_version');
           
           if (!currentVersion) {
-            // Guardamos la versión la primera vez que comprobamos
+            // Es el primer chequeo de esta sesión en memoria
             currentVersion = data.version;
+            
+            if (savedVersion && savedVersion !== data.version) {
+                // Si la versión en disco duro es más vieja que la del servidor, recargamos
+                localStorage.setItem('swap26_version', data.version);
+                console.log("Versión desactualizada en inicio. Recargando...");
+                window.location.reload(true);
+                return;
+            }
+            
+            // Guardar para futuras aperturas
+            localStorage.setItem('swap26_version', data.version);
+            
           } else if (currentVersion !== data.version) {
-            // ¡El desarrollador subió una nueva versión! Forzamos recarga.
-            console.log("Nueva versión detectada. Recargando...");
+            // ¡El desarrollador subió una nueva versión mientras el usuario usaba la app!
+            localStorage.setItem('swap26_version', data.version);
+            console.log("Nueva versión detectada en vivo. Recargando...");
             window.location.reload(true);
           }
         }
