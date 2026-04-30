@@ -34,7 +34,7 @@ export const Layout = () => {
             </div>
 
             {/* Main Content Area */}
-            <main className="w-full max-w-lg mx-auto min-h-screen relative z-0">
+            <main className="w-full max-w-lg mx-auto min-h-screen">
                 <Outlet />
             </main>
 

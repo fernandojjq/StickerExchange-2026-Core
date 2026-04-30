@@ -2,50 +2,49 @@ import { useEffect } from 'react';
 
 export const useVersionCheck = () => {
   useEffect(() => {
-    // Solo comprobamos en el servidor de producción (no mientras desarrollas)
     if (import.meta.env.DEV) return;
+
+    let sessionVersion = null;
+    let pendingUpdate = false;
 
     const checkVersion = async () => {
       try {
-        // 1. Evitamos bucles: No recargar si ya lo hicimos hace menos de 10 segundos
-        const lastReload = localStorage.getItem('swap26_last_reload');
-        const now = Date.now();
-        if (lastReload && (now - parseInt(lastReload)) < 10000) return;
-
-        const response = await fetch('/version.json?t=' + now);
-        const contentType = response.headers.get("content-type");
+        const response = await fetch('/version.json?t=' + Date.now());
+        const data = await response.json();
         
-        // 2. Solo procesamos si la respuesta es OK y es un JSON real
-        if (response.ok && contentType && contentType.includes("application/json")) {
-          const data = await response.json();
-          const buildVersion = window.APP_VERSION;
-          
-          // La fuente de verdad es la comparación entre lo que el HTML dice ser (APP_VERSION)
-          // y lo que el servidor dice que es la última versión (data.version)
-          if (buildVersion && data.version !== buildVersion) {
-              console.log(`Nueva versión detectada (${buildVersion} -> ${data.version}). Actualizando...`);
-              localStorage.setItem('swap26_last_reload', Date.now().toString());
-              window.location.reload();
-          }
+        if (!sessionVersion) {
+          sessionVersion = data.version;
+          return;
         }
-      } catch (err) {
-        // Ignoramos errores de red
-      }
+
+        if (data.version !== sessionVersion) {
+          console.log("Versión nueva detectada. Se aplicará cuando la app no esté en uso.");
+          pendingUpdate = true;
+        }
+      } catch (err) {}
     };
 
-    // 1. Comprobamos ahora mismo
-    checkVersion();
-
-    // 2. Comprobamos cada minuto en segundo plano
-    const interval = setInterval(checkVersion, 60000);
-
-    // 3. Comprobamos instantáneamente cuando el usuario vuelve a abrir la app
     const handleVisibilityChange = () => {
+      // Si el usuario oculta la app (cambia de pestaña, bloquea tlf) y hay una actualización
+      if (document.visibilityState === 'hidden' && pendingUpdate) {
+        // SEGURIDAD: No recargar si estamos en medio de un intercambio vivo
+        if (window.location.pathname.includes('/swap')) {
+          console.log("Actualización pendiente pospuesta por sesión activa.");
+          return;
+        }
+        
+        window.location.reload();
+      } 
+      
+      // Al volver a la app, también aprovechamos para chequear
       if (document.visibilityState === 'visible') {
         checkVersion();
       }
     };
+
+    const interval = setInterval(checkVersion, 300000); // 5 min
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    checkVersion();
 
     return () => {
       clearInterval(interval);
