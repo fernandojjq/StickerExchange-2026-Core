@@ -9,7 +9,7 @@ import { NotFound } from './pages/NotFound';
 import { useVersionCheck } from './hooks/useVersionCheck';
 
 function App() {
-  useVersionCheck(); // Activamos el vigilante de versiones
+  // useVersionCheck desactivado temporalmente para evitar recargas infinitas en tablets
 
   useEffect(() => {
     if (window.removeInitialLoader) {
