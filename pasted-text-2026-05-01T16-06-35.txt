@@ -1,0 +1,325 @@
+Here is your full content translated into clear, structured English optimized for LLM understanding:
+
+---
+
+# Swap-26: Complete Guide for Content Creators
+
+## Project Overview
+
+Swap-26 is a Progressive Web App (PWA) designed to manage and facilitate the exchange of physical stickers from the official FIFA World Cup 2026 album.
+
+The app allows users to:
+
+* Track their sticker inventory (duplicates and missing stickers)
+* Generate QR codes representing their collection to share with others
+* Scan other users’ QR codes to find matching trades
+* Perform exchanges offline (via QR codes) or live (via Firebase real-time synchronization)
+
+---
+
+## The Album: Numbers and Structure
+
+### Total Stickers
+
+The FIFA World Cup 2026 album contains a total of **980 stickers in its base version**, distributed as follows:
+
+| Section                | Quantity | Description                                 |
+| ---------------------- | -------- | ------------------------------------------- |
+| FWC Special Stickers   | 20       | Logos, stadiums, mascot, tournament history |
+| National Team Stickers | 960      | 48 teams × 20 stickers each                 |
+| **TOTAL BASE ALBUM**   | **980**  | Required to complete the album              |
+
+---
+
+### Additional Collections (Not Required for Completion)
+
+| Collection               | Quantity | Description                   |
+| ------------------------ | -------- | ----------------------------- |
+| EXTRAS                   | 20       | Premium stickers (E1–E20)     |
+| PROMO (Partner)          | 14       | Promotional stickers (C1–C14) |
+| **TOTAL EXTRAS + PROMO** | **34**   | Optional, not required        |
+
+---
+
+### Total Physical Product
+
+* Base Album: 980 stickers
+* Additional Collections: 34 stickers
+* **TOTAL PRINTED: 1,014 stickers** (1,012 in some regions)
+
+Important note: PROMO and EXTRAS stickers do NOT count toward base album completion. Total printed numbers may vary by region.
+
+---
+
+## Detailed Album Structure
+
+### 1. Tournament Special Stickers (FWC)
+
+| Number Range | Quantity | Type               |
+| ------------ | -------- | ------------------ |
+| 00           | 1        | Commemorative logo |
+| 01–05        | 5        | Tournament emblems |
+| 06–08        | 3        | Host cities        |
+| 09–19        | 11       | History and mascot |
+
+---
+
+### 2. National Teams (48 Teams)
+
+Each team has exactly 20 stickers:
+
+| Number Range | Quantity | Type               |
+| ------------ | -------- | ------------------ |
+| 01           | 1        | Team badge         |
+| 02–12        | 11       | Main players       |
+| 13           | 1        | Team photo         |
+| 14–20        | 7        | Additional players |
+
+* Total per team: 20 stickers
+* Total for 48 teams: 960 stickers
+
+---
+
+### 3. Group Organization
+
+* 48 teams divided into 12 groups (A–L)
+* 4 teams per group
+
+---
+
+## Application Sections
+
+### Section 1: Album (Inventory)
+
+Main area where users manage their collection.
+
+**Features:**
+
+* Search by sticker number or country
+* Filters:
+
+  * ALL
+  * MISSING
+  * DUPLICATES
+* Type filters:
+
+  * ALL
+  * BADGES
+  * PROMO (C1–C14)
+  * EXTRAS (E1–E20)
+  * PLAYERS
+
+**Inventory Stats:**
+
+* Total unique stickers
+* Number of duplicates
+* Completion progress
+
+**Sticker Management:**
+
+* Tap + to add duplicates
+* Tap – to remove duplicates
+* Long press to mark as priority
+
+---
+
+### Section 2: Swap Center
+
+Two exchange modes:
+
+#### Offline Mode (QR Codes)
+
+* Generate QR code from your duplicates
+* Others scan it to find matches
+* No internet required
+
+#### Live Mode (Firebase Realtime Database)
+
+* Create a room with a unique code
+* Join via code or QR
+* Real-time synchronization
+* Both users must confirm exchanges
+
+---
+
+### Exchange Flow
+
+1. Scan friend’s QR → View matches
+2. Select stickers you want
+3. Select stickers you offer
+4. Friend does the same
+5. Both confirm
+6. Inventories update automatically
+
+---
+
+### Section 3: My Profile (My ID)
+
+* Custom username
+* Personal QR code
+* Stats:
+
+  * Total stickers
+  * Unique stickers
+  * Total trades
+* Trade history
+
+---
+
+## Sticker Identification System
+
+### ID Format
+
+[PREFIX]-[NUMBER]
+
+### Prefixes
+
+| Prefix | Meaning          | Example  |
+| ------ | ---------------- | -------- |
+| FWC    | Special stickers | FWC-01   |
+| ISO-3  | Country code     | ARG, BRA |
+| EXT    | Extra stickers   | EXT-01   |
+| CC     | Promo stickers   | CC-01    |
+
+---
+
+### Examples
+
+* FWC-00: Commemorative logo
+* ARG-01: Argentina badge
+* ARG-07: Player
+* BRA-13: Team photo
+* EXT-05: Extra sticker
+* CC-12: Promo sticker
+
+---
+
+## FAQ (SEO Content)
+
+### How many stickers are in the World Cup 2026 album?
+
+980 in the base album. Total printed: 1,014 (or 1,012 depending on region).
+
+---
+
+### How many teams are included?
+
+48 teams, each with 20 stickers, organized into 12 groups.
+
+---
+
+### Hardest stickers to get?
+
+* FWC specials
+* Team badges (01)
+* EXTRAS and PROMO
+
+---
+
+### How does trading work?
+
+1. Users register duplicates
+2. Generate/scan QR codes
+3. App calculates matches
+4. Select trades
+5. Confirm
+6. Inventory updates
+
+---
+
+### How many stickers to complete the album?
+
+980 unique stickers (base album only).
+
+---
+
+## Glossary
+
+* Sticker: collectible image
+* Album: physical book
+* Duplicate: repeated sticker
+* Missing: not owned
+* Swap: exchange
+* QR Code: data-sharing code
+* PWA: installable web app
+* Inventory: your collection
+* Base Album: 980 stickers
+* Extras: 20 premium
+* Promo: 14 promotional
+* Full Album: 1,014 total
+
+---
+
+## Technical Notes
+
+### Common Mistakes to Avoid
+
+1. Do not mix sticker numbering systems
+2. EXTRAS and PROMO do not count toward completion
+3. Do not invent sticker IDs
+4. Do not confuse totals:
+
+   * 980 = base
+   * 1,014 = total printed
+   * 48 teams
+   * 12 groups
+   * 4 teams per group
+
+---
+
+## Verified Information
+
+* URL: swap26.pages.dev
+* Name: Swap-26 / SWAP-26
+* Platform: PWA
+* Tech: React, Vite, Firebase
+* Languages: Spanish, English
+* Exchange methods: QR + real-time
+
+---
+
+## SEO Data
+
+### Main Keywords
+
+* swap 26
+* world cup 2026 album
+* fifa sticker exchange
+* panini album 2026
+* world cup stickers
+* how to complete album
+
+---
+
+### Long-tail Keywords
+
+* app to trade world cup stickers
+* how many duplicates needed
+* best way to complete panini album
+* rare sticker tricks
+
+---
+
+### Meta Description
+
+“Swap-26 is the ultimate tool to manage your FIFA World Cup 2026 sticker collection. Scan QR codes, find matches instantly, and complete your album faster. Free PWA.”
+
+---
+
+## Executive Summary
+
+Swap-26 is a web application designed to simplify sticker trading for the FIFA World Cup 2026 album.
+
+The album contains:
+
+* 980 base stickers
+* 34 additional stickers
+* Total printed: 1,014
+
+The app enables users to:
+
+* Manage inventory
+* Share collections via QR codes
+* Trade offline or in real time
+
+---

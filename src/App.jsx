@@ -5,6 +5,7 @@ import { Layout } from './components/Layout';
 import { Album } from './pages/Album';
 import { Swap } from './pages/Swap';
 import { Profile } from './pages/Profile';
+import { Info } from './pages/Info';
 import { NotFound } from './pages/NotFound';
 import { useVersionCheck } from './hooks/useVersionCheck';
 
@@ -25,6 +26,7 @@ function App() {
             <Route index element={<Album />} />
             <Route path="swap" element={<Swap />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="info" element={<Info />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

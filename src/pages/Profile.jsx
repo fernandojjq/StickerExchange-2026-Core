@@ -4,6 +4,7 @@
 // ============================================================================
 
 import { useState, useMemo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { storage } from '../utils/storage';
 import { Protocol } from '../utils/protocol';
 import { Icons } from '../components/Icons';
@@ -365,6 +366,26 @@ export const Profile = () => {
                     </button>
                 </div>
                 <p className="text-[9px] text-slate-400 pl-1 mb-6">{t.profile.backup_desc}</p>
+            </div>
+
+            {/* Ayuda y Soporte */}
+            <div className="mb-8">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 pl-1">Soporte y Más</p>
+                <Link 
+                    to="/info"
+                    className="flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-100 shadow-sm active:scale-95 transition-all group"
+                >
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-500 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                            <Icons.Info className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <p className="text-sm font-black text-slate-800">Info & FAQ</p>
+                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tight">Sobre el proyecto y dudas</p>
+                        </div>
+                    </div>
+                    <Icons.ArrowRight className="w-5 h-5 text-slate-300" />
+                </Link>
             </div>
 
             {/* Acciones Finales */}
