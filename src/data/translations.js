@@ -147,7 +147,9 @@ export const translations = {
             backup_desc: "Guarda o restaura tu inventario en otro dispositivo.",
             restore_title: "¿RESTAURAR DATOS?",
             restore_desc: "Se sobrescribirá tu inventario actual. Esta acción no se puede deshacer.",
-            restore_confirm_btn: "Sí, Restaurar"
+            restore_confirm_btn: "Sí, Restaurar",
+            support_title: "Soporte y Más",
+            info_badge: "Sobre el proyecto y dudas"
         },
         guide: {
             manual: "Manual de Usuario",
@@ -175,6 +177,24 @@ export const translations = {
                     { t: "Seguridad", d: "Tus datos se guardan solo en este dispositivo." }
                 ]
             }
+        },
+        info: {
+            title: "Info & FAQ",
+            subtitle: "Conoce más sobre Swap-26",
+            about_title: "Sobre el Proyecto",
+            about_p1: "Swap-26 nació con una misión simple: hacer que la experiencia de coleccionar cromos de la Copa del Mundo 2026 sea más rápida, social y digital.",
+            about_p2: "Diseñada para funcionar sin fricciones, permite llevar tu inventario en el bolsillo y comparar repetidas con amigos en segundos, eliminando las listas en papel y los errores al intercambiar.",
+            faq_title: "Preguntas Frecuentes",
+            contact_title: "Comunidad y Soporte",
+            contact_desc: "Síguenos para novedades y tips",
+            faqs: [
+                { q: "¿Es esta una aplicación oficial?", a: "No. Swap-26 es una herramienta independiente creada por y para coleccionistas. No estamos afiliados a Panini ni a la FIFA." },
+                { q: "¿Cómo funciona el Intercambio Live?", a: "El modo Live permite sincronizar tu inventario con el de un amigo en tiempo real. Uno crea una sala, el otro ingresa el código, y la app les muestra automáticamente qué cromos pueden intercambiar basándose en las repetidas de ambos." },
+                { q: "¿Cómo funciona el Intercambio Offline (Cámara)?", a: "Abre tu 'Código QR' y pide a un amigo que lo escanee. La app cruzará ambas colecciones al instante. Importante: A diferencia del modo 'En Vivo', en el modo Offline los cambios solo se guardan automáticamente en el teléfono de quien escanea." },
+                { q: "¿Mis datos están seguros?", a: "Totalmente. Tu inventario se guarda localmente en tu navegador (LocalStorage). No requerimos registros, correos electrónicos ni contraseñas. Los datos de las salas Live son temporales." },
+                { q: "¿Qué significan los colores en los cromos?", a: "Gris: Te falta. Azul: Lo tienes. Azul Intenso: Tienes repetidas. Dorado/Efecto: Cromos especiales o brillantes." },
+                { q: "¿Cómo puedo reportar un error?", a: "¡Nos encanta recibir feedback! Puedes escribirnos directamente a swap26app@gmail.com." }
+            ]
         }
     },
     en: {
@@ -320,7 +340,9 @@ export const translations = {
             backup_desc: "Save or restore your inventory on another device.",
             restore_title: "RESTORE DATA?",
             restore_desc: "Your current inventory will be overwritten. This action cannot be undone.",
-            restore_confirm_btn: "Yes, Restore"
+            restore_confirm_btn: "Yes, Restore",
+            support_title: "Support & More",
+            info_badge: "About the project and FAQ"
         },
         guide: {
             manual: "User Manual",
@@ -348,6 +370,24 @@ export const translations = {
                     { t: "Security", d: "Your data is saved only on this device." }
                 ]
             }
+        },
+        info: {
+            title: "Info & FAQ",
+            subtitle: "Learn more about Swap-26",
+            about_title: "About the Project",
+            about_p1: "Swap-26 was born with a simple mission: to make the experience of collecting World Cup 2026 stickers faster, more social, and digital.",
+            about_p2: "Designed to work without friction, it allows you to carry your inventory in your pocket and compare duplicates with friends in seconds, eliminating paper lists and exchange errors.",
+            faq_title: "Frequently Asked Questions",
+            contact_title: "Community & Support",
+            contact_desc: "Follow us for news and tips",
+            faqs: [
+                { q: "Is this an official app?", a: "No. Swap-26 is an independent tool created by and for collectors. We are not affiliated with Panini or FIFA." },
+                { q: "How does Live Swap work?", a: "Live mode allows you to sync your inventory with a friend in real time. One creates a room, the other enters the code, and the app automatically shows which stickers you can trade based on both players' duplicates." },
+                { q: "How does Offline Swap (Camera) work?", a: "Open your 'QR Code' and have a friend scan it. The app will cross both collections instantly. Important: Unlike 'Live' mode, in Offline mode, changes are only automatically saved on the phone of the person who scans." },
+                { q: "Are my data safe?", a: "Absolutely. Your inventory is saved locally in your browser (LocalStorage). We do not require registration, emails, or passwords. Live room data is temporary." },
+                { q: "What do the colors on the stickers mean?", a: "Grey: Missing. Blue: Collected. Deep Blue: Duplicates. Gold/Effect: Special or shiny stickers." },
+                { q: "How can I report a bug?", a: "We love receiving feedback! You can write to us directly at swap26app@gmail.com." }
+            ]
         }
     },
     pt: {
@@ -493,7 +533,9 @@ export const translations = {
             backup_desc: "Salve ou restaure seu inventário em outro dispositivo.",
             restore_title: "RESTAURAR DADOS?",
             restore_desc: "Seu inventário atual será sobrescrito. Esta ação não pode ser desfeita.",
-            restore_confirm_btn: "Sim, Restaurar"
+            restore_confirm_btn: "Sim, Restaurar",
+            support_title: "Suporte e Mais",
+            info_badge: "Sobre o projeto e dúvidas"
         },
         guide: {
             manual: "Manual do Usuário",
@@ -521,6 +563,24 @@ export const translations = {
                     { t: "Segurança", d: "Seus dados ficam apenas neste dispositivo." }
                 ]
             }
+        },
+        info: {
+            title: "Info & FAQ",
+            subtitle: "Saiba mais sobre o Swap-26",
+            about_title: "Sobre o Projeto",
+            about_p1: "O Swap-26 nasceu com uma missão simple: tornar a experiência de colecionar figurinhas da Copa do Mundo de 2026 mais rápida, social e digital.",
+            about_p2: "Projetado para funcionar sem atritos, permite que você leve seu inventário no bolso e compare repetidas com amigos em segundos, eliminando listas de papel e erros de troca.",
+            faq_title: "Perguntas Frecuentes",
+            contact_title: "Comunidade e Suporte",
+            contact_desc: "Siga-nos para novidades e dicas",
+            faqs: [
+                { q: "Este é um aplicativo oficial?", a: "Não. O Swap-26 é uma ferramenta independente criada por e para colecionadores. Não somos afiliados à Panini nem à FIFA." },
+                { q: "Como funciona a Troca ao Vivo?", a: "O modo ao vivo permite sincronizar seu inventário com um amigo em tempo real. Um cria uma sala, el otro digita o código, e o app mostra automaticamente quais figurinhas vocês podem trocar." },
+                { q: "Como funciona a Troca Offline (Câmera)?", a: "Abra seu 'Código QR' e peça a um amigo para escanear. O app cruzará as duas coleções instantaneamente. Importante: No modo Offline, as alterações são salvas automaticamente apenas no telefone de quem escanea." },
+                { q: "Meus dados estão seguros?", a: "Totalmente. Seu inventario é salvo localmente no seu navegador (LocalStorage). Não exigimos registro, e-mails ou senhas." },
+                { q: "O que significam as cores nas figurinhas?", a: "Cinza: Faltando. Azul: Coletada. Azul Intenso: Repetidas. Dourado/Efecto: Figurinhas especiais ou brilhantes." },
+                { q: "Como posso relatar um erro?", a: "Adoramos receber feedback! Você pode nos escrever diretamente para swap26app@gmail.com." }
+            ]
         }
     },
     fr: {
@@ -666,7 +726,9 @@ export const translations = {
             backup_desc: "Enregistrez ou restaurez votre inventaire sur un autre appareil.",
             restore_title: "RESTAURER DONNÉES ?",
             restore_desc: "Votre inventaire actuel sera écrasé. Cette action est irréversible.",
-            restore_confirm_btn: "Oui, Restaurer"
+            restore_confirm_btn: "Oui, Restaurer",
+            support_title: "Support et Plus",
+            info_badge: "À propos du projet et FAQ"
         },
         guide: {
             manual: "Manuel d'Utilisation",
@@ -694,6 +756,24 @@ export const translations = {
                     { t: "Sécurité", d: "Vos données restent sur cet appareil." }
                 ]
             }
+        },
+        info: {
+            title: "Info & FAQ",
+            subtitle: "En savoir plus sur Swap-26",
+            about_title: "À propos du Projet",
+            about_p1: "Swap-26 est né d'une mission simple : rendre l'expérience de collecte des stickers de la Coupe du Monde 2026 plus rapide, plus sociale et plus numérique.",
+            about_p2: "Conçu pour fonctionner sans friction, il vous permet d'emporter votre inventaire dans votre poche et de comparer les doubles avec des amis en quelques secondes, éliminant les listes papier et les erreurs d'échange.",
+            faq_title: "Questions Fréquemment Posées",
+            contact_title: "Communauté et Support",
+            contact_desc: "Suivez-nous pour des nouveautés et des conseils",
+            faqs: [
+                { q: "Est-ce une application officielle ?", a: "Non. Swap-26 est un outil indépendant créé par et pour les collectionneurs. Nous ne sommes pas affiliés à Panini ni à la FIFA." },
+                { q: "Comment fonctionne l'Échange en Direct ?", a: "Le mode En Direct vous permet de synchroniser votre inventaire avec un ami en temps réel. L'un crée une salle, l'autre saisit le code, et l'appli affiche automatiquement quels stickers vous pouvez échanger." },
+                { q: "Comment fonctionne l'Échange Hors-ligne (Caméra) ?", a: "Ouvrez votre 'Code QR' et demandez à un ami de le scanner. L'appli croisera les deux collections instantanément. Important : En mode Hors-ligne, les modifications ne sont enregistrées que sur le téléphone de la personne qui scanne." },
+                { q: "Mes données sont-elles en sécurité ?", a: "Absolument. Votre inventaire est sauvegardé localmente dans votre navigateur (LocalStorage). Nous ne demandons ni inscription, ni e-mail, ni mot de passe." },
+                { q: "Que signifient les couleurs sur les stickers ?", a: "Gris : Manquant. Bleu : Collecté. Bleu Foncé : Doubles. Doré/Effet : Stickers spéciaux ou brillants." },
+                { q: "Comment signaler un bug ?", a: "Nous adorons recevoir des retours ! Vous pouvez nous écrire directement à swap26app@gmail.com." }
+            ]
         }
     },
     de: {
@@ -839,7 +919,9 @@ export const translations = {
             backup_desc: "Speichern oder wiederherstellen Sie Ihr Inventar auf einem anderen Gerät.",
             restore_title: "DATEN WIEDERHERSTELLEN?",
             restore_desc: "Ihr aktuelles Inventar wird überschrieben. Dies kann nicht rückgängig gemacht werden.",
-            restore_confirm_btn: "Ja, Wiederherstellen"
+            restore_confirm_btn: "Ja, Wiederherstellen",
+            support_title: "Support & Mehr",
+            info_badge: "Über das Projekt und FAQ"
         },
         guide: {
             manual: "Benutzerhandbuch",
@@ -867,6 +949,24 @@ export const translations = {
                     { t: "Sicherheit", d: "Daten werden nur hier gespeichert." }
                 ]
             }
+        },
+        info: {
+            title: "Info & FAQ",
+            subtitle: "Erfahren Sie mehr über Swap-26",
+            about_title: "Über das Projekt",
+            about_p1: "Swap-26 wurde mit einer einfachen Mission ins Leben gerufen: das Sammeln von Stickern für die Weltmeisterschaft 2026 schneller, sozialer und digitaler zu machen.",
+            about_p2: "Entwickelt für reibungslose Abläufe, ermöglicht es Ihnen, Ihr Inventar in der Tasche zu tragen und Doppelte in Sekundenschnelle mit Freunden zu vergleichen, ohne Papierlisten und Tauschfehler.",
+            faq_title: "Häufig gestellte Fragen",
+            contact_title: "Community & Support",
+            contact_desc: "Folgen Sie uns für Neuigkeiten und Tipps",
+            faqs: [
+                { q: "Ist dies eine offizielle App?", a: "Nein. Swap-26 ist ein unabhängiges Tool, das von und für Sammler entwickelt wurde. Wir stehen in keiner Verbindung zu Panini oder der FIFA." },
+                { q: "Wie funktioniert der Live-Tausch?", a: "Der Live-Modus ermöglicht es Ihnen, Ihr Inventar in Echtzeit mit einem Freund zu synchronisieren. Einer erstellt einen Raum, der andere gibt den Code ein, und die App zeigt automatisch an, welche Sticker getauscht werden können." },
+                { q: "Wie funktioniert der Offline-Tausch (Kamera)?", a: "Öffnen Sie Ihren 'QR-Code' und lassen Sie ihn von einem Freund scannen. Die App gleicht beide Sammlungen sofort ab. Wichtig: Im Offline-Modus werden Änderungen nur auf dem Handy der scannenden Person gespeichert." },
+                { q: "Sind meine Daten sicher?", a: "Absolument. Ihr Inventar wird lokal in Ihrem Browser (LocalStorage) gespeichert. Wir benötigen keine Registrierung, E-Mails oder Passwörter." },
+                { q: "Was bedeuten die Farben auf den Stickern?", a: "Grau: Fehlend. Blau: Gesammelt. Dunkelblau: Doppelte. Gold/Effekt: Spezial- oder Glitzersticker." },
+                { q: "Wie kann ich einen Fehler melden?", a: "Wir freuen uns über Feedback! Sie können uns direkt unter swap26app@gmail.com schreiben." }
+            ]
         }
     },
     it: {
@@ -1012,7 +1112,9 @@ export const translations = {
             backup_desc: "Salva o ripristina il tuo inventario su un altro dispositivo.",
             restore_title: "RIPRISTINARE I DATI?",
             restore_desc: "Il tuo inventario attuale verrà sovrascritto. Questa azione è irreversibile.",
-            restore_confirm_btn: "Sì, Ripristina"
+            restore_confirm_btn: "Sì, Ripristina",
+            support_title: "Supporto e Altro",
+            info_badge: "Sul progetto e dubbi"
         },
         guide: {
             manual: "Manuale Utente",
@@ -1040,6 +1142,24 @@ export const translations = {
                     { t: "Sicurezza", d: "I tuoi datos restano su questo dispositivo." }
                 ]
             }
+        },
+        info: {
+            title: "Info & FAQ",
+            subtitle: "Scopri di più su Swap-26",
+            about_title: "Sul Progetto",
+            about_p1: "Swap-26 è nato con una missione semplice: rendere l'esperienza di collezionare figurine della Coppa del Mondo 2026 più veloce, sociale e digitale.",
+            about_p2: "Progettato per funzionare senza attriti, ti permette di portare il tuo inventario in tasca e confrontare i doppioni con gli amici in pochi secondi, eliminando liste cartacee ed errori di scambio.",
+            faq_title: "Domande Frequenti",
+            contact_title: "Community & Supporto",
+            contact_desc: "Seguici per novità e consigli",
+            faqs: [
+                { q: "È un'app ufficiale?", a: "No. Swap-26 è uno strumento indipendente creato da e per i collezionisti. Non siamo affiliati a Panini né alla FIFA." },
+                { q: "Come funziona lo Scambio Live?", a: "La modalità Live ti consente di sincronizzare il tuo inventario con un amico in tempo real. Uno crea una stanza, l'altro inserisce il codice e l'app mostra quali figurine potete scambiare." },
+                { q: "Come funziona lo Scambio Offline (Fotocamera)?", a: "Apri il tuo 'Codice QR' e fallo scansionare a un amico. L'app confronterà le due collezioni istantaneamente. Importante: In modalità Offline, le modifiche vengono salvate solo sul telefono di chi scansiona." },
+                { q: "I miei dati sono al sicuro?", a: "Assolutamente. Il tuo inventario è salvato localmente nel tuo browser (LocalStorage). Non richiediamo registrazione, e-mail o password." },
+                { q: "Cosa significano i colori sulle figurine?", a: "Grigio: Mancante. Blu: Collezionata. Blu Intenso: Doppioni. Oro/Effetto: Figurine speciali o brillanti." },
+                { q: "Come posso segnalare un errore?", a: "Amiamo ricevere feedback! Puoi scriverci direttamente a swap26app@gmail.com." }
+            ]
         }
-    }
+    },
 };

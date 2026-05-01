@@ -370,7 +370,7 @@ export const Profile = () => {
 
             {/* Ayuda y Soporte */}
             <div className="mb-8">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 pl-1">Soporte y Más</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 pl-1">{t.profile.support_title}</p>
                 <Link 
                     to="/info"
                     className="flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-100 shadow-sm active:scale-95 transition-all group"
@@ -381,7 +381,7 @@ export const Profile = () => {
                         </div>
                         <div>
                             <p className="text-sm font-black text-slate-800">Info & FAQ</p>
-                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tight">Sobre el proyecto y dudas</p>
+                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tight">{t.profile.info_badge}</p>
                         </div>
                     </div>
                     <Icons.ArrowRight className="w-5 h-5 text-slate-300" />
