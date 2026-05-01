@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Icons } from './Icons';
 import { useLanguage } from '../hooks/useLanguage';
+import { InstallBanner } from './InstallBanner';
 
 export const Layout = () => {
     const location = useLocation();
@@ -34,9 +35,12 @@ export const Layout = () => {
             </div>
 
             {/* Main Content Area */}
-            <main className="w-full max-w-lg mx-auto min-h-screen">
+            <main className="w-full max-w-lg mx-auto min-h-screen relative">
                 <Outlet />
             </main>
+
+            {/* Install Prompt Banner */}
+            <InstallBanner />
 
             {/* Bottom Navigation */}
             <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-t border-slate-200/50 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)]">
