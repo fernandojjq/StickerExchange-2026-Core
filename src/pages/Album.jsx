@@ -32,19 +32,34 @@ const ProgressRing = React.memo(({ progress, size = 38, stroke = 3.5 }) => {
 
 const StickerSection = React.memo(({ section, inventory, onIncrement, onDecrement, isSpecial }) => {
     const [isVisible, setIsVisible] = useState(false);
+    const [renderedCount, setRenderedCount] = useState(24); // Renderizar 24 iniciales para llenar la pantalla rápido
     const sectionRef = useRef(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
-            ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-            { rootMargin: '600px 0px', threshold: 0 }
+            ([entry]) => { 
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                }
+            },
+            { rootMargin: '400px 0px', threshold: 0 } // Reducido rootMargin de 600px a 400px para ser menos agresivo
         );
         if (sectionRef.current) observer.observe(sectionRef.current);
         return () => observer.disconnect();
     }, []);
 
+    // Renderizado progresivo: si la sección es visible y hay más items, renderizar el resto en el siguiente frame
+    useEffect(() => {
+        if (isVisible && renderedCount < section.items.length) {
+            const timer = requestAnimationFrame(() => {
+                setRenderedCount(section.items.length);
+            });
+            return () => cancelAnimationFrame(timer);
+        }
+    }, [isVisible, renderedCount, section.items.length]);
+
     return (
-        <div ref={sectionRef} id={section.country ? `section-${section.country}` : null} className="scroll-mt-fix min-h-[140px]">
+        <div ref={sectionRef} id={section.country ? `section-${section.country}` : null} className="scroll-mt-fix min-h-[140px] contain-paint">
             <div className="mb-4 flex items-center gap-2 pl-2 mt-4">
                 {section.country && <Flag iso={section.country} size="xs" hideText={true} />}
                 <div className="text-sm font-black text-slate-400 uppercase tracking-widest">{section.country || section.title}</div>
@@ -52,7 +67,7 @@ const StickerSection = React.memo(({ section, inventory, onIncrement, onDecremen
             </div>
             <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2 sm:gap-3">
                 {isVisible ? (
-                    section.items.map(item => (
+                    section.items.slice(0, renderedCount).map(item => (
                         <Sticker
                             key={item.id} id={item.id} country={section.country || 'INT'} number={item.number}
                             quantity={inventory[item.id] || 0} onIncrement={onIncrement} onDecrement={onDecrement}
@@ -60,8 +75,15 @@ const StickerSection = React.memo(({ section, inventory, onIncrement, onDecremen
                         />
                     ))
                 ) : (
+                    // Placeholders para CLS
                     Array.from({ length: section.items.length }).map((_, i) => (
-                        <div key={i} className="aspect-[3/4] bg-slate-50 border border-slate-100 rounded-lg" />
+                        <div key={i} className="aspect-[3/4] bg-slate-100/50 rounded-lg border-2 border-transparent" />
+                    ))
+                )}
+                {/* Si estamos en renderizado progresivo, mantener el espacio de los que faltan */}
+                {isVisible && renderedCount < section.items.length && (
+                    Array.from({ length: section.items.length - renderedCount }).map((_, i) => (
+                        <div key={`placeholder-${i}`} className="aspect-[3/4] bg-slate-100/50 rounded-lg border-2 border-transparent" />
                     ))
                 )}
             </div>

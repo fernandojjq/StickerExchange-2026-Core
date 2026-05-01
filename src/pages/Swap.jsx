@@ -909,7 +909,7 @@ export const Swap = () => {
     const isLiveSessionActive = liveSession.sessionState !== SESSION_STATE.IDLE;
 
     return (
-        <div className="pb-32 px-4 pt-6 max-w-lg mx-auto min-h-screen">
+        <div className="pb-32 px-4 pt-6 max-w-lg mx-auto min-h-screen contain-paint">
             {/* Hidden input para escaneo de imagen */}
             <input
                 type="file"
@@ -958,8 +958,9 @@ export const Swap = () => {
                 </div>
             )}
 
-            {/* Contenido principal */}
-            {!isLiveSessionActive ? (
+            {/* Contenido principal - Estabilizado con min-height */}
+            <div className="min-h-[400px]">
+                {!isLiveSessionActive ? (
                 <>
                     {/* Tabs */}
                     <div className="flex bg-slate-100 rounded-2xl p-1 mb-6">
@@ -1108,6 +1109,7 @@ export const Swap = () => {
                     document.body
                 )
             )}
+            </div>
 
             {/* Modal: Scanner de Cámara */}
             <CameraScannerModal
