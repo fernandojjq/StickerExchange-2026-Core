@@ -355,9 +355,20 @@ const OfflineMatchModal = ({
                 {/* Footer */}
                 <div className="bg-white p-4 border-t border-slate-100 shrink-0">
                     {tradeProcessed ? (
-                        <div className="w-full py-4 bg-emerald-500 text-white rounded-2xl flex flex-col items-center">
-                            <Icons.Check className="w-8 h-8 mb-1" />
-                            <span className="font-black uppercase tracking-widest text-sm">{t.swap.saved_status}</span>
+                        <div className="flex flex-col gap-3">
+                            <div className="w-full py-4 bg-emerald-500 text-white rounded-2xl flex flex-col items-center text-center px-4 shadow-lg animate-in zoom-in duration-300">
+                                <Icons.Check className="w-8 h-8 mb-1" />
+                                <span className="font-black uppercase tracking-widest text-sm mb-1">{t.swap.saved_status}</span>
+                                <p className="text-[10px] opacity-90 font-medium leading-tight">
+                                    {t.swap.saved_desc || "El intercambio se guardó correctamente en tu historial."}
+                                </p>
+                            </div>
+                            <button
+                                onClick={onClose}
+                                className="w-full py-3 bg-slate-900 text-white font-bold rounded-xl text-xs uppercase tracking-widest active:scale-95 transition"
+                            >
+                                {t.common.understand}
+                            </button>
                         </div>
                     ) : (
                         <button
@@ -887,13 +898,8 @@ export const Swap = () => {
 
         if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
         setHistoryRefresh(h => h + 1);
-
-        setTimeout(() => {
-            setScanResult(null);
-            setSelectedReceive([]);
-            setSelectedGive([]);
-            setTradeProcessed(false);
-        }, 1500);
+        
+        // Se elimina el setTimeout para que el usuario pueda leer el mensaje y cerrar manualmente
     }, [scanResult, tradeProcessed, selectedReceive, selectedGive]);
 
     // Toggle handlers
@@ -1175,7 +1181,12 @@ export const Swap = () => {
                 onSelectAllGive={() => scanResult && setSelectedGive([...scanResult.give])}
                 onSelectNoneGive={() => setSelectedGive([])}
                 onConfirm={confirmOfflineTrade}
-                onClose={() => { setScanResult(null); setSelectedReceive([]); setSelectedGive([]); }}
+                onClose={() => { 
+                    setScanResult(null); 
+                    setSelectedReceive([]); 
+                    setSelectedGive([]); 
+                    setTradeProcessed(false); 
+                }}
                 tradeProcessed={tradeProcessed}
             />
         </div>

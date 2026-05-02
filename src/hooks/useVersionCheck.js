@@ -1,54 +1,54 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useVersionCheck = () => {
+  const [updateAvailable, setUpdateAvailable] = useState(false);
+
   useEffect(() => {
+    // Si estamos en entorno de desarrollo local, no verificar versiones
     if (import.meta.env.DEV) return;
 
     let sessionVersion = null;
-    let pendingUpdate = false;
 
     const checkVersion = async () => {
       try {
-        const response = await fetch('/version.json?t=' + Date.now());
+        // Añadimos un timestamp para evitar que la red o Cloudflare nos devuelva un JSON cacheado
+        const response = await fetch('/version.json?t=' + Date.now(), { cache: 'no-store' });
         const data = await response.json();
         
+        // La primera vez que se carga la app, guardamos qué versión tiene
         if (!sessionVersion) {
           sessionVersion = data.version;
           return;
         }
 
+        // Si la versión del servidor es diferente a la nuestra, hay actualización
         if (data.version !== sessionVersion) {
-          console.log("Versión nueva detectada. Se aplicará cuando la app no esté en uso.");
-          pendingUpdate = true;
+          setUpdateAvailable(true);
         }
-      } catch (err) {}
+      } catch (err) {
+        // Silencioso, si falla la red no pasa nada
+      }
     };
 
+    // Verificar cada vez que el usuario vuelve a la app (por ejemplo, después de minimizarla)
     const handleVisibilityChange = () => {
-      // Si el usuario oculta la app (cambia de pestaña, bloquea tlf) y hay una actualización
-      if (document.visibilityState === 'hidden' && pendingUpdate) {
-        // SEGURIDAD: No recargar si estamos en medio de un intercambio vivo
-        if (window.location.pathname.includes('/swap')) {
-          console.log("Actualización pendiente pospuesta por sesión activa.");
-          return;
-        }
-        
-        window.location.reload();
-      } 
-      
-      // Al volver a la app, también aprovechamos para chequear
       if (document.visibilityState === 'visible') {
         checkVersion();
       }
     };
 
-    const interval = setInterval(checkVersion, 300000); // 5 min
+    // Verificar cada 10 minutos (600000 ms)
+    const interval = setInterval(checkVersion, 600000);
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    checkVersion();
+    
+    // Verificación inicial con un pequeño retraso para no bloquear la carga inicial
+    setTimeout(checkVersion, 5000);
 
     return () => {
       clearInterval(interval);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
+
+  return updateAvailable;
 };

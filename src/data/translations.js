@@ -11,6 +11,7 @@ export const translations = {
             retry_btn: "RECARGAR APLICACIÓN"
         },
         common: { loading: "Cargando...", understand: "¡Entendido!", cancel: "Cancelar", confirm: "Confirmar", help: "Ayuda", none: "Ninguno", generating: "Generando...", no_results: "Sin resultados", clear_filters: "Limpiar filtros" },
+        update: { new_version: "¡Nueva versión disponible!", desc: "Mejoras y nuevas funciones.", btn: "Actualizar" },
         nav: { album: "Álbum", swap: "Intercambio", profile: "Mi ID" },
         album: {
             title: "SWAP-26",
@@ -73,7 +74,8 @@ export const translations = {
             mark_all: "Marcar Todo",
             clear: "Limpiar",
             reminder_tip: "⚠️ Recuerda: tu amigo debe hacer lo mismo en su teléfono",
-            saved_status: "¡Guardado!",
+            saved_status: "¡Cambio Exitoso!",
+            saved_desc: "El intercambio offline se guardó en tu historial.",
             confirm_btn: "Confirmar Intercambio",
             close_btn: "Cerrar",
             scanner_label: "Escáner",
@@ -93,7 +95,7 @@ export const translations = {
                 conn_error: "Error de Conexión",
                 back: "Volver",
                 success_title: "¡Intercambio Exitoso!",
-                success_desc: "Los cromos han sido añadidos a tu colección y descontados de tus repetidos.",
+                success_desc: "El cambio se guardó correctamente. Puedes ir a la pestaña 'Historial' para revisar qué cromos cambiaste.",
                 understood: "Entendido",
                 peer_joined: "Tu amigo se unió",
                 connected: "Conectado",
@@ -204,6 +206,7 @@ export const translations = {
             retry_btn: "RELOAD APPLICATION"
         },
         common: { loading: "Loading...", understand: "Got it!", cancel: "Cancel", confirm: "Confirm", help: "Help", none: "None", generating: "Generating...", no_results: "No results", clear_filters: "Clear filters" },
+        update: { new_version: "New version available!", desc: "Improvements and new features.", btn: "Update" },
         nav: { album: "Album", swap: "Swap", profile: "My ID" },
         album: {
             title: "SWAP-26",
@@ -266,7 +269,8 @@ export const translations = {
             mark_all: "Mark All",
             clear: "Clear",
             reminder_tip: "⚠️ Remember: your friend must do the same on their phone",
-            saved_status: "Saved!",
+            saved_status: "Exchange Successful!",
+            saved_desc: "The offline exchange has been saved to your history.",
             confirm_btn: "Confirm Exchange",
             close_btn: "Close",
             scanner_label: "Scanner",
@@ -286,7 +290,7 @@ export const translations = {
                 conn_error: "Connection Error",
                 back: "Back",
                 success_title: "Successful Exchange!",
-                success_desc: "The stickers have been added to your collection and discounted from your duplicates.",
+                success_desc: "Trade saved successfully. You can go to the 'History' tab to review the traded stickers.",
                 understood: "Understood",
                 peer_joined: "Your friend joined",
                 connected: "Connected",
@@ -397,6 +401,7 @@ export const translations = {
             retry_btn: "RECARREGAR APLICATIVO"
         },
         common: { loading: "Carregando...", understand: "Entendi!", cancel: "Cancelar", confirm: "Confirmar", help: "Ajuda", none: "Nenhum", generating: "Gerando...", no_results: "Sem resultados", clear_filters: "Limpar filtros" },
+        update: { new_version: "Nova versão disponível!", desc: "Melhorias e novas funções.", btn: "Atualizar" },
         nav: { album: "Álbum", swap: "Troca", profile: "Meu ID" },
         album: {
             title: "SWAP-26",
@@ -459,7 +464,8 @@ export const translations = {
             mark_all: "Marcar Tudo",
             clear: "Limpar",
             reminder_tip: "⚠️ Lembre-se: seu amigo deve fazer o mesmo no telefone dele",
-            saved_status: "Salvo!",
+            saved_status: "Troca bem-sucedida!",
+            saved_desc: "A troca offline foi salva no seu histórico.",
             confirm_btn: "Confirmar Troca",
             close_btn: "Fechar",
             scanner_label: "Scanner",
@@ -479,7 +485,7 @@ export const translations = {
                 conn_error: "Erro de Conexão",
                 back: "Voltar",
                 success_title: "Troca bem-sucedida!",
-                success_desc: "As figurinhas foram adicionadas à sua coleção e descontadas das suas repetidas.",
+                success_desc: "A troca foi salva com sucesso. Você pode ir para a guia 'Histórico' para rever quais figurinhas você trocou.",
                 understood: "Entendido",
                 peer_joined: "Seu amigo entrou",
                 connected: "Conectado",
@@ -590,6 +596,7 @@ export const translations = {
             retry_btn: "RECHARGER L'APPLICATION"
         },
         common: { loading: "Chargement...", understand: "Compris !", cancel: "Annuler", confirm: "Confirmer", help: "Aide", none: "Aucun", generating: "Génération...", no_results: "Aucun résultat", clear_filters: "Effacer les filtres" },
+        update: { new_version: "Nouvelle version disponible !", desc: "Améliorations et nouveautés.", btn: "Mettre à jour" },
         nav: { album: "Album", swap: "Échange", profile: "Mon ID" },
         album: {
             title: "SWAP-26",
@@ -652,7 +659,8 @@ export const translations = {
             mark_all: "Tout Cocher",
             clear: "Effacer",
             reminder_tip: "⚠️ Rappel : votre ami doit faire de même sur son téléphone",
-            saved_status: "Enregistré !",
+            saved_status: "Échange réussi !",
+            saved_desc: "L'échange hors ligne a été enregistré dans votre historique.",
             confirm_btn: "Confirmer l'Échange",
             close_btn: "Fermer",
             scanner_label: "Scanner",
@@ -672,7 +680,7 @@ export const translations = {
                 conn_error: "Erreur de Connexion",
                 back: "Retour",
                 success_title: "Échange réussi !",
-                success_desc: "Les stickers ont été ajoutés à votre collection et déduits de vos doubles.",
+                success_desc: "L'échange a été enregistré. Vous pouvez vérifier l'onglet 'Historique' pour voir les stickers échangés.",
                 understood: "Compris",
                 peer_joined: "Votre ami a rejoint",
                 connected: "Connecté",
@@ -783,6 +791,7 @@ export const translations = {
             retry_btn: "ANWENDUNG NEU LADEN"
         },
         common: { loading: "Laden...", understand: "Verstanden!", cancel: "Abbrechen", confirm: "Bestätigen", help: "Hilfe", none: "Keine", generating: "Generiere...", no_results: "Keine Ergebnisse", clear_filters: "Filter löschen" },
+        update: { new_version: "Neue Version verfügbar!", desc: "Verbesserungen und neue Funktionen.", btn: "Aktualisieren" },
         nav: { album: "Album", swap: "Tausch", profile: "Mein ID" },
         album: {
             title: "SWAP-26",
@@ -845,7 +854,8 @@ export const translations = {
             mark_all: "Alle markieren",
             clear: "Leeren",
             reminder_tip: "⚠️ Denken Sie daran: Ihr Freund muss dasselbe auf seinem Handy tun",
-            saved_status: "Gespeichert!",
+            saved_status: "Tausch erfolgreich!",
+            saved_desc: "Der Offline-Tausch wurde in Ihrem Verlauf gespeichert.",
             confirm_btn: "Tausch bestätigen",
             close_btn: "Schließen",
             scanner_label: "Scanner",
@@ -976,6 +986,7 @@ export const translations = {
             retry_btn: "RICARICA APPLICAZIONE"
         },
         common: { loading: "Caricamento...", understand: "Ho capito!", cancel: "Annulla", confirm: "Conferma", help: "Aiuto", none: "Nessuno", generating: "Generazione...", no_results: "Nessun risultato", clear_filters: "Cancella filtri" },
+        update: { new_version: "Nuova versione disponibile!", desc: "Miglioramenti e nuove funzioni.", btn: "Aggiorna" },
         nav: { album: "Album", swap: "Scambio", profile: "Il mio ID" },
         album: {
             title: "SWAP-26",
@@ -1038,7 +1049,8 @@ export const translations = {
             mark_all: "Seleziona Tutto",
             clear: "Pulisci",
             reminder_tip: "⚠️ Ricorda: il tuo amico deve fare lo stesso sul suo telefono",
-            saved_status: "Salvato!",
+            saved_status: "Scambio riuscito!",
+            saved_desc: "Lo scambio offline è stato salvato nella tua cronologia.",
             confirm_btn: "Conferma Scambio",
             close_btn: "Chiudi",
             scanner_label: "Scanner",

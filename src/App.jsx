@@ -7,11 +7,9 @@ import { Swap } from './pages/Swap';
 import { Profile } from './pages/Profile';
 import { Info } from './pages/Info';
 import { NotFound } from './pages/NotFound';
-import { useVersionCheck } from './hooks/useVersionCheck';
+import { UpdateBanner } from './components/UpdateBanner';
 
 function App() {
-  // useVersionCheck desactivado temporalmente para evitar recargas infinitas en tablets
-
   useEffect(() => {
     if (window.removeInitialLoader) {
       window.removeInitialLoader();
@@ -21,6 +19,7 @@ function App() {
   return (
     <LanguageProvider>
       <BrowserRouter>
+        <UpdateBanner />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Album />} />

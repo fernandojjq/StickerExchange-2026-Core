@@ -244,10 +244,8 @@ export const useLiveSession = () => {
 
             setSessionState(SESSION_STATE.COMPLETED);
 
-            // Auto-leave session after success
-            setTimeout(() => {
-                leaveSession();
-            }, 3500);
+            // Se elimina el auto-leave para que el usuario pueda leer el mensaje tranquilamente
+            // El usuario tendrá que hacer clic en el botón "Entendido" para salir.
         } catch (err) {
             console.error('[LiveSession] Execute trade error:', err);
             isTradingRef.current = false; // Allow retry if failed
