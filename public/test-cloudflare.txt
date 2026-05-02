@@ -1,0 +1,1 @@
+Prueba de conexion de Cloudflare Pages. Si puedes leer esto, la carpeta public funciona correctamente.
